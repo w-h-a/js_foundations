@@ -1,0 +1,25 @@
+Problem:
+
+Without using standard conversion functions available in JS,
+write a function that takes an integer and outputs a signed string.
+
+Test Cases (given):
+
+console.log(signedIntegerToString(4321) === "+4321");
+console.log(signedIntegerToString(-123) === "-123");
+console.log(signedIntegerToString(0) === "0");
+
+High-Level Program:
+
+1. Using Math.sign(), check if input number is negative, positive, or 0. Save result.
+2. Using Math.abs(), get absolute value of number.
+3. Declare variable and assign to it an empty array.
+4. While number > 0:
+    1. let r = number % 10;
+    2. Push r to array.
+    3. let difference = number - r;
+    4. number = difference / 10;
+5. Reduce or map array to string.
+6. Add sign to front of array if needed. If no sign needed, then the input
+    number was 0. Push 0 to array.
+7. Join and return.

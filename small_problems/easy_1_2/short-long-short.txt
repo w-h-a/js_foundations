@@ -1,0 +1,19 @@
+Problem:
+
+Create a function that takes two strings as arguments,
+determines the length of the two strings, and
+return the result of concatenating the shorter, the longer, and the shorter once again.
+You may assume the strings are of different lengths.
+
+Test Cases (Given):
+
+shortLongShort('abc', 'defgh');    // "abcdefghabc"
+shortLongShort('abcde', 'fgh');    // "fghabcdefgh"
+shortLongShort('', 'xyz');         // "xyz"
+
+High-Level Program:
+
+1. Declare length variables (length1 and length2) and
+assign to them the lengths of the strings.
+2. If length1 > length2, then return secondString + firstString + secondString
+3: If length2 > length1, then return firstString + secondString + firstString

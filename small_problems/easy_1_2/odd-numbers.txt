@@ -1,0 +1,79 @@
+ORIGINAL EXERCISE
+Problem:
+
+All odd numbers from and including 1 to and including 99 are logged.
+Each number should be placed on a separate line.
+
+Input: n/a
+Output: each number logged to its own line
+
+Test Cases:
+
+Trivial
+
+High-Level Program:
+
+Input data type: n/a
+Output data type: number
+
+Loops through 1-99, inclusive, logging each to the console.
+
+FURTHER EXPLORATION
+Problem:
+
+Given a user's input on the limits of the odd numbers logged, log each number
+to the console.
+
+Input: min odd number and max odd number
+Output: each number logged to its own line
+
+Test Cases:
+
+Input:
+  min: 1
+  max: 99
+Output: Obvious
+
+Input:
+  min: 2
+  max: 18
+Output: Start with 3 and finish with 17
+
+Input:
+  min: -8
+  max: 0
+Output: Start with -7 and finish with -1
+
+Input:
+  min: 0
+  max: 0
+Output: n/a
+
+Input:
+  min or max: empty string
+Output: It'll treat these as 0 and go from there (so give user a warning ahead)
+
+Input:
+  min: -8
+  max: -99
+Output: Error message; min can't be greater than max
+
+Input:
+  min or max: evaluates to NaN
+Output: Error message; must be integer
+
+Input:
+  min or max: is decimal
+Output: Round up in both instances and go
+
+High-Level Program
+
+Input data type: string from user
+Output data type: number
+
+1. Asks for user input and converts to number and rounds up.
+2. If one of the inputs evaluates to NaN, throws error.
+3. If the min is not less than than than max, throws error.
+4. Otherwise continues:
+    1. Constructs array of the relevant numbers from min-max, inclusive.
+    2. Logs each to the console.

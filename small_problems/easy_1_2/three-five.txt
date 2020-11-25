@@ -1,0 +1,33 @@
+Problem:
+
+Create a function that iteratively creates an array of multiples of
+3 or 5 up to and including a given target and, furthermore,
+returns the sum of the multiples.
+
+Test Cases (given):
+
+Input: 20
+Output: 98
+
+Input: 3
+Output: 3
+
+Input: 5
+Output: 8
+
+Input: 10
+Output: 33
+
+Input: 1000
+Output: 234168
+
+High-Level Program:
+
+1. Create an empty array called ‘multiples’ that will contain the multiples.
+2. Declare an iteration variable and set it to 1.
+3. While the iteration variable is less than the target
+    1. For each factor, append the current iteration value to multiples
+        if the value isn’t already in multiples and
+        the value is divisible by the factor without remainder.
+    2. Add 1 to the iteration variable.
+4. Compute and return the sum of the numbers in multiples.

@@ -1,0 +1,61 @@
+ORIGINAL EXERCISE
+Problem:
+
+The program should take length and width in meters and output
+square meters and square feet.
+
+1 square meter == 10.7639 square feet
+
+Input: string (meters)
+Output:
+  square meters: string (from a number, round to 2 decimals)
+  square feet: string (from a number, round to 2 decimals)
+
+Test Case:
+
+7 * 10 = 70
+70 * 10.7639 = 753.47
+
+High-Level Program:
+
+Input data type: string
+Output data type: string
+
+1. Asks user for length of their room in meters (converts to number)
+2. Asks user for width of their room in meters (converts to number)
+3. Gets square meters and square feet, returns numbers and rounds.
+
+FURTHER EXPLORATION
+Problem:
+Same as the above, but ask the user if they are using meters or feet.
+
+1 square meter == 10.7639 square feet
+
+Input:
+  unit: string
+  length: string
+  width: string
+Output:
+  square meters: string (from a number, round to 2 decimals)
+  square feet: string (from a number, round to 2 decimals)
+
+Test Cases:
+
+Input:
+  unit: meters
+  length: 7
+  width: 10
+Output: Same as above
+
+Input:
+  unit: feet
+  length: 7
+  width: 10
+Output: The area is 70 square feet (or == 6.50 square meters)
+
+High-Level Program:
+
+1. Asks user for unit of measurement (meters or feet)
+2. Asks user for length of their room (converts to number)
+3. Asks user for width of their room (converts to number)
+4. Gets square meters and square feet, returns numbers and rounds.

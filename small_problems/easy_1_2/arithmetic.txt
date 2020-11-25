@@ -1,0 +1,17 @@
+Problem:
+
+The program should prompt the user for two positive integers.
+It then prints the result of all the following arithmetic operations:
+addition,
+subtraction,
+product,
+quotient,
+remainder, and
+power.
+
+High-Level Program:
+
+1. Asks user for positive integer.
+2. Asks user for another positive integer.
+3. Performs the operations
+4. Returns the result, one-by-one.

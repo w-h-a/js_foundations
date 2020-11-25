@@ -1,0 +1,33 @@
+ORIGINAL PROBLEM
+Problem:
+
+Using the multiply() function from the "Multiplying Two Numbers" problem,
+write a function that computes the square of its argument.
+
+High-Level Program:
+
+1. Declare a square function that takes one argument.
+2. The square function feeds its argument into the multiply function twice and
+    returns the result.
+
+FURTHER EXPLORATION
+Problem:
+
+Using the multiply() function, write a raisedToTheNPower function.
+
+High-Level Program:
+
+1. Declare a raisedToTheNPower function that takes two arguments:
+    the number and n
+2. The raisedToTheNPower function operates in the following way.
+    1. If n = 0, then returns 1.
+    2. If n = 1, then returns number.
+    3. If n > 1, then
+        (a) declare iteration variable and assign to it 2.
+        (b) declare result variable and assign to it result of
+            sending number and number into multiply function.
+        (c) while iteration variable < n:
+            1. update result variable to the value of sending
+                result and original number into multiply function
+            2. increment iteration variable by 1.
+        (d) return result.

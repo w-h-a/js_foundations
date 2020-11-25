@@ -1,0 +1,105 @@
+ORIGINAL EXERCISE
+Problem:
+
+The program takes an integer greater than 0 and 's' or 'p' as input.
+Then it determines and returns the sum or product of all numbers
+between 1 and the integer, inclusive.
+
+Test Cases:
+
+Input:
+  integer: 5
+  sum/product: s
+Output: The sum of the integers between 1 and 5 is 15.
+
+Input:
+  integer: 6
+  sum/product: p
+Output: the product of the integers between 1 and 6 is 720.
+
+Input:
+  integer: 1
+  sum/product:
+Output: The sum/product of the integers between 1 and 1 is 1.
+
+Input:
+  integer: 0 or empty
+  sum/product:
+Output: Throws error: please try again
+
+Input:
+  integer: evaluates to NaN or is not an integer
+  sum/product:
+Output: Throws error: please try again
+
+Input:
+  integer: integer greater than 0
+  sum/product: anything other than s or p
+Output: Throws error: please try again
+
+High-Level Program
+
+1. Asks user for integer greater than 0.
+2. If input is 0, empty, NaN, or not an integer, then throw error and stop
+3. Asks user whether they want to compute sum or product.
+4. If input is neither 's' nor 'p', then throw error and stop
+5. Otherwise:
+    1. If 's' is entered, sum all numbers from 1 to input integer and return
+    2. If 'p' is entered, multiply all numbers from 1 to input integer and return
+
+FURTHER EXPLORATION
+
+Generalize the above function so that the user is permitted to enter
+and array of integers.
+
+Test Cases:
+
+Input:
+  integer/array: integer
+Output: then above cases should still hold
+
+Input:
+  integer/array: array
+  array: 1 2 3 4 5
+  sum/product
+Output: same
+
+Input:
+  integer/array: undefined or not one of two choices
+Output: throws error
+
+Input:
+  integer/array: array
+  array:
+Output: will be treated as 0, so warn user
+
+Input:
+  integer/array: array
+  array: 1 2 four 5
+Output: throws new error
+
+Input:
+  integer/array: array
+  array: 4.5
+Output: throws error
+
+High-Level Program
+
+1. Asks user to choose between a series of consecutive integers
+    up to and including an integer of their choice and a series of integers
+    of their choosing.
+2. Suppose the user chooses the former:
+    1. Asks user for integer greater than 0.
+    2. If input is 0, empty, NaN, or not an integer, then throw error and stop.
+    3. Constructs array from 1 to user input.
+    4. Goes to 4.
+3. Suppose the user chooses the latter:
+    1. Initializes empty array.
+    2. To the array, pushes input integers as long as user wishes to continue.
+    3. If array contains some elements that are NaN or not integers, then throw error.
+    4. Goes to 4.
+4. Asks user whether they want to compute sum or product.
+5. If input is neither 's' nor 'p', then throw error and stop.
+6. Otherwise:
+    1. If 's' is entered, sum all integers in array and return
+    2. If 'p' is entered, multiply all integers in array and return

@@ -1,0 +1,30 @@
+Problem:
+
+The program takes bill amount and tip percentage as input and outputs
+the tip amount and the tip amount plus the bill amount (i.e., the total).
+
+Test Cases:
+
+Input:
+  bill: 200
+  percentage: 15
+Output:
+  tip: $30.00
+  total: $230.00
+
+Input:
+  bill: 200
+  percentage: 0.15
+Output:
+  tip: $30.00 (if it's a decimal, assume it should be 15 percent and not 0.15 percent)
+  total: $230.00
+
+High-Level Program
+
+1. Asks user for bill amount.
+2. Asks user for percentage.
+3. Gets tip:
+    1. If the percentage input is an integer, then tip = bill amount * (percentage / 100)
+    2. If the percentage input is a decimal, then tip = bill amount * percentage
+4. Get total: tip + bill amount.
+5. Return tip and total.

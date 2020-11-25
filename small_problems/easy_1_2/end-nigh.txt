@@ -1,0 +1,53 @@
+ORIGINAL EXERCISE
+Problem:
+
+Write a function. The function should return the penultimate word in a string.
+You may assume that the string contains at least two words.
+
+Test Cases (given):
+
+console.log(penultimate("last word") === "last"); // logs true
+console.log(penultimate("Launch School is great!") === "is"); // logs true
+
+High-Level Program:
+
+1. The function splits the string into an array of words.
+2. The function returns the penultimate word.
+
+FURTHER EXPLORATION
+Problem:
+
+Write a function. The function should return the middle word in a string.
+
+Test Cases:
+
+Input: 'hello ole chap'
+Output: 'ole'
+
+Input: 'hello little sunshine ray'
+Output: 'little', 'sunshine'
+
+Input: 'hello'
+Output: 'hello'
+
+Input: ''
+Output: I am error.
+
+Input: Hello   how       are     you    doing.
+Output: are
+
+Input: I    am   at      the crazy        house.
+Output: at, the
+
+High-Level Program:
+
+1. Asks user for string of words.
+2. If string is empty after trimming off white space, return error message and stop.
+3. Splits the string into an array of words.
+4. Removes all whitespace elements from the array of words.
+5. Suppose length of array is odd.
+    1. Divide length by 2 and round up. Call this 'result'.
+    2. Return word at index result minus 1.
+6. Suppose length is even.
+    1. Divide length by 2. Call this 'result'.
+    2. Return words: one at index result minus 1 and one at index result.

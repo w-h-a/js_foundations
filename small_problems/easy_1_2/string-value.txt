@@ -1,0 +1,18 @@
+Problem:
+
+Write a function that takes a string and outputs the ASCII value of the string.
+The ASCII value of a string is just the sum of the ASCII values of the characters.
+You may use .charCodeAt() to determine the ASCII value of a character.
+
+Test Cases (given):
+
+asciiValue('Four score');         // 984
+asciiValue('Launch School');      // 1251
+asciiValue('a');                  // 97
+asciiValue('');                   // 0
+
+High-Level Program:
+
+1. Construct an array. Each element holds a character of the input string.
+2. Map or reduce the array to an array with ASCII values.
+3. Sum across mapped or reduced array and return value.

@@ -1,0 +1,28 @@
+Problem:
+
+Write a program that asks for the user's name.
+The computer yells back a greeting if the user follows their
+input with an exclamation mark or writes in all caps; otherwise,
+the computer greets without yelling.
+
+
+Test Cases (given):
+
+What is your name? 
+Bob
+Hello Bob.
+
+What is your name?
+Bob!
+HELLO BOB. WHY ARE WE SCREAMING?
+
+High-Level Program:
+
+1. Asks user for their name. Assign the value to a variable called 'userName'.
+2. Suppose userName is all caps or followed by exclamation mark.
+    1. Declare actualName and assign it the value of userName.
+    2. If userName ends with an exclamation mark, then assign actualName
+        the contents of userName without the exclamation mark.
+    3. Computer snaps back.
+3. Suppose userName is neither all caps nor followed by exclamation mark.
+    Then computer greets normally.

@@ -1,0 +1,22 @@
+Problem:
+
+Write a function that takes on integer argument.
+It should return true if the number's absolute value is odd, false otherwise.
+
+Test Cases:
+
+console.log(isOdd(2)); // => false
+console.log(isOdd(5)); // => true
+console.log(isOdd(-17)); // => true
+console.log(isOdd(-8)); // => false
+console.log(isOdd(0)); // => false
+console.log(isOdd(7)); // => true
+
+High-Level Program:
+
+The input data is a number.
+The output data is a boolean.
+
+The function checks whether the input number's absolute value is odd or even.
+  1. If it is odd, the function should return true
+  2. If it is even, the function should return false.
