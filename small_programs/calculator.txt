@@ -10,8 +10,15 @@ Test Cases:
 
 Pseudocode:
 
-1. Ask the user for the first number.
-2. Ask the user for the second number.
-3. Ask the user for an operation to perform.
-4. Perform the operation on the two numbers.
-5. Print the result to the terminal.
+START
+
+1. GET the first number.
+2. Check if input is permissible, otherwise, ask for another
+3. GET the second number.
+4. Check if input is permissible, otherwise, ask for another
+5. GET the operator.
+6. Check if input is permissible, otherwise, ask again
+7. PRINT number operator number
+8. GET user's answer to the question "Would you like to do another?"
+
+END
