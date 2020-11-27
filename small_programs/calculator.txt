@@ -1,0 +1,17 @@
+Problem:
+
+Ask the user for two numbers.
+Ask the user for the type of operation to perform: add, subtract, multiply or divide.
+Perform the calculation and display the result.
+
+Test Cases:
+
+?
+
+Pseudocode:
+
+1. Ask the user for the first number.
+2. Ask the user for the second number.
+3. Ask the user for an operation to perform.
+4. Perform the operation on the two numbers.
+5. Print the result to the terminal.

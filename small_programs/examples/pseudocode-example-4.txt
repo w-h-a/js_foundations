@@ -1,0 +1,21 @@
+Problem:
+
+Write a function that takes an array of integers and returns
+a new array with every other element.
+
+Pseudocode:
+
+START
+
+Given an array of integers:
+
+1. SET local variable called 'arrayParam' to the array of integers.
+2. SET local variable called 'i' to 0.
+3. SET local variable called 'accumulator' to an empty array.
+4. WHILE i < length of arrayParam:
+  1. If the ith element of the arrayParam is even
+    push the element to accumulator.
+  2. iterator += 1
+5. PRINT accumulator.
+
+END

@@ -1,0 +1,13 @@
+Problem:
+
+Write a function that returns the sum of two numbers.
+
+Pseudocode:
+
+START
+
+1. GET number from user and call it number1.
+2. GET number from user and call it number2.
+3. PRINT number1 + number2
+
+END
