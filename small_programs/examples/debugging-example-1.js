@@ -9,7 +9,7 @@ function getMake(newCar) {
 }
 
 function getModel(newCar) {
-  return newCar.split(' ')[2];
+  return newCar.split(' ')[2]; // => undefined
 }
 
 let [ make, model ] = car('Ford Mustang');

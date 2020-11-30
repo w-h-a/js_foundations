@@ -1,0 +1,24 @@
+{
+  "language": "=> Enter 'en' for English or Entrez 'fr' pour le Francais.\n",
+  "tryAgain": "=> Try again. / Essaie encore.",
+  "en": {
+    "welcome": "=> Welcome to Calculator!",
+    "firstNum": "=> What's your first number?\n",
+    "error": "=> Hmm... that doesn't look like a number.",
+    "secondNum": "=> What's your second number?\n",
+    "userOperation": "=> What operation would you like to perform?\n=> 1) Add\n=> 2) Subtract\n=> 3) Multiply\n=> 4) Divide\n=> Enter the number of your choice.\n",
+    "choose": "=> You must choose 1, 2, 3, or 4",
+    "again": "=> Would you like to perform another calculation?\n=> If so, enter 'y'; otherwise, enter any key or press enter.\n",
+    "result": "=> The result is:"
+  },
+  "fr": {
+    "welcome": "=> Bienvenue a la Calculatrice!",
+    "firstNum": "=> Quel est votre premier numero?\n",
+    "error": "=> Hmm... ceci ne ressemble pas a un numero.",
+    "secondNum": "=> Quel est votre deuxieme numero?\n",
+    "userOperation": "=> Quel operation aimeriez-vous performer?\n=> 1) Additioner\n=> 2) Soustraire\n=> 3) Multiplier\n=> 4) Diviser\n=> Entrez le numero de votre choix.\n",
+    "choose": "=> Vous devez choisir 1, 2, 3, ou 4",
+    "again": "=> Voulez-vous performer un autre calculation?\n=> Si oui, entrez 'o'; si non, entrez n'importe quelle cle ou appuyez sur Entrée.\n",
+    "result": "=> Le resultat est:"
+  }
+}

@@ -1,0 +1,41 @@
+Problem:
+
+Ask the user if they'd like to choose english or french.
+Ask the user for two numbers.
+Ask the user for the type of operation to perform: add, subtract, multiply or divide.
+Perform the calculation and display the result.
+Ask the user if they would like to perform another calculation and
+start a new calculation if, and only if, they respond in the affirmative.
+
+Test Cases (for step 2 below):
+
+Input: 'en' or 'fr' at 1
+Output: goes to step 3
+
+Input: anything other than 'en' or 'fr'
+Output: keeps asking to try again
+
+Test Cases (for step 10 below):
+
+Input: 'y' or 'Y' or 'o' or 'O' (depending on language selection)
+Output: goes back to step 3
+
+Input: anything other than 'y' or 'Y' (if selected 'en') or 'o' or 'O' (if selected 'fr')
+Output: exits
+
+Pseudocode:
+
+START
+
+1. GET language preferences.
+2. Check if input is permissible, otherwise, ask for another
+3. GET the first number.
+4. Check if input is permissible, otherwise, ask for another
+5. GET the second number.
+6. Check if input is permissible, otherwise, ask for another
+7. GET the operator.
+8. Check if input is permissible, otherwise, ask again
+9. PRINT number operator number
+10. GET user's answer to the question "Would you like to do another?"
+
+END
