@@ -63,29 +63,35 @@ do {
   } else {
     console.clear();
   }
+
   let number1 = getUserInput(MESSAGES[language]['firstNum']);
   while (impermissibleNumber(number1)) {
     console.log(MESSAGES[language]['error']);
     number1 = READLINE.question();
   }
   number1 = Number(number1);
+
   let number2 = getUserInput(MESSAGES[language]['secondNum']);
   while (impermissibleNumber(number2)) {
     console.log(MESSAGES[language]['error']);
     number2 = READLINE.question();
   }
   number2 = Number(number2);
+
   let operation = getUserInput(MESSAGES[language]['userOperation']);
   while (!['1', '2', '3', '4'].includes(operation)) {
     console.log(MESSAGES[language]['choose']);
     operation = READLINE.question();
   }
+
   let result = calculator(number1, number2, operation);
   console.log(result);
+
   if (language === 'en') {
     toRepeat = getUserInput(MESSAGES[language]['again']).toLowerCase() === 'y';
   } else if (language === 'fr') {
     toRepeat = getUserInput(MESSAGES[language]['again']).toLowerCase() === 'o';
   }
+
   iteration += 1;
 } while (toRepeat);
