@@ -83,7 +83,7 @@ function setUpInterest(userInputP) {
     joinedString = joinedString.substring(0, joinedString['length'] - 1);
   }
   while (impermissibleInterest(joinedString)) {
-    console.log("=> Whoops!");
+    console.log("=> Whoops! The input must be a non-negative number.");
     joinedString = setUpInterest(getUserInput());
   }
   return joinedString;
@@ -230,7 +230,7 @@ do {
     console.log("=> Whoops!");
     secondUserInput = getUserInput();
   }
-  if (secondUserInput === 'y') {
+  if (secondUserInput.toLowerCase() === 'y') {
     isInterestYears = true;
   } else {
     isInterestYears = false;
@@ -249,7 +249,7 @@ do {
     console.log("=> Whoops!");
     fourthUserInput = getUserInput();
   }
-  if (fourthUserInput === 'y') {
+  if (fourthUserInput.toLowerCase() === 'y') {
     isTermYears = true;
   } else {
     isTermYears = false;
