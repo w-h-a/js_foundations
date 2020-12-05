@@ -55,9 +55,9 @@ function calculator(firstNumParam, secondNumParam, operationParam) {
 do {
   if (toSetLangAndWelcome === true) {
     language = getUserInput(MESSAGES['language']).toLowerCase();
-    while (!['en', 'fr'].includes(language.toLowerCase())) {
+    while (!['en', 'fr'].includes(language)) {
       console.log(MESSAGES['tryAgain']);
-      language = READLINE.question();
+      language = READLINE.question().toLowerCase();
     }
     console.log(MESSAGES[language]['welcome']);
     toSetLangAndWelcome = false;

@@ -225,10 +225,10 @@ do {
   let firstUserInput = setUpLoanAmount(getUserInput("=> Enter the loan amount: $"));
   loAmount = Number(firstUserInput);
 
-  let secondUserInput = getUserInput("=> Is the interest in years (enter: 'y') or months (enter: 'm')?\n");
-  while (!['y', 'm'].includes(secondUserInput.toLowerCase())) {
+  let secondUserInput = getUserInput("=> Is the interest in years (enter: 'y') or months (enter: 'm')?\n").toLowerCase();
+  while (!['y', 'm'].includes(secondUserInput)) {
     console.log("=> Whoops!");
-    secondUserInput = getUserInput();
+    secondUserInput = getUserInput().toLowerCase();
   }
   if (secondUserInput.toLowerCase() === 'y') {
     isInterestYears = true;
@@ -244,12 +244,12 @@ do {
     moIR = Number(thirdUserInput) / 100;
   }
 
-  let fourthUserInput = getUserInput("=> Is the loan term in years (enter: 'y') or months (enter: 'm')?\n");
-  while (!['y', 'm'].includes(fourthUserInput.toLowerCase())) {
+  let fourthUserInput = getUserInput("=> Is the loan term in years (enter: 'y') or months (enter: 'm')?\n").toLowerCase();
+  while (!['y', 'm'].includes(fourthUserInput)) {
     console.log("=> Whoops!");
-    fourthUserInput = getUserInput();
+    fourthUserInput = getUserInput().toLowerCase();
   }
-  if (fourthUserInput.toLowerCase() === 'y') {
+  if (fourthUserInput === 'y') {
     isTermYears = true;
   } else {
     isTermYears = false;
