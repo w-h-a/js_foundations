@@ -23,7 +23,7 @@ let language;
 
 let toRepeat;
 
-let iteration = 0;
+let toSetLangAndWelcome = true;
 
 function getUserInput(inputParam) {
   return READLINE.question(inputParam);
@@ -53,13 +53,14 @@ function calculator(firstNumParam, secondNumParam, operationParam) {
 }
 
 do {
-  if (iteration === 0) {
-    language = getUserInput(MESSAGES['language']);
-    while (!['en', 'fr'].includes(language)) {
+  if (toSetLangAndWelcome === true) {
+    language = getUserInput(MESSAGES['language']).toLowerCase();
+    while (!['en', 'fr'].includes(language.toLowerCase())) {
       console.log(MESSAGES['tryAgain']);
       language = READLINE.question();
     }
     console.log(MESSAGES[language]['welcome']);
+    toSetLangAndWelcome = false;
   } else {
     console.clear();
   }
@@ -92,6 +93,4 @@ do {
   } else if (language === 'fr') {
     toRepeat = getUserInput(MESSAGES[language]['again']).toLowerCase() === 'o';
   }
-
-  iteration += 1;
 } while (toRepeat);

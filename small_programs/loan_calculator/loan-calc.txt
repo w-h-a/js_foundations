@@ -1,0 +1,133 @@
+Problem:
+
+First, you need to gather three pieces of information from a user:
+1. the loan amount
+2. the annual interest rate as either a percent or floating-point
+3. the loan term in either years or months
+
+Second, from those inputs, you need to calculate:
+1. monthly interest rate
+2. the loan term in months
+3. (and eventually) the monthly payments (as a dollar and cents amount)
+
+loAmount = loan amount
+anIR = annual interest rate
+moIR = monthly interest rate or anIR / 12
+termYr = loan term in years
+termMo = loan term in months or termYr * 12
+moPayment = monthly payment
+
+
+
+Pseudocode:
+
+START
+
+1.  GET loan amount from user.
+2.  IF user input is permissible
+      SET loAmount to user input.
+    ELSE
+      WHILE user input is impermissible
+        Go back to step 1.
+3.  GET answer to 'Is the interest rate in years or months?'
+4.  IF user input is permissible and 'y'
+      SET isInterestYears to true
+    ELSE IF user input is permissible and 'm'
+      SET isInterestYears to false
+    ELSE
+      WHILE user input is impermissible
+        Go back to step 3.
+5.  GET interest rate from user
+6.  IF user input is permissible and isInterestYears === true
+      SET anIR to user input and moIR = anIR / 12
+    ELSE IF user input is permissible and isInterestYears === false
+      SET moIR to user input
+    ELSE
+      WHILE user input is impermissible
+        Go back to step 5.
+7.  GET answer to 'Is the loan term in years or months?'
+8.  IF user input is permissible and 'y'
+      SET isTermYears to true
+    ELSE IF user input is permissible and 'm'
+      SET isTermYears to false
+    ELSE
+      WHILE user input is impermissible
+        Go back to step 7.
+9.  GET loan term from user
+10.  IF user input is permissible and isTermYears === true
+      SET termYr to user input and termMo = termYr * 12
+    ELSE IF user input is permissible and isTermYears === false
+      SET termMo to user input
+    ELSE
+      WHILE user input is impermissible
+        Go back to step 9.
+11. GET moPayment.
+12. PRINT moPayment in dollars and cents.
+
+END
+
+
+
+Test Cases (for steps 1 and 2 above):
+
+Input: 10000, 10,000, 10 000, all those with $ appended to front, or all those
+as floating-point numbers.
+Output: loAmount = 10000 or 10000.00
+
+Input: NaN or less than or equal to 0
+Output: ask user to try again
+
+
+
+Test Cases (for steps 3 and 4 above):
+
+Input: 'y' or 'Y'
+Output: isInterestYears = true
+
+Input: 'm' or 'M'
+Output: isInterestYears = false
+
+Input: anything other than those
+Output: ask user to try again
+
+
+
+Test Cases (for steps 5 and 6 above):
+
+Input: 'y' or Y' (from previous) and 10 or 10.00
+Output: anIR = 0.10 and moIR = anIR / 12
+
+Input: 'm' or 'M' (from previous) an 10 or 10.00
+Output: moIR to user input
+
+Input: 0
+Output: anIR = moIR = 0.00
+
+Input: NaN, empty string, or negative number
+Output: ask user to try again
+
+
+
+Test Cases (for steps 7 and 8 above):
+
+Input: 'y' or 'Y'
+Output: isTermYears = true
+
+Input: 'm' or 'M'
+Output: isTermYears = false
+
+Input: anything other than those
+Output: ask user to try again
+
+
+
+Test Cases (for steps 9 and 10 above):
+
+Input: 'y' or 'Y' (from previous) and 10
+Output: termYr to user input and termMo = termYr * 12
+
+Input: 'm' or 'M' (from previous) and 10
+Output: termMo to user input
+
+Input: NaN or less than or equal to 0
+Output: ask user to try again
