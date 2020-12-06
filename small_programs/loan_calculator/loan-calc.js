@@ -237,8 +237,6 @@ do {
   if (doWelcome === true) {
     console.log(MESSAGES['welcome']);
     doWelcome = false;
-  } else {
-    console.clear();
   }
 
   let firstUserInput = setUpLoanAmount(getUserInput(MESSAGES['amount']));
@@ -295,12 +293,11 @@ do {
     console.log(MESSAGES['summary']);
     let moPayment = getNonVerbosePay(loAmount, moIR, termMo);
     console.log(moPayment);
-  }
-
-  console.log();
-  let learnMore = getUserInput(MESSAGES['more']).toLowerCase() === 'y';
-  if (learnMore === true) {
-    console.log(MESSAGES['final remark']);
+    console.log();
+    let learnMore = getUserInput(MESSAGES['more']).toLowerCase() === 'y';
+    if (learnMore === true) {
+      console.log(MESSAGES['final remark']);
+    }
   }
 
   console.log();
