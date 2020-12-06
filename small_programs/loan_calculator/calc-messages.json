@@ -28,5 +28,7 @@
   "factoring term 3": "=> By factoring monthly payment out on the left-hand side of the equation, we have\n\n===> monthly payment * (rate^2 + rate + 1) = loan amount * rate^3 <===\n",
   "dividing term 3": "=> Finally, by dividing both sides by (rate^2 + rate + 1), we have\n\n===> monthly payment = loan amount * (rate^3 / (rate^2 + rate + 1)) <===\n",
   "continue": "=> When you are ready to continue, enter 'c'.\n",
-  "summary": "=> monthly payment = loan amount * (rate^n / s)\n===> where rate is (1 + monthly interest rate),\n===> where n is your loan term in months, and\n===> where s is the following series: rate^(n - 1) + rate^(n - 2) + ...\n"
+  "summary": "=> monthly payment = loan amount * (rate^n / s)\n===> where rate is (1 + monthly interest rate),\n===> where n is your loan term in months, and\n===> where s is the following series: rate^(n - 1) + rate^(n - 2) + ...\n",
+  "more": "=> If you'd like to learn more about monthly loan payment calculation, then:\n=> enter 'y'; otherwise, enter any key or press enter.\n",
+  "final remark": "=> With the additional assumption that the monthly interest rate is > 0 (so that rate > 1):\n===> monthly payment = loan amount * ((rate^n * (rate - 1)) / (rate^n - 1))\n=> After some algebra, we get:\n===> monthly payment = loan amount * (monthly interest rate / (1 - rate^(-n)))"
 }
