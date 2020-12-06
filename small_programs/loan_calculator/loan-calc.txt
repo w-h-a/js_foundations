@@ -94,10 +94,10 @@ Output: ask user to try again
 
 Test Cases (for steps 5 and 6 above):
 
-Input: 'y' or Y' (from previous) and 10 or 10.00
+Input: 'y' or Y' (from previous) and 10 or 10.00 or 10%
 Output: anIR = 0.10 and moIR = anIR / 12
 
-Input: 'm' or 'M' (from previous) an 10 or 10.00
+Input: 'm' or 'M' (from previous) an 10 or 10.00 or 10%
 Output: moIR to user input
 
 Input: 0

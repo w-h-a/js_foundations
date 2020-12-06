@@ -47,6 +47,8 @@ END
 
 const READLINE = require('readline-sync');
 
+const MESSAGES = require('./calc-messages.json');
+
 let doWelcome = true;
 
 let loAmount;
@@ -71,8 +73,8 @@ function setUpLoanAmount(userInputP) {
     joinedString = joinedString.substring(1);
   }
   while (impermissibleNumber(joinedString)) {
-    console.log("=> Whoops! The input must be a number greater than 0.");
-    joinedString = setUpLoanAmount(getUserInput());
+    console.log(MESSAGES['num error']);
+    joinedString = setUpLoanAmount(getUserInput(MESSAGES['$']));
   }
   return joinedString;
 }
@@ -83,7 +85,7 @@ function setUpInterest(userInputP) {
     joinedString = joinedString.substring(0, joinedString['length'] - 1);
   }
   while (impermissibleInterest(joinedString)) {
-    console.log("=> Whoops! The input must be a non-negative number.");
+    console.log(MESSAGES['interest error']);
     joinedString = setUpInterest(getUserInput());
   }
   return joinedString;
@@ -92,7 +94,7 @@ function setUpInterest(userInputP) {
 function setUpTerm(userInputP) {
   let joinedString = cleanUpTheString(userInputP);
   while (impermissibleNumber(joinedString)) {
-    console.log("=> Whoops! The input must be a number greater than 0.");
+    console.log(MESSAGES['num error']);
     joinedString = setUpTerm(getUserInput());
   }
   return joinedString;
@@ -119,11 +121,11 @@ function impermissibleInterest(userInputP) {
 function setUpCalculation(amountP, interestP, termP) {
   console.clear();
   console.log(`=> You've taken out a loan of $${amountP} with a ${interestP} monthly interest rate.\n=> You are to pay it back in ${termP} months.\n`);
-  let firstUserCheck = getUserInput("=> Enter 'y', if this is correct; otherwise, enter any key or press enter.\n").toLowerCase() === 'y';
+  let firstUserCheck = getUserInput(MESSAGES['correct']).toLowerCase() === 'y';
   if (!firstUserCheck) return 'The user did not like some of the inputs.';
   console.clear();
   let rate = (1 + interestP);
-  let secondUserCheck = getUserInput("=> Enter 'y', if you'd like an in-depth explanation of your monthly payment;\n=> otherwise, enter any key or press enter.\n").toLowerCase() === 'y';
+  let secondUserCheck = getUserInput(MESSAGES['explanation']).toLowerCase() === 'y';
   if (secondUserCheck) {
     getVerbosePay(amountP, rate);
   }
@@ -142,10 +144,10 @@ function getVerbosePay(amountP, rateP) {
 }
 
 function explLite(amountP, rateP, payTermTwoP, payTermThreeP) {
-  console.log(`=> To make things a bit simpler, let's say that a variable called 'rate' is (1 + monthly interest rate).\n`);
+  console.log(MESSAGES['rate']);
   console.log(`=> Then if you have two months to pay the loan, then:\n===> monthly payment = loan amount * (rate^2 / (rate + 1))\n=> That is, your monthly payment would be $${payTermTwoP.toFixed(2)}.\n`);
   console.log(`=> And if you have three months to pay the loan, then:\n===> monthly payment = loan amount * (rate^3 / (rate^2 + rate + 1))\n=> That is, your monthly payment would be $${payTermThreeP.toFixed(2)}.\n`);
-  let thirdUserCheck = getUserInput("=> Enter 'y', if this makes sense; otherwise, enter any key or press enter for a fuller explanation.\n").toLowerCase() === 'y';
+  let thirdUserCheck = getUserInput(MESSAGES['sense']).toLowerCase() === 'y';
   if (thirdUserCheck) {
     generalExplanation();
   } else {
@@ -154,14 +156,14 @@ function explLite(amountP, rateP, payTermTwoP, payTermThreeP) {
 }
 
 function generalExplanation() {
-  console.log(`=> So, if we generalize the pattern, then:\n=> monthly payment = loan amount * (rate^n / s)\n===> where, again, rate is (1 + monthly interest rate),\n===> where n is your loan term in months, and\n===> where s is the following series: rate^(n - 1) + rate^(n - 2) + ...\n`);
+  console.log(MESSAGES['general']);
   readyToContinue();
 }
 
 function noAlgExpl(amountP, rateP, payTermTwoP, payTermThreeP) {
-  console.log(`=> If you have two months to pay the loan, then:\n===> monthly payment = (loan amount * rate - monthly payment) * rate\n=> After some algebra, we get the above result:\n===> monthly payment = loan amount * (rate^2 / (rate + 1))\n`);
-  console.log(`=> If you have three months to pay the loan, then:\n===> monthly payment = ((loan amount * rate - monthly payment) * rate - monthly payment) * rate\n=> After some algebra, we get the above result:\n===> monthly payment = loan amount * (rate^3 / (rate^2 + rate + 1))\n`);
-  let fourthUserCheck = getUserInput("=> Enter 'y', if this makes sense; otherwise, enter any key or press enter for a fuller explanation.\n").toLowerCase() === 'y';
+  console.log(MESSAGES['no algebra term 2']);
+  console.log(MESSAGES['no algebra term 3']);
+  let fourthUserCheck = getUserInput(MESSAGES['sense']).toLowerCase() === 'y';
   if (fourthUserCheck) {
     generalExplanation();
   } else {
@@ -171,30 +173,30 @@ function noAlgExpl(amountP, rateP, payTermTwoP, payTermThreeP) {
 
 function firstAlgExpl(amountP, rateP, payTermTwoP, payTermThreeP) {
   console.clear();
-  console.log(`=> If you have two months to pay the loan, then:\n\n===> monthly payment = (loan amount * rate - monthly payment) * rate <===\n`);
-  console.log(`=> By expanding the right-hand side of the equation, we have:\n\n===> monthly payment = loan amount * rate^2 - monthly payment * rate <===\n`);
-  console.log(`=> By adding monthly payment * rate to both sides, we have\n\n===> monthly payment + monthly payment * rate = loan amount * rate^2 <===\n`);
-  console.log(`=> By factoring monthly payment out on the left-hand side of the equation, we have:\n\n===> monthly payment * (1 + rate) = loan amount * rate^2 <===\n`);
-  console.log(`=> Finally, by dividing both sides by (1 + rate), we have\n\n===> monthly payment = loan amount * (rate^2 / (rate + 1)) <===\n`);
+  console.log(MESSAGES['algebra term 2']);
+  console.log(MESSAGES['expanding term 2']);
+  console.log(MESSAGES['adding term 2']);
+  console.log(MESSAGES['factoring term 2']);
+  console.log(MESSAGES['dividing term 2']);
   console.log(`=> Here your monthly payment would be ${amountP} * (${rateP}^2 / (${rateP} + 1)) = $${payTermTwoP.toFixed(2)}.\n`);
   readyToContinue();
   secondAlgExpl(amountP, rateP, payTermThreeP);
 }
 
 function secondAlgExpl(amountP, rateP, payTermThreeP) {
-  console.log(`=> If you have three months to pay the loan, then:\n\n===> monthly payment = ((loan amount * rate - monthly payment) * rate - monthly payment) * rate <===\n`);
-  console.log(`=> By expanding the right-hand side of the equation, we have\n\n===> monthly payment = loan amount * rate^3 - monthly payment * rate^2 - monthly payment * rate <===\n`);
-  console.log(`=> By adding to both sides twice, we have\n\n===> monthly payment + monthly payment * rate + monthly payment * rate^2 = loan amount * rate^3 <===\n`);
-  console.log(`=> By factoring monthly payment out on the left-hand side of the equation, we have\n\n===> monthly payment * (rate^2 + rate + 1) = loan amount * rate^3 <===\n`);
-  console.log(`=> Finally, by dividing both sides by (rate^2 + rate + 1), we have\n\n===> monthly payment = loan amount * (rate^3 / (rate^2 + rate + 1)) <===\n`);
+  console.log(MESSAGES['algebra term 3']);
+  console.log(MESSAGES['expanding term 3']);
+  console.log(MESSAGES['adding term 3']);
+  console.log(MESSAGES['factoring term 3']);
+  console.log(MESSAGES['dividing term 3']);
   console.log(`=> Here your monthly payment would be ${amountP} * (${rateP}^3 / (${rateP}^2 + ${rateP} + 1)) = $${payTermThreeP.toFixed(2)}.\n`);
   generalExplanation();
 }
 
 function readyToContinue() {
-  let anotherUserCheck = getUserInput("=> When you are ready to continue enter 'c'.\n").toLowerCase() === 'c';
+  let anotherUserCheck = getUserInput(MESSAGES['continue']).toLowerCase() === 'c';
   while (!anotherUserCheck) {
-    console.log("=> Whoops!");
+    console.log(MESSAGES['error']);
     anotherUserCheck = getUserInput();
   }
   console.clear();
@@ -209,25 +211,25 @@ function getNonVerbosePay(amountP, interestP, rateP, termP) {
     power -= 1;
   }
   let result = amountP * (onePlusMoInterestToPowerOfTerm / denomSeries);
-  console.log(`=> monthly payment = loan amount * (rate^n / s)\n===> where rate is (1 + monthly interest rate),\n===> where n is your loan term in months, and\n===> where s is the following series: rate^(n - 1) + rate^(n - 2) + ...\n`);
+  console.log(MESSAGES['summary']);
   return (`=> So, since you have ${termP} months to pay back the loan of $${amountP} with a ${interestP} monthly interest rate,\n=> your monthly payment would be:\n===> ${amountP} * (${rateP}^${termP} / ${denomSeries}) = $${result.toFixed(2)}\n=> Your total payment would be:\n===> $${(result * termP).toFixed(2)}\n=> The total interest would be:\n===> $${((result * termP) - amountP).toFixed(2)}`);
 }
 
 do {
   console.clear();
   if (doWelcome === true) {
-    console.log("=> Welcome to the loan calculator!\n=> In a few quick steps, you can calculate your monthly payments!\n=> We can also walk you through the reasoning in more or less detail!");
+    console.log(MESSAGES['welcome']);
     doWelcome = false;
   } else {
     console.clear();
   }
 
-  let firstUserInput = setUpLoanAmount(getUserInput("=> Enter the loan amount: $"));
+  let firstUserInput = setUpLoanAmount(getUserInput(MESSAGES['amount']));
   loAmount = Number(firstUserInput);
 
-  let secondUserInput = getUserInput("=> Is the interest in years (enter: 'y') or months (enter: 'm')?\n").toLowerCase();
+  let secondUserInput = getUserInput(MESSAGES['interest unit']).toLowerCase();
   while (!['y', 'm'].includes(secondUserInput)) {
-    console.log("=> Whoops!");
+    console.log(MESSAGES['error']);
     secondUserInput = getUserInput().toLowerCase();
   }
   if (secondUserInput.toLowerCase() === 'y') {
@@ -236,7 +238,7 @@ do {
     isInterestYears = false;
   }
 
-  let thirdUserInput = setUpInterest(getUserInput("=> Enter the interest rate as a percentage: "));
+  let thirdUserInput = setUpInterest(getUserInput(MESSAGES['interest']));
   if (isInterestYears === true) {
     anIR = Number(thirdUserInput) / 100;
     moIR = anIR / 12;
@@ -244,9 +246,9 @@ do {
     moIR = Number(thirdUserInput) / 100;
   }
 
-  let fourthUserInput = getUserInput("=> Is the loan term in years (enter: 'y') or months (enter: 'm')?\n").toLowerCase();
+  let fourthUserInput = getUserInput(MESSAGES['term unit']).toLowerCase();
   while (!['y', 'm'].includes(fourthUserInput)) {
-    console.log("=> Whoops!");
+    console.log(MESSAGES['error']);
     fourthUserInput = getUserInput().toLowerCase();
   }
   if (fourthUserInput === 'y') {
@@ -255,7 +257,7 @@ do {
     isTermYears = false;
   }
 
-  let fifthUserInput = setUpTerm(getUserInput("=> Enter the loan term: "));
+  let fifthUserInput = setUpTerm(getUserInput(MESSAGES['term']));
   if (isTermYears === true) {
     termYr = Number(fifthUserInput);
     termMo = termYr * 12;
@@ -264,8 +266,10 @@ do {
   }
 
   let moPayment = setUpCalculation(loAmount, moIR, termMo);
-  if (moPayment !== 'The user did not like some of the inputs.') console.log(moPayment);
+  if (moPayment !== 'The user did not like some of the inputs.') {
+    console.log(moPayment);
+  }
 
   console.log();
-  toRepeat = getUserInput("=> Enter 'y', if you'd like to calculate a monthly loan payment; otherwise, enter any key or press enter.\n").toLowerCase() === 'y';
+  toRepeat = getUserInput(MESSAGES['again']).toLowerCase() === 'y';
 } while (toRepeat);
