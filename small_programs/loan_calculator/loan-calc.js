@@ -118,37 +118,36 @@ function impermissibleInterest(userInputP) {
   return userInputP === '' || Number.isNaN(Number(userInputP)) || Number(userInputP) < 0;
 }
 
-function setUpCalculation(amountP, interestP, termP) {
-  console.clear();
-  console.log(`=> You've taken out a loan of $${amountP} with a ${interestP} monthly interest rate.\n=> You are to pay it back in ${termP} months.\n`);
-  let firstUserCheck = getUserInput(MESSAGES['correct']).toLowerCase() === 'y';
-  if (!firstUserCheck) return 'The user did not like some of the inputs.';
-  console.clear();
-  let rate = (1 + interestP);
-  let secondUserCheck = getUserInput(MESSAGES['explanation']).toLowerCase() === 'y';
-  if (secondUserCheck) {
-    getVerbosePay(amountP, rate);
-  }
-  return getNonVerbosePay(amountP, interestP, rate, termP);
+function confirmUserInputs() {
+  return getUserInput(MESSAGES['correct']).toLowerCase() === 'y';
 }
 
-function getVerbosePay(amountP, rateP) {
+function setUpExplanation(amountP, interestP) {
   console.clear();
-  let rateToPowerThree = rateP ** 3;
-  let rateToPowerTwo = rateP ** 2;
-  let moPaymentTermTwo = amountP * (rateToPowerTwo / (rateP + 1));
+  let desiresDepth = getUserInput(MESSAGES['explanation']).toLowerCase() === 'y';
+  if (desiresDepth) {
+    getVerbosePay(amountP, interestP);
+  }
+}
+
+function getVerbosePay(amountP, interestP) {
+  console.clear();
+  let rate = (1 + interestP);
+  let rateToPowerThree = rate ** 3;
+  let rateToPowerTwo = rate ** 2;
+  let moPaymentTermTwo = amountP * (rateToPowerTwo / (rate + 1));
   let moPaymentTermThree = (
-    amountP * (rateToPowerThree / (rateToPowerTwo + rateP + 1))
+    amountP * (rateToPowerThree / (rateToPowerTwo + rate + 1))
   );
-  explLite(amountP, rateP, moPaymentTermTwo, moPaymentTermThree);
+  explLite(amountP, rate, moPaymentTermTwo, moPaymentTermThree);
 }
 
 function explLite(amountP, rateP, payTermTwoP, payTermThreeP) {
   console.log(MESSAGES['rate']);
   console.log(`=> Then if you have two months to pay the loan, then:\n===> monthly payment = loan amount * (rate^2 / (rate + 1))\n=> That is, your monthly payment would be $${payTermTwoP.toFixed(2)}.\n`);
   console.log(`=> And if you have three months to pay the loan, then:\n===> monthly payment = loan amount * (rate^3 / (rate^2 + rate + 1))\n=> That is, your monthly payment would be $${payTermThreeP.toFixed(2)}.\n`);
-  let thirdUserCheck = getUserInput(MESSAGES['sense']).toLowerCase() === 'y';
-  if (thirdUserCheck) {
+  let firstUserCheck = getUserInput(MESSAGES['sense']).toLowerCase() === 'y';
+  if (firstUserCheck) {
     generalExplanation();
   } else {
     noAlgExpl(amountP, rateP, payTermTwoP, payTermThreeP);
@@ -163,8 +162,8 @@ function generalExplanation() {
 function noAlgExpl(amountP, rateP, payTermTwoP, payTermThreeP) {
   console.log(MESSAGES['no algebra term 2']);
   console.log(MESSAGES['no algebra term 3']);
-  let fourthUserCheck = getUserInput(MESSAGES['sense']).toLowerCase() === 'y';
-  if (fourthUserCheck) {
+  let secondUserCheck = getUserInput(MESSAGES['sense']).toLowerCase() === 'y';
+  if (secondUserCheck) {
     generalExplanation();
   } else {
     firstAlgExpl(amountP, rateP, payTermTwoP, payTermThreeP);
@@ -202,17 +201,17 @@ function readyToContinue() {
   console.clear();
 }
 
-function getNonVerbosePay(amountP, interestP, rateP, termP) {
-  let onePlusMoInterestToPowerOfTerm = rateP ** termP;
+function getNonVerbosePay(amountP, interestP, termP) {
+  let rate = (1 + interestP);
+  let onePlusMoInterestToPowerOfTerm = rate ** termP;
   let power = termP - 1;
   let denomSeries = 0;
   while (power > -1) {
-    denomSeries += rateP ** power;
+    denomSeries += rate ** power;
     power -= 1;
   }
   let result = amountP * (onePlusMoInterestToPowerOfTerm / denomSeries);
-  console.log(MESSAGES['summary']);
-  return (`=> So, since you have ${termP} months to pay back the loan of $${amountP} with a ${interestP} monthly interest rate,\n=> your monthly payment would be:\n===> ${amountP} * (${rateP}^${termP} / ${denomSeries}) = $${result.toFixed(2)}\n=> Your total payment would be:\n===> $${(result * termP).toFixed(2)}\n=> The total interest would be:\n===> $${((result * termP) - amountP).toFixed(2)}`);
+  return (`=> So, since you have ${termP} months to pay back the loan of $${amountP} with a ${interestP} monthly interest rate,\n=> your monthly payment would be:\n===> ${amountP} * (${rate}^${termP} / ${denomSeries}) = $${result.toFixed(2)}\n=> Your total payment would be:\n===> $${(result * termP).toFixed(2)}\n=> The total interest would be:\n===> $${((result * termP) - amountP).toFixed(2)}`);
 }
 
 do {
@@ -265,8 +264,14 @@ do {
     termMo = Number(fifthUserInput);
   }
 
-  let moPayment = setUpCalculation(loAmount, moIR, termMo);
-  if (moPayment !== 'The user did not like some of the inputs.') {
+  console.clear();
+  console.log(`=> You've taken out a loan of $${loAmount} with a ${moIR} monthly interest rate.\n=> You are to pay it back in ${termMo} months.\n`);
+
+  let isConfirmed = confirmUserInputs();
+  if (isConfirmed === true) {
+    setUpExplanation(loAmount, moIR);
+    console.log(MESSAGES['summary']);
+    let moPayment = getNonVerbosePay(loAmount, moIR, termMo);
     console.log(moPayment);
   }
 
