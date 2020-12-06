@@ -122,14 +122,6 @@ function confirmUserInputs() {
   return getUserInput(MESSAGES['correct']).toLowerCase() === 'y';
 }
 
-function setUpExplanation(amountP, interestP) {
-  console.clear();
-  let desiresDepth = getUserInput(MESSAGES['explanation']).toLowerCase() === 'y';
-  if (desiresDepth) {
-    getVerbosePay(amountP, interestP);
-  }
-}
-
 function getVerbosePay(amountP, interestP) {
   console.clear();
   let rate = (1 + interestP);
@@ -269,7 +261,11 @@ do {
 
   let isConfirmed = confirmUserInputs();
   if (isConfirmed === true) {
-    setUpExplanation(loAmount, moIR);
+    console.clear();
+    let desiresDepth = getUserInput(MESSAGES['explanation']).toLowerCase() === 'y';
+    if (desiresDepth) {
+      getVerbosePay(loAmount, moIR);
+    }
     console.log(MESSAGES['summary']);
     let moPayment = getNonVerbosePay(loAmount, moIR, termMo);
     console.log(moPayment);
