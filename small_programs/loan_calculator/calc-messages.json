@@ -1,5 +1,5 @@
 {
-  "welcome": "=> Welcome to the loan calculator!\n=> In a few quick steps, you can calculate your monthly payments.\n=> We can also walk you through the reasoning in more or less detail.\n=> Don't let loan providers exploit ignorance!",
+  "welcome": "=> Welcome to the loan calculator!\n=> In a few quick steps, you can calculate your monthly payments.\n=> We can also walk you through the reasoning in more or less detail.",
   "amount": "=> Enter the loan amount: $",
   "num error": "=> Whoops! The input must be a number greater than 0.",
   "$": "$",
@@ -30,5 +30,5 @@
   "continue": "=> When you are ready to continue, enter 'c'.\n",
   "summary": "=> monthly payment = loan amount * (rate^n / s)\n===> where rate is (1 + monthly interest rate),\n===> where n is your loan term in months, and\n===> where s is the following series: rate^(n - 1) + rate^(n - 2) + ...\n",
   "more": "=> If you'd like to learn more about monthly loan payment calculation, then:\n=> enter 'y'; otherwise, enter any key or press enter.\n",
-  "final remark": "=> With the additional assumption that the monthly interest rate is > 0 (so that rate > 1):\n===> monthly payment = loan amount * ((rate^n * (rate - 1)) / (rate^n - 1))\n=> After some algebra, we get:\n===> monthly payment = loan amount * (monthly interest rate / (1 - rate^(-n)))"
+  "final remark": "=> With the additional assumption that the monthly interest rate is > 0 (so that rate > 1):\n===> monthly payment = loan amount * ((rate^n * (rate - 1)) / (rate^n - 1))\n=> After some algebra, we get:\n===> monthly payment = loan amount * (monthly interest rate / (1 - rate^(-n)))\n"
 }

@@ -163,7 +163,12 @@ function explLite(amountP, rateP, payTermTwoP, payTermThreeP) {
 
 function generalExplanation() {
   console.log(MESSAGES['general']);
-  readyToContinue();
+  let learnMore = getUserInput(MESSAGES['more']).toLowerCase() === 'y';
+  if (learnMore === true) {
+    console.log(MESSAGES['final remark']);
+    readyToContinue();
+  }
+  console.clear();
 }
 
 function noAlgExpl(amountP, rateP, payTermTwoP, payTermThreeP) {
@@ -282,7 +287,6 @@ do {
 
   console.clear();
   console.log(`=> You've taken out a loan of $${loAmount} with a ${moIR} monthly interest rate.\n=> You are to pay it back in ${termMo} months.\n`);
-
   let isConfirmed = confirmUserInputs();
   if (isConfirmed === true) {
     console.clear();
@@ -293,11 +297,6 @@ do {
     console.log(MESSAGES['summary']);
     let moPayment = getNonVerbosePay(loAmount, moIR, termMo);
     console.log(moPayment);
-    console.log();
-    let learnMore = getUserInput(MESSAGES['more']).toLowerCase() === 'y';
-    if (learnMore === true) {
-      console.log(MESSAGES['final remark']);
-    }
   }
 
   console.log();
