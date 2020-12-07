@@ -214,7 +214,7 @@ function readyToContinue() {
 
   while (!anotherUserCheck) {
     console.log(MESSAGES['error']);
-    anotherUserCheck = getUserInput();
+    anotherUserCheck = getUserInput().toLowerCase() === 'c';
   }
 
   console.clear();
