@@ -253,7 +253,7 @@ function computerPlay(toEvolveP) {
     }
 
     console.log(`=> The results are in!\n===> Rock players scored ${scoresAndProbs['rockScore']} wins!\n===> Paper players scored ${scoresAndProbs['paperScore']} wins!\n===> Scissors players scored ${scoresAndProbs['scissorsScore']} wins!`);
-    console.log(`===> The probability that the ${active} computer selects rock is ${scoresAndProbs['probToRock']}.\n===> The probability that the ${active} computer selects paper is ${scoresAndProbs['probToPaper']}.\n===> The probability that the ${active} computer selects scissors is ${scoresAndProbs['probToScissors']}.`);
+    //console.log(`===> The probability that the ${active} computer selects rock is ${scoresAndProbs['probToRock']}.\n===> The probability that the ${active} computer selects paper is ${scoresAndProbs['probToPaper']}.\n===> The probability that the ${active} computer selects scissors is ${scoresAndProbs['probToScissors']}.`);
 
     let population = `[${arrayOfComputers[0]['choice']}] [${arrayOfComputers[1]['choice']}] [${arrayOfComputers[2]['choice']}] [${arrayOfComputers[3]['choice']}] [${arrayOfComputers[4]['choice']}] [${arrayOfComputers[5]['choice']}] [${arrayOfComputers[6]['choice']}] [${arrayOfComputers[7]['choice']}]`;
 
