@@ -1,0 +1,48 @@
+Problem:
+
+Best of 5 Keep score of the player's and computer's wins.
+When either the player or computer reaches five wins,
+the match is over, and the winning player becomes the grand winner.
+Don't add your incrementing logic to displayResults.
+Keep your functions simple; they should perform one logical task — no more, no less.
+
+I've also added a "watch-only" mode.
+
+Pseudocode:
+
+START
+
+1.  GET user's preference for game-play or watch-play
+2.  IF game-play
+      GO to step 3
+    ELSE watch-play
+      GO to step 7
+3.  GET user's preference for best of.
+4.  IF user's selection is permissible
+      SET rounds variable to user choice
+    ELSE
+      WHILE impermissible input
+        GO back to step 1
+5.  WHILE neither player has won Math.ceil(round / 2)
+      1.  GET user's move
+      2.  IF user's selection is permissible
+            SET choice to user's move
+          ELSE
+            WHILE impermissible input
+              GO back to step 3.1.
+      3.  GET computer's move
+      4.  PRINT choices
+      5.  PRINT winner
+      6.  SET number of wins
+6.  PRINT grand winner
+7.  GET computers' strategies
+8.  PRINT torus of computers, identified by their strategies
+9.  WHILE user wishes to watch
+      1. SET scores and update probabilities to 0
+      2. SET computers that are in play
+      3. SET scores
+      4. SET update prob distribution over strategies for focal computer
+      5. SET strategy of focal computer
+      6. PRINT torus of computers, identified by their strategies
+
+STOP

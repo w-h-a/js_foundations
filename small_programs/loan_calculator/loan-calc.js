@@ -252,7 +252,7 @@ do {
     console.log(MESSAGES['error']);
     secondUserInput = getUserInput().toLowerCase();
   }
-  if (secondUserInput.toLowerCase() === 'y') {
+  if (secondUserInput === 'y') {
     isInterestYears = true;
   } else {
     isInterestYears = false;
