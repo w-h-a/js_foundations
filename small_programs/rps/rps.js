@@ -157,51 +157,6 @@ function displayGrandWinner(firstToP) {
   }
 }
 
-function play(firstToP) {
-  while (!((score['user'] === firstToP) || (score['computer'] === firstToP))) {
-    console.clear();
-
-    let choice = getUserInput("=> Make a choice: 'r' for rock, 'p' for paper, or 's' for scissors\n");
-
-    while (!CHOICES['choiceArray'].includes(choice)) {
-      console.log("=> Whoops!");
-      choice = getUserInput();
-    }
-
-    let randomIndex = Math.floor(Math.random() * CHOICES['choiceArray']['length']);
-
-    let computerChoice = CHOICES['choiceArray'][randomIndex];
-
-    displayChoices(choice, computerChoice);
-    displayWinner(choice, computerChoice);
-    updateWins(choice, computerChoice);
-    displayWins();
-    readyToContinue();
-  }
-}
-
-function masterForGamePlay() {
-  console.clear();
-
-  let bestOf = getUserInput("=> Enter the number of your choosing:\n===> 1: Best of 1\n===> 3: Best of 3\n===> 5: Best of 5\n===> 7: Best of 7\n");
-
-  while (!ROUNDS.includes(bestOf)) {
-    console.log("=> Whoops!");
-    bestOf = getUserInput();
-  }
-
-  bestOf = Number(bestOf);
-
-  let firstTo = Math.ceil(bestOf / 2);
-
-  score['user'] = 0;
-  score['computer'] = 0;
-
-  play(firstTo);
-
-  displayGrandWinner(firstTo);
-}
-
 function setInitialStrategies() {
   arrayOfComputers = arrayOfComputers.reduce((acc, ele) => {
     let randomIndex = Math.floor(Math.random() * CHOICES['choiceArray']['length']);
@@ -340,67 +295,6 @@ function displayResults() {
   console.log(`=> Here's our little population now:\n===> ${population}`);
 }
 
-function computerPlay(toEvolveP) {
-  do {
-    resetScoresAndProbs();
-
-    let active = Math.floor(Math.random() * arrayOfComputers['length']);
-    let activeMinus;
-    let activePlus;
-
-    if ((active - 1) === -1) {
-      activeMinus = 7;
-    } else {
-      activeMinus = (active - 1);
-    }
-
-    if ((active + 1) === 8) {
-      activePlus = 0;
-    } else {
-      activePlus = (active + 1);
-    }
-
-    console.log(`=> The computer at index ${activeMinus} is playing against its neighbors.\n=> The computer at index ${activePlus} is playing against its neighbors.`);
-    console.log(`=> The results of those matches will determine how the computer at index ${active} chooses its strategy in the next round.`);
-    console.log("=> If there are no wins, no computer updates its strategy.");
-    readyToContinue();
-
-    let arrayOfRPS = getLocaleOfAction(active);
-
-    addUpPaperScore(arrayOfRPS);
-    addUpScissorsScore(arrayOfRPS);
-    addUpRockScore(arrayOfRPS);
-
-    updateProbs();
-
-    if (arrayOfRPS[2]['choice'] === 'r') {
-      updateRStrategy(arrayOfRPS);
-    } else if (arrayOfRPS[2]['choice'] === 'p') {
-      updatePStrategy(arrayOfRPS);
-    } else {
-      updateSStrategy(arrayOfRPS);
-    }
-
-    displayResults();
-
-    toEvolveP = getUserInput("=> When you want to see the next iteration, enter 'c'; otherwise enter any key or press enter to stop.\n") === 'c';
-  } while (toEvolveP);
-}
-
-function masterForEvolve() {
-  console.clear();
-
-  setInitialStrategies();
-
-  let population = `[${arrayOfComputers[0]['choice']}] [${arrayOfComputers[1]['choice']}] [${arrayOfComputers[2]['choice']}] [${arrayOfComputers[3]['choice']}] [${arrayOfComputers[4]['choice']}] [${arrayOfComputers[5]['choice']}] [${arrayOfComputers[6]['choice']}] [${arrayOfComputers[7]['choice']}]`;
-
-  console.log(`=> Here we have a little population of computers on a 1-dimensional torus:\n===> ${population}\n=> Each computer is identified by its strategy.\n=> Each computer's neighbors are those to its immediate left and immediate right.\n=> The computers at the edges are neighbors of one another.`);
-
-  readyToContinue();
-
-  computerPlay();
-}
-
 do {
   console.clear();
 
@@ -414,9 +308,101 @@ do {
   let playOrEvolve = getUserInput("=> Enter 'y', if you'd like to play the game; otherwise, enter any key or press enter to watch computers play.\n");
 
   if (playOrEvolve === 'y') {
-    masterForGamePlay();
+    console.clear();
+
+    let bestOf = getUserInput("=> Enter the number of your choosing:\n===> 1: Best of 1\n===> 3: Best of 3\n===> 5: Best of 5\n===> 7: Best of 7\n");
+
+    while (!ROUNDS.includes(bestOf)) {
+      console.log("=> Whoops!");
+      bestOf = getUserInput();
+    }
+
+    bestOf = Number(bestOf);
+
+    let firstTo = Math.ceil(bestOf / 2);
+
+    score['user'] = 0;
+    score['computer'] = 0;
+
+    while (!((score['user'] === firstTo) || (score['computer'] === firstTo))) {
+      console.clear();
+
+      let choice = getUserInput("=> Make a choice: 'r' for rock, 'p' for paper, or 's' for scissors\n");
+
+      while (!CHOICES['choiceArray'].includes(choice)) {
+        console.log("=> Whoops!");
+        choice = getUserInput();
+      }
+
+      let randomIndex = Math.floor(Math.random() * CHOICES['choiceArray']['length']);
+
+      let computerChoice = CHOICES['choiceArray'][randomIndex];
+
+      displayChoices(choice, computerChoice);
+      displayWinner(choice, computerChoice);
+      updateWins(choice, computerChoice);
+      displayWins();
+      readyToContinue();
+    }
+
+    displayGrandWinner(firstTo);
   } else {
-    masterForEvolve();
+    console.clear();
+
+    setInitialStrategies();
+
+    let population = `[${arrayOfComputers[0]['choice']}] [${arrayOfComputers[1]['choice']}] [${arrayOfComputers[2]['choice']}] [${arrayOfComputers[3]['choice']}] [${arrayOfComputers[4]['choice']}] [${arrayOfComputers[5]['choice']}] [${arrayOfComputers[6]['choice']}] [${arrayOfComputers[7]['choice']}]`;
+
+    console.log(`=> Here we have a little population of computers on a 1-dimensional torus:\n===> ${population}\n=> Each computer is identified by its strategy.\n=> Each computer's neighbors are those to its immediate left and immediate right.\n=> The computers at the edges are neighbors of one another.`);
+
+    readyToContinue();
+
+    let toEvolve;
+
+    do {
+      resetScoresAndProbs();
+
+      let active = Math.floor(Math.random() * arrayOfComputers['length']);
+      let activeMinus;
+      let activePlus;
+
+      if ((active - 1) === -1) {
+        activeMinus = 7;
+      } else {
+        activeMinus = (active - 1);
+      }
+
+      if ((active + 1) === 8) {
+        activePlus = 0;
+      } else {
+        activePlus = (active + 1);
+      }
+
+      console.log(`=> The computer at index ${activeMinus} is playing against its neighbors.\n=> The computer at index ${activePlus} is playing against its neighbors.`);
+      console.log(`=> The results of those matches will determine how the computer at index ${active} chooses its strategy in the next round.`);
+      console.log("=> If there are no wins, no computer updates its strategy.");
+      readyToContinue();
+
+      let arrayOfRPS = getLocaleOfAction(active);
+
+      addUpPaperScore(arrayOfRPS);
+      addUpScissorsScore(arrayOfRPS);
+      addUpRockScore(arrayOfRPS);
+
+      updateProbs();
+
+      if (arrayOfRPS[2]['choice'] === 'r') {
+        updateRStrategy(arrayOfRPS);
+      } else if (arrayOfRPS[2]['choice'] === 'p') {
+        updatePStrategy(arrayOfRPS);
+      } else {
+        updateSStrategy(arrayOfRPS);
+      }
+
+      displayResults();
+
+      toEvolve = getUserInput("=> When you want to see the next iteration, enter 'c'; otherwise enter any key or press enter to stop.\n") === 'c';
+    } while (toEvolve);
   }
 
   toRepeat = getUserInput("=> Enter 'y', if you'd like another go; otherwise, enter any key or press enter to exit.\n") === 'y';
