@@ -260,7 +260,7 @@ function maxProbUpdate() {
   if ((scoresAndProbs['paperScore'] + scoresAndProbs['scissorsScore'] + scoresAndProbs['rockScore']) !== 0) {
     let max = Math.max(scoresAndProbs['paperScore'], scoresAndProbs['scissorsScore'], scoresAndProbs['rockScore']);
     if (
-      ((scoresAndProbs['paperScore'] === max) && (scoresAndProbs['scissorsScore'] === max) && (scoresAndProbs['rockScore'])) ||
+      ((scoresAndProbs['paperScore'] === max) && (scoresAndProbs['scissorsScore'] === max) && (scoresAndProbs['rockScore'])) || // This condition is not needed unless we expand the game to a 2d surface
       ((scoresAndProbs['paperScore'] === max) && (scoresAndProbs['scissorsScore'] === max)) ||
       ((scoresAndProbs['paperScore'] === max) && (scoresAndProbs['rockScore'] === max)) ||
       ((scoresAndProbs['rockScore'] === max) && (scoresAndProbs['scissorsScore'] === max))
