@@ -65,6 +65,8 @@ let toRepeat;
 
 const NEIGHBORS = 'neighbors';
 
+const UPDATE = ['1', '2'];
+
 let computer0 = {};
 let computer1 = {};
 let computer2 = {};
@@ -246,11 +248,31 @@ function addUpRockScore(arrayP) {
   }
 }
 
-function updateProbs() {
+function proportionateProbUpdate() {
   if ((scoresAndProbs['paperScore'] + scoresAndProbs['scissorsScore'] + scoresAndProbs['rockScore']) !== 0) {
     scoresAndProbs['probToPaper'] = (scoresAndProbs['paperScore'] / (scoresAndProbs['paperScore'] + scoresAndProbs['scissorsScore'] + scoresAndProbs['rockScore']));
     scoresAndProbs['probToScissors'] = (scoresAndProbs['scissorsScore'] / (scoresAndProbs['paperScore'] + scoresAndProbs['scissorsScore'] + scoresAndProbs['rockScore']));
     scoresAndProbs['probToRock'] = (scoresAndProbs['rockScore'] / (scoresAndProbs['paperScore'] + scoresAndProbs['scissorsScore'] + scoresAndProbs['rockScore']));
+  }
+}
+
+function maxProbUpdate() {
+  if ((scoresAndProbs['paperScore'] + scoresAndProbs['scissorsScore'] + scoresAndProbs['rockScore']) !== 0) {
+    let max = Math.max(scoresAndProbs['paperScore'], scoresAndProbs['scissorsScore'], scoresAndProbs['rockScore']);
+    if (
+      ((scoresAndProbs['paperScore'] === max) && (scoresAndProbs['scissorsScore'] === max) && (scoresAndProbs['rockScore'])) ||
+      ((scoresAndProbs['paperScore'] === max) && (scoresAndProbs['scissorsScore'] === max)) ||
+      ((scoresAndProbs['paperScore'] === max) && (scoresAndProbs['rockScore'] === max)) ||
+      ((scoresAndProbs['rockScore'] === max) && (scoresAndProbs['scissorsScore'] === max))
+    ) {
+      proportionateProbUpdate();
+    } else if (scoresAndProbs['paperScore'] === max) {
+      scoresAndProbs['probToPaper'] = 1;
+    } else if (scoresAndProbs['scissorsScore'] === max) {
+      scoresAndProbs['probToScissors'] = 1;
+    } else {
+      scoresAndProbs['probToRock'] = 1;
+    }
   }
 }
 
@@ -355,7 +377,12 @@ do {
 
     console.log(`=> Here we have a little population of computers on a 1-dimensional torus:\n===> ${population}\n=> Each computer is identified by its strategy.\n=> Each computer's neighbors are those to its immediate left and immediate right.\n=> The computers at the edges are neighbors of one another.`);
 
-    readyToContinue();
+    let updateMethod = getUserInput("=> How would you like the computers to update their strategy?\n=> Enter the number of your choosing:\n===> 1: Players copy a neighbor chosen according to probabilities that are proportional to the neighbor's payoff.\n===> 2: Players copy a neighbor with maximum payoff.\n=> Note: For our little game, the difference between these update methods can be seen\n=> only on the (rare) occassion that one neighbor wins twice and the other wins once.\n");
+
+    while (!UPDATE.includes(updateMethod)) {
+      console.log("=> Whoops!");
+      updateMethod = getUserInput();
+    }
 
     let toEvolve;
 
@@ -389,7 +416,11 @@ do {
       addUpScissorsScore(arrayOfRPS);
       addUpRockScore(arrayOfRPS);
 
-      updateProbs();
+      if (updateMethod === '1') {
+        proportionateProbUpdate();
+      } else {
+        maxProbUpdate();
+      }
 
       if (arrayOfRPS[2]['choice'] === 'r') {
         updateRStrategy(arrayOfRPS);
