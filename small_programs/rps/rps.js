@@ -18,7 +18,7 @@ START
             SET choice to user's move
           ELSE
             WHILE impermissible input
-              GO back to step 3.1.
+              GO back to step 5.1.
       3.  GET computer's move
       4.  PRINT choices
       5.  PRINT winner
@@ -106,38 +106,15 @@ let scoresAndProbs = {
   probToRock: 0,
 };
 
+function getUserInput(userInputP) {
+  return READLINE.question(userInputP).toLowerCase();
+}
+
 function readyToContinue() {
   let isReady = getUserInput("=> When you're ready to continue, enter 'c'.\n") === 'c';
   while (!isReady) {
     console.log("=> Whoops!");
     isReady = getUserInput() === 'c';
-  }
-}
-
-function getUserInput(userInputP) {
-  return READLINE.question(userInputP).toLowerCase();
-}
-
-function play(firstToP) {
-  while (!((score['user'] === firstToP) || (score['computer'] === firstToP))) {
-    console.clear();
-
-    let choice = getUserInput("=> Make a choice: 'r' for rock, 'p' for paper, or 's' for scissors\n");
-
-    while (!CHOICES['choiceArray'].includes(choice)) {
-      console.log("=> Whoops!");
-      choice = getUserInput();
-    }
-
-    let randomIndex = Math.floor(Math.random() * CHOICES['choiceArray']['length']);
-
-    let computerChoice = CHOICES['choiceArray'][randomIndex];
-
-    displayChoices(choice, computerChoice);
-    displayWinner(choice, computerChoice);
-    updateWins(choice, computerChoice);
-    displayWins();
-    readyToContinue();
   }
 }
 
@@ -180,6 +157,29 @@ function displayGrandWinner(firstToP) {
   }
 }
 
+function play(firstToP) {
+  while (!((score['user'] === firstToP) || (score['computer'] === firstToP))) {
+    console.clear();
+
+    let choice = getUserInput("=> Make a choice: 'r' for rock, 'p' for paper, or 's' for scissors\n");
+
+    while (!CHOICES['choiceArray'].includes(choice)) {
+      console.log("=> Whoops!");
+      choice = getUserInput();
+    }
+
+    let randomIndex = Math.floor(Math.random() * CHOICES['choiceArray']['length']);
+
+    let computerChoice = CHOICES['choiceArray'][randomIndex];
+
+    displayChoices(choice, computerChoice);
+    displayWinner(choice, computerChoice);
+    updateWins(choice, computerChoice);
+    displayWins();
+    readyToContinue();
+  }
+}
+
 function masterForGamePlay() {
   console.clear();
 
@@ -209,58 +209,6 @@ function setInitialStrategies() {
     acc.push(ele);
     return acc;
   }, []);
-}
-
-function computerPlay(toEvolveP) {
-  do {
-    resetScoresAndProbs();
-
-    let active = Math.floor(Math.random() * arrayOfComputers['length']);
-    let activeMinus;
-    let activePlus;
-
-    if ((active - 1) === -1) {
-      activeMinus = 7;
-    } else {
-      activeMinus = (active - 1);
-    }
-
-    if ((active + 1) === 8) {
-      activePlus = 0;
-    } else {
-      activePlus = (active + 1);
-    }
-
-    console.log(`=> The computer at index ${activeMinus} is playing against its neighbors.\n=> The computer at index ${activePlus} is playing against its neighbors.`);
-    console.log(`=> The results of those matches will determine how the computer at index ${active} chooses its strategy in the next round.`);
-    console.log("=> If there are no wins, no computer updates its strategy.");
-    readyToContinue();
-
-    let arrayOfRPS = getLocaleOfAction(active);
-
-    addUpPaperScore(arrayOfRPS);
-    addUpScissorsScore(arrayOfRPS);
-    addUpRockScore(arrayOfRPS);
-
-    updateProbs();
-
-    if (arrayOfRPS[2]['choice'] === 'r') {
-      updateRStrategy(arrayOfRPS);
-    } else if (arrayOfRPS[2]['choice'] === 'p') {
-      updatePStrategy(arrayOfRPS);
-    } else {
-      updateSStrategy(arrayOfRPS);
-    }
-
-    console.log(`=> The results are in!\n===> Rock players scored ${scoresAndProbs['rockScore']} wins!\n===> Paper players scored ${scoresAndProbs['paperScore']} wins!\n===> Scissors players scored ${scoresAndProbs['scissorsScore']} wins!`);
-    //console.log(`===> The probability that the ${active} computer selects rock is ${scoresAndProbs['probToRock']}.\n===> The probability that the ${active} computer selects paper is ${scoresAndProbs['probToPaper']}.\n===> The probability that the ${active} computer selects scissors is ${scoresAndProbs['probToScissors']}.`);
-
-    let population = `[${arrayOfComputers[0]['choice']}] [${arrayOfComputers[1]['choice']}] [${arrayOfComputers[2]['choice']}] [${arrayOfComputers[3]['choice']}] [${arrayOfComputers[4]['choice']}] [${arrayOfComputers[5]['choice']}] [${arrayOfComputers[6]['choice']}] [${arrayOfComputers[7]['choice']}]`;
-
-    console.log(`=> Here's our little population now:\n===> ${population}`);
-
-    toEvolveP = getUserInput("=> When you want to see the next iteration, enter 'c'; otherwise enter any key or press enter to stop.\n") === 'c';
-  } while (toEvolveP);
 }
 
 function resetScoresAndProbs() {
@@ -382,6 +330,61 @@ function updateSStrategy(arrayP) {
   } else {
     arrayP[2]['choice'] = 's';
   }
+}
+
+function displayResults() {
+  console.log(`=> The results are in!\n===> Rock players scored ${scoresAndProbs['rockScore']} wins!\n===> Paper players scored ${scoresAndProbs['paperScore']} wins!\n===> Scissors players scored ${scoresAndProbs['scissorsScore']} wins!`);
+
+  let population = `[${arrayOfComputers[0]['choice']}] [${arrayOfComputers[1]['choice']}] [${arrayOfComputers[2]['choice']}] [${arrayOfComputers[3]['choice']}] [${arrayOfComputers[4]['choice']}] [${arrayOfComputers[5]['choice']}] [${arrayOfComputers[6]['choice']}] [${arrayOfComputers[7]['choice']}]`;
+
+  console.log(`=> Here's our little population now:\n===> ${population}`);
+}
+
+function computerPlay(toEvolveP) {
+  do {
+    resetScoresAndProbs();
+
+    let active = Math.floor(Math.random() * arrayOfComputers['length']);
+    let activeMinus;
+    let activePlus;
+
+    if ((active - 1) === -1) {
+      activeMinus = 7;
+    } else {
+      activeMinus = (active - 1);
+    }
+
+    if ((active + 1) === 8) {
+      activePlus = 0;
+    } else {
+      activePlus = (active + 1);
+    }
+
+    console.log(`=> The computer at index ${activeMinus} is playing against its neighbors.\n=> The computer at index ${activePlus} is playing against its neighbors.`);
+    console.log(`=> The results of those matches will determine how the computer at index ${active} chooses its strategy in the next round.`);
+    console.log("=> If there are no wins, no computer updates its strategy.");
+    readyToContinue();
+
+    let arrayOfRPS = getLocaleOfAction(active);
+
+    addUpPaperScore(arrayOfRPS);
+    addUpScissorsScore(arrayOfRPS);
+    addUpRockScore(arrayOfRPS);
+
+    updateProbs();
+
+    if (arrayOfRPS[2]['choice'] === 'r') {
+      updateRStrategy(arrayOfRPS);
+    } else if (arrayOfRPS[2]['choice'] === 'p') {
+      updatePStrategy(arrayOfRPS);
+    } else {
+      updateSStrategy(arrayOfRPS);
+    }
+
+    displayResults();
+
+    toEvolveP = getUserInput("=> When you want to see the next iteration, enter 'c'; otherwise enter any key or press enter to stop.\n") === 'c';
+  } while (toEvolveP);
 }
 
 function masterForEvolve() {
