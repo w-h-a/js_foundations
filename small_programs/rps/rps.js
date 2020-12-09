@@ -249,30 +249,26 @@ function addUpRockScore(arrayP) {
 }
 
 function proportionateProbUpdate() {
-  if ((scoresAndProbs['paperScore'] + scoresAndProbs['scissorsScore'] + scoresAndProbs['rockScore']) !== 0) {
-    scoresAndProbs['probToPaper'] = (scoresAndProbs['paperScore'] / (scoresAndProbs['paperScore'] + scoresAndProbs['scissorsScore'] + scoresAndProbs['rockScore']));
-    scoresAndProbs['probToScissors'] = (scoresAndProbs['scissorsScore'] / (scoresAndProbs['paperScore'] + scoresAndProbs['scissorsScore'] + scoresAndProbs['rockScore']));
-    scoresAndProbs['probToRock'] = (scoresAndProbs['rockScore'] / (scoresAndProbs['paperScore'] + scoresAndProbs['scissorsScore'] + scoresAndProbs['rockScore']));
-  }
+  scoresAndProbs['probToPaper'] = (scoresAndProbs['paperScore'] / (scoresAndProbs['paperScore'] + scoresAndProbs['scissorsScore'] + scoresAndProbs['rockScore']));
+  scoresAndProbs['probToScissors'] = (scoresAndProbs['scissorsScore'] / (scoresAndProbs['paperScore'] + scoresAndProbs['scissorsScore'] + scoresAndProbs['rockScore']));
+  scoresAndProbs['probToRock'] = (scoresAndProbs['rockScore'] / (scoresAndProbs['paperScore'] + scoresAndProbs['scissorsScore'] + scoresAndProbs['rockScore']));
 }
 
 function maxProbUpdate() {
-  if ((scoresAndProbs['paperScore'] + scoresAndProbs['scissorsScore'] + scoresAndProbs['rockScore']) !== 0) {
-    let max = Math.max(scoresAndProbs['paperScore'], scoresAndProbs['scissorsScore'], scoresAndProbs['rockScore']);
-    if (
-      ((scoresAndProbs['paperScore'] === max) && (scoresAndProbs['scissorsScore'] === max) && (scoresAndProbs['rockScore'])) || // This condition is not needed unless we expand the game to a 2d surface
-      ((scoresAndProbs['paperScore'] === max) && (scoresAndProbs['scissorsScore'] === max)) ||
-      ((scoresAndProbs['paperScore'] === max) && (scoresAndProbs['rockScore'] === max)) ||
-      ((scoresAndProbs['rockScore'] === max) && (scoresAndProbs['scissorsScore'] === max))
-    ) {
-      proportionateProbUpdate();
-    } else if (scoresAndProbs['paperScore'] === max) {
-      scoresAndProbs['probToPaper'] = 1;
-    } else if (scoresAndProbs['scissorsScore'] === max) {
-      scoresAndProbs['probToScissors'] = 1;
-    } else {
-      scoresAndProbs['probToRock'] = 1;
-    }
+  let max = Math.max(scoresAndProbs['paperScore'], scoresAndProbs['scissorsScore'], scoresAndProbs['rockScore']);
+  if (
+    ((scoresAndProbs['paperScore'] === max) && (scoresAndProbs['scissorsScore'] === max) && (scoresAndProbs['rockScore'])) || // This condition is not needed unless we expand the game to a 2d surface
+    ((scoresAndProbs['paperScore'] === max) && (scoresAndProbs['scissorsScore'] === max)) ||
+    ((scoresAndProbs['paperScore'] === max) && (scoresAndProbs['rockScore'] === max)) ||
+    ((scoresAndProbs['rockScore'] === max) && (scoresAndProbs['scissorsScore'] === max))
+  ) {
+    proportionateProbUpdate();
+  } else if (scoresAndProbs['paperScore'] === max) {
+    scoresAndProbs['probToPaper'] = 1;
+  } else if (scoresAndProbs['scissorsScore'] === max) {
+    scoresAndProbs['probToScissors'] = 1;
+  } else {
+    scoresAndProbs['probToRock'] = 1;
   }
 }
 
@@ -416,9 +412,9 @@ do {
       addUpScissorsScore(arrayOfRPS);
       addUpRockScore(arrayOfRPS);
 
-      if (updateMethod === '1') {
+      if (((scoresAndProbs['paperScore'] + scoresAndProbs['scissorsScore'] + scoresAndProbs['rockScore']) !== 0) && (updateMethod === '1')) {
         proportionateProbUpdate();
-      } else {
+      } else if ((scoresAndProbs['paperScore'] + scoresAndProbs['scissorsScore'] + scoresAndProbs['rockScore']) !== 0) {
         maxProbUpdate();
       }
 
