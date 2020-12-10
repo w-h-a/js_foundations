@@ -1,14 +1,13 @@
 let complexValue = [1, 2, 3, 4];
 
 function mutate(complexP) {
-  complexP = complexP.reverse();
+  complexP = [4, 3, 2, 1];
   console.log(complexP === complexValue);
   console.log(complexP); // [4, 3, 2, 1]
 }
 
 mutate(complexValue);
-console.log(complexValue); // [4, 3, 2, 1]
-
+console.log(complexValue); // 
 
 let simpleValue = 2;
 

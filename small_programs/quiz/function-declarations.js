@@ -1,7 +1,7 @@
-let foo1 = function() {};
+let foo = function() {};
 
-function foo2() {};
+function foo() {};
 
-(function foo3() {});
+(function foo() {});
 
-let foo4 = () => 3;
+let foo = () => 3;
