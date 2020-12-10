@@ -2,6 +2,7 @@ let complexValue = [1, 2, 3, 4];
 
 function mutate(complexP) {
   complexP = complexP.reverse();
+  console.log(complexP === complexValue);
   console.log(complexP); // [4, 3, 2, 1]
 }
 
