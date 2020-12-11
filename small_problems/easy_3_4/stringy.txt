@@ -1,0 +1,23 @@
+Problem:
+
+Function takes positive integer and
+returns string of alternating '1's and '0's, always starting with a '1'.
+The length of the string should match the given integer.
+
+Test Cases (Given):
+
+stringy(6);    // "101010"
+stringy(9);    // "101010101"
+stringy(4);    // "1010"
+stringy(7);    // "1010101"
+
+Pseudocode:
+
+START
+
+IF input number is odd
+    GET repeated '10' string for floor of input number / 2 and add a '1'
+ELSE
+    GET repeated '10' string for floor of input number / 2
+
+END

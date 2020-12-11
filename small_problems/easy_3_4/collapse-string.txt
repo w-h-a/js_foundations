@@ -1,0 +1,26 @@
+Problem:
+
+Write a function that takes a string argument,
+collapses all consecutive duplicate characters into a single character,
+and returns the resulting string.
+
+Test Cases (given):
+
+crunch('ddaaiillyy ddoouubbllee');    // "daily double"
+crunch('4444abcabccba');              // "4abcabcba"
+crunch('ggggggggggggggg');            // "g"
+crunch('a');                          // "a"
+crunch('');                           // ""
+
+Pseudocode:
+
+START
+
+1.  SET charArray to split string
+2.  WHILE charArray still has elements
+      IF element is not the same as the last
+        push the element to a new array
+      RETURN new array
+3.  RETURN joined new array
+
+END

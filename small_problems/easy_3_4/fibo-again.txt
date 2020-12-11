@@ -1,0 +1,35 @@
+Problem:
+
+The Fibonacci series is a series of numbers 1, 1, 2, 3, 5, 8, 13, 21, ...
+such that the first two numbers are 1 by definition, and
+each subsequent number is the sum of the two previous numbers. 
+
+Write a function that calculates and returns
+the index (in the series) of the first Fibonacci number that
+has the number of digits specified by the argument fed into the function.
+Assume the first Fibonacci number has an index of 1.
+That is, assume the first Fibonacci number is 1 rather than start with
+the zeroth Fibonacci number (which is 0).
+
+Test Cases (given):
+
+findFibonacciIndexByLength(2);       // 7
+findFibonacciIndexByLength(10);      // 45
+findFibonacciIndexByLength(16);      // 74
+
+// Don't try any higher values until you read the solution Discussion
+
+Pseudocode:
+
+START
+
+1.  SET fib idx to 1
+2.  SET fib number to 1
+3.  SET fib length to stringified fib length
+4.  WHILE it is not true that input and stringified fib length are identical
+      SET fib number = fib(fib idx)
+      SET fib length
+      SET fib idx to fix idx plus 1
+5.  RETURN fib idx - 1
+
+END

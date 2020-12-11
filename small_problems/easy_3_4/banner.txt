@@ -1,0 +1,74 @@
+Problem:
+
+Write a function that will take a line of text, and
+write it to the console within a box.
+
+Further Exploration:
+
+Modify the function.
+If the message does not fit inside a max width provided as a second argument,
+the function truncates the message.
+If the message is truncated, it is wrapped to next line.
+You may assume no maximum if the second argument is omitted.
+
+Test Cases (Given):
+
+Input:
+
+logInBox('To boldly go where no one has gone before.');
+
+Output:
+
++--------------------------------------------+
+|                                            |
+| To boldly go where no one has gone before. |
+|                                            |
++--------------------------------------------+
+
+Input:
+
+logInBox('');
+
+Output:
+
++--+
+|  |
+|  |
+|  |
++--+
+
+Pseudocode:
+
+START
+
+1.  IF length of input string is not longer than max
+      GO to step 2
+    ELSE
+      GO to step 6
+2.  PRINT '+-' plus '-' (times length of input string) plus '-+'
+3.  PRINT '| ' plus ' ' (times length of input string) plus ' |'
+4.  PRINT '| ' plus 'string' plus ' |'
+5.  REPEAT step 1 and 2 in reverse order
+6.  GET arrayOfLines (see other pseudocode below)
+7.  PRINT '+-' plus '-' (times length of max) plus '-+'
+8.  PRINT '| ' plus ' ' (times length of max) plus ' |'
+9.  WHILE there are elements in arrayOfLines
+      DO step 4
+10. REPEAT steps 8 and 9 in reverse order
+
+END
+
+Here's the pseudocode for 'GET arrayOfLines' (step 6 above)
+
+START
+
+1.  SET numOfFullLines to the length of the input string divided by max
+2.  SET index to 0;
+3.  SET arrayOfLines to empty string.
+4.  WHILE index is less than numOfFullLines
+      1. SET line to substring(index * max, (index + 1) * max)
+      2. PUSH line to arrayOfLines
+      3. SET index to index plus 1
+5.  RETURN arrayOfLines
+
+END
