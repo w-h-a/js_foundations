@@ -119,6 +119,8 @@ function logInLilBox(maxP, stringP) {
 }
 
 do {
+  console.clear();
+  
   if (doWelcome) {
     console.log("Welcome to BannerizeIt! This is your one stop shop for turning messages into banners.");
     doWelcome = false;

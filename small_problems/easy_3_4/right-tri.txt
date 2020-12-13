@@ -1,0 +1,45 @@
+Problem:
+
+Function should take positive integer, n.
+Function should log a right triangle whose sides each have n stars (*).
+The hypotenuse endpoints should be lower-left and upper-right.
+The right-angle should be lower-right.
+The triangle should be filled in with the stars (*).
+
+Test Cases (given):
+
+triangle(5);
+
+    *
+   **
+  ***
+ ****
+*****
+
+triangle(9);
+
+        *
+       **
+      ***
+     ****
+    *****
+   ******
+  *******
+ ********
+*********
+
+Pseudocode:
+
+START
+
+1.  GET n from user
+2.  WHILE n is impermissible
+      GO back to step 1
+3.  SET spaceNum to n
+4.  SET starNum to 0
+5.  WHILE spaceNum >= 0
+      PRINT repeated spaces for spaceNum and repeated stars for starNum
+      spaceNum -= 1
+      starNum += 1
+
+END

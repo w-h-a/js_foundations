@@ -1,0 +1,32 @@
+Problem:
+
+The program should prompt for
+noun
+verb
+adverb
+adjective
+and inject them into a story.
+
+Test Case (given):
+
+Enter a noun: dog
+Enter an adjective: blue
+Enter a verb: walk
+Enter an adverb: quickly
+
+// console output
+Do you walk your blue dog quickly? That's hilarious!
+The blue dog walks quickly over the lazy dog.
+The dog quickly walks up blue Joe's turtle.
+
+Pseudocode:
+
+START
+
+1.  GET noun from user
+2.  GET adjective from user
+3.  GET verb from user
+4.  GET adverb from user
+5.  PRINT story with inputs
+
+END
