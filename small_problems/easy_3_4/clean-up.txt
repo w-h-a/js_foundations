@@ -1,0 +1,24 @@
+Problem:
+
+Function takes string as input
+Removes non-alphabetic characters and replaces them with space
+but no consecutive spaces are allowed
+Return the resulting string.
+
+Test Cases (given):
+
+cleanUp("---what's my +*& line?");    // " what s my line "
+
+Pseudocode:
+
+START
+
+1.  SET alphabet array
+2.  SET string array to split string
+3.  WHILE alphabet does not include character in string array
+      SET place space in string array instead
+4.  WHILE string array array has consecutive spaces
+      REDUCE string array
+5.  RETURN joined string array
+
+END
