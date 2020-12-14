@@ -1,0 +1,30 @@
+Problem:
+
+Write a function that
+returns true
+if the string passed as an argument is a palindrome;
+false otherwise.
+
+Your function should be case-insensitive and
+should ignore all non-alphanumeric characters. 
+
+Test Cases (given):
+
+isRealPalindrome('madam');               // true
+isRealPalindrome('Madam');               // true (case does not matter)
+isRealPalindrome("Madam, I'm Adam");     // true (only alphanumerics matter)
+isRealPalindrome('356653');              // true
+isRealPalindrome('356a653');             // true
+isRealPalindrome('123ab321');            // false
+
+Pseudocode:
+
+START
+
+1.  GET clean version of string
+2.  IF clean word is strictly identical to its mirror self
+      RETURN true
+    ELSE
+      RETURN false
+
+END

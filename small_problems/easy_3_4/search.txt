@@ -1,0 +1,18 @@
+Problem:
+
+Program gets 6 numbers from user
+logs a message that describes whether the 6th number is among the first 5
+
+Pseudocode:
+
+START
+
+1.  SET n to length of initial numbers
+2.  GET user numbers
+3.  GET the number that the user wishes to search for
+4.  IF the search number is included in the initial n numbers
+      PRINT 'The number appears in first n numbers'
+    ELSE
+      PRINT 'The number does not appear in the first n numbers'
+
+END

@@ -1,0 +1,19 @@
+Problem:
+
+Build a program that logs the year that the user will retire
+and how many more years the user has to work until retirement.
+The program should take as input the user's current age
+and the age they'd like to be when they retire.
+
+Pseudocode:
+
+START
+
+1.  GET user's age
+2.  GET user's age of retirement
+3.  GET current year
+4.  SET difference to user's age of retirement minus user's age.
+5.  PRINT year that the user will retire (current year plus difference)
+6.  PRINT how many more years of work (difference)
+
+END
