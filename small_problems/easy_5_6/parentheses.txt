@@ -1,0 +1,41 @@
+Problem:
+
+Write a function that takes a string as an argument and
+
+returns true
+if all parentheses in the string are properly balanced;
+false otherwise.
+
+To be properly balanced,
+parentheses must occur in matching '(' ')' pairs.
+
+Test Cases (Given):
+
+console.log(isBalanced("What (is) this?") === true);
+console.log(isBalanced("What is) this?") === false);
+console.log(isBalanced("What (is this?") === false);
+console.log(isBalanced("((What) (is this))?") === true);
+console.log(isBalanced("((What)) (is this))?") === false);
+console.log(isBalanced("Hey!") === true);
+console.log(isBalanced(")Hey!(") === false);
+console.log(isBalanced("What ((is))) up(") === false);
+
+Pseudocode:
+
+START
+
+1.  SET balance variable to 0
+2.  SET arrayRep to split string
+3.  SET reduced variable to true
+4.  WHILE there are elements in arrayRep
+      IF the element is strictly identical to '('
+        SET balance to balance plus 1
+      ELSE IF element is strictly identical to ')'
+        SET balance to balance minus 1
+      IF balance is less than 0
+        SET reduced to false
+        RETURN reduced
+      RETURN reduced
+5.   RETURN reduced and whether balance is strictly identical to 0
+
+END

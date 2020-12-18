@@ -1,0 +1,27 @@
+Problem:
+
+Write a function that takes a non-empty string argument and
+returns the string's middle character(s).
+
+If the string has an odd length, you should return exactly one character.
+If the string has an even length, you should return exactly two characters.
+
+Test Cases (Given):
+
+centerOf('I Love JavaScript'); // "a"
+centerOf('Launch School');     // " "
+centerOf('Launch');            // "un"
+centerOf('Launchschool');      // "hs"
+centerOf('x');                 // "x"
+
+Pseudocode:
+
+START
+
+1.  SET arrayRep to split string
+2.  IF arrayRep has odd length
+      RETURN spliced out element at Math.floor(length divided by 2)
+    ELSE
+      RETURN spliced out elements at length divided by 2 and one before
+
+END

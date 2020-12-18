@@ -1,0 +1,39 @@
+Problem:
+
+Write a function that takes an integer argument and
+returns an array containing
+all integers between 1 and the argument (inclusive),
+in ascending order.
+
+You may assume that the argument will always be a positive integer.
+
+Test Cases (Given):
+
+getSequence(5);    // [1, 2, 3, 4, 5]
+getSequence(3);    // [1, 2, 3]
+getSequence(1);    // [1]
+
+Pseudocode:
+
+for getSequence
+START
+
+IF number is greater than 0
+  SET sequence variable to include number
+  SET number to number minus 1
+  RETURN sequence from getSequence with number and sequence variable as arguments
+ELSE
+  RETURN sequence
+
+END
+
+for getSequence1
+START
+
+SET length of sequence variable to number
+SET sequence variable to include undefined value from index 0 to final index
+WHILE there are still (undefined) elements in sequence
+  SET element to number minus current index
+RETURN sequence
+
+END

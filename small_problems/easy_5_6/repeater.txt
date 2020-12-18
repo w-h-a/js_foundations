@@ -1,0 +1,36 @@
+Problem:
+
+Write a function that takes a string,
+doubles every character that the user wishes to double or
+doubles only the consonants, and
+returns the result.
+
+Test Cases (Given):
+
+Every
+
+repeater('Hello');        // "HHeelllloo"
+repeater('Good job!');    // "GGoooodd  jjoobb!!"
+repeater('');             // ""
+
+Consonants Only
+
+doubleConsonants('String');          // "SSttrrinngg"
+doubleConsonants('Hello-World!');    // "HHellllo-WWorrlldd!"
+doubleConsonants('July 4th');        // "JJullyy 4tthh"
+doubleConsonants('');                // ""
+
+Pseudocode:
+
+START
+
+1.  GET user's choice.
+2.  GET user's string.
+3.  IF user chose repeater
+      SET arrayRep to split string
+      RETURN arrayRep reduced to repeat
+    ELSE
+      SET arrayRep to split string
+      RETURN arrayRep reduced to double consonants only
+
+END

@@ -1,0 +1,20 @@
+Problem:
+
+Function takes a string argument consisting of
+a first name, space, and a last name
+and returns a new string consisting of
+the last name, a comma, space, and the first name.
+
+Test Cases (given):
+
+swapName('Joe Roberts');    // "Roberts, Joe"
+
+Pseudocode:
+
+START
+
+1.  SET arrayRep to string that is split at the space
+2.  SET 1st element of arrayRep to include comma after
+3.  PRINT 1st element of arrayRep plus space plus 0th element of arrayRep
+
+END

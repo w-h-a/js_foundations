@@ -1,0 +1,30 @@
+Problem:
+
+Create a function that takes two integers as arguments.
+The first argument is a count, and
+the second is the starting number of a sequence that your function will create.
+
+The function should return an array containing
+the same number of elements as the count argument.
+The value of each element should be a multiple of the starting number.
+
+If the count is 0, the function should return an empty array.
+
+Test Cases (Given):
+
+sequence(5, 1);          // [1, 2, 3, 4, 5]
+sequence(4, -7);         // [-7, -14, -21, -28]
+sequence(3, 0);          // [0, 0, 0]
+sequence(0, 1000000);    // []
+
+Pseudocode:
+
+START
+
+1.  SET array to length of count
+2.  SET array to include undefined in each element
+3.  WHILE there are (undefined) elements
+      SET element to number * (1 + idx)
+4.  RETURN array
+
+END
