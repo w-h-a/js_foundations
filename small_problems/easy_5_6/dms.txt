@@ -1,0 +1,65 @@
+Problem:
+
+Write a function that takes a floating-point number
+representing an angle between 0 and 360 degrees and
+
+returns a string representing that angle in degrees, minutes, and seconds.
+You should use a degree symbol to represent degrees,
+a single quote to represent minutes, and
+a double quote to represent seconds.
+
+There are 60 minutes in a degree and 60 seconds in a minute.
+
+1 degree = 60 minutes
+1 minute = 60 seconds
+
+Test Cases (Given):
+
+dms(30);           // 30°00'00"
+dms(76.73);        // 76°43'48"
+dms(254.6);        // 254°35'59"
+dms(93.034773);    // 93°02'05"
+dms(0);            // 0°00'00"
+dms(360);          // 360°00'00" or 0°00'00"
+
+Pseudocode:
+
+For Function dms:
+
+START
+
+1.  SET the degree parameter to a permissible number.
+      (see function pseudocode below)
+2.  SET stringRep to string representation of input degree parameter
+3.  SET arrayRep to array representation of input floating point.
+4.  PUSH the 0th element of arrayRep to an array called "resultArray"
+5.  IF resultArray has 3 elements
+      GET clean version of resultArray
+      RETURN joined resultArray
+6.  IF arrayRep does not only have one element
+      SET newString to '0.' plus the 1st element of arrayRep
+      SET newNumber to number version of newString
+      SET result to newNumber * 60
+      RETURN value that results from feeding result and resultArray back
+        into function (i.e., return to step 1)
+    ELSE
+      GET clean version of resultArray
+      RETURN clean version of resultArray
+
+END
+
+For Function getPermissibleVersion:
+
+START
+
+IF degree parameter is greater than 360
+  SET the param to the param minus MAX
+  RETURN value that results from feeding param back into function
+    (i.e., return to START)
+ELSE IF degree param is less than 0
+  SET the param to param plus MAX
+  RETURN value that results from feeding param back into function
+ELSE
+  RETURN degree param (it's now permissible)
+
+END

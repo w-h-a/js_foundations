@@ -1,0 +1,12 @@
+Problem:
+
+Function takes an array of integers as input,
+multiples all of the integers together,
+divides the result by the number of entries, and
+returns the result
+as a string with the value rounded to three decimal places.
+
+Test Cases (Given):
+
+multiplicativeAverage([3, 5]);                   // "7.500"
+multiplicativeAverage([2, 5, 7, 11, 13, 17]);    // "28361.667"

@@ -1,0 +1,51 @@
+Problem:
+
+Two functions that each take a time of day in 24-hour format.
+The 'afterMidnight' function should return the number of minutes after midnight.
+The 'beforeMidnight' function ought to return the number of minutes before midnight.
+
+Both functions should return a value in the range 0...1439.
+
+You may not use JS's Date class methods.
+
+Disregard DST and other irregularities.
+
+Test Cases:
+
+console.log(afterMidnight("00:00") === 0);
+console.log(beforeMidnight("00:00") === 0);
+console.log(afterMidnight("12:34") === 754);
+console.log(beforeMidnight("12:34") === 686);
+console.log(afterMidnight("24:00") === 0);
+console.log(beforeMidnight("24:00") === 0);
+
+console.log(afterMidnight("23:57") === 1437);
+console.log(beforeMidnight("23:57") === 3);
+console.log(afterMidnight("00:03") === 3);
+console.log(beforeMidnight("00:03") === 1437);
+console.log(afterMidnight("13:20") === 800);
+console.log(beforeMidnight("13:20") === 640);
+console.log(afterMidnight("01:29") === 89);
+console.log(beforeMidnight("01:29") === 1351);
+
+Pseudocode:
+
+afterMidnight
+START
+
+1.  SET arrayRep to split string at ":"
+2.  SET hourNum to Number(0th element of arrayRep)
+3.  SET minuteNum to Number(1st element of arrayRep)
+4.  RETURN hourNum * 60 + minuteNumber
+
+END
+
+beforeMidnight
+START
+
+1.  SET arrayRep to split string at ":"
+2.  SET hourNum to Number(0th element of arrayRep)
+3.  SET minuteNum to Numer(1st element of arrayRep)
+4.  RETURN (24 * 60) - (hourNum * 60 + minuteNumber)
+
+END

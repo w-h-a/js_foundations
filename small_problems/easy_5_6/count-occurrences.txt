@@ -1,0 +1,37 @@
+Problem:
+
+Function counts the number of occurrences of each string in a given array.
+Once counted, logs each element alongside the number of occurrences.
+
+Strings should be case sensitive.
+
+Test Cases (Given):
+
+let vehicles = ['car', 'car', 'truck', 'car', 'SUV', 'truck',
+                'motorcycle', 'motorcycle', 'car', 'truck'];
+
+countOccurrences(vehicles);
+
+// console output -- your output sequence may be different
+car => 4
+truck => 3
+SUV => 1
+motorcycle => 2
+
+Pseudocode:
+
+START
+
+GET countTable
+  SET countTable to empty dictionary-like object
+  WHILE there are elements in the input array
+    IF there is no element in countTable,
+      SET add one to countTable's new element
+    ELSE
+      SET countTable's element to itself plus one
+  RETURN countTable
+SET arrayOKeys to the keys of countTable
+WHILE there are elements in arrayOKeys
+  PRINT element and element count of countTable
+
+END

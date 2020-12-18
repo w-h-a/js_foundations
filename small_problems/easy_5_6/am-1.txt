@@ -1,0 +1,42 @@
+Problem:
+
+Function takes a time using the minute-based format and
+returns the time of day in 24 hour format (hh:mm).
+
+Your function should work with any integer input.
+You may not use JS's Date class methods.
+You may disregard DST and other complications.
+
+Test Cases (Given):
+
+console.log(timeOfDay(0) === "00:00");
+console.log(timeOfDay(-3) === "23:57");
+console.log(timeOfDay(35) === "00:35");
+console.log(timeOfDay(-1437) === "00:03");
+console.log(timeOfDay(3000) === "02:00");
+console.log(timeOfDay(800) === "13:20");
+console.log(timeOfDay(-4231) === "01:29");
+
+Pseudocode:
+
+START
+
+1.  GET permissible input (0, 1440), recursively
+2.  GET hours
+      SET stringRep to string version of permissible input divided by 60
+      SET arrayRep to string split at the decimal (if any)
+      RETURN arrayRep
+3.  SET resultArray to include 0th element of arrayRep (our hours)
+4.  IF 1st element of arrayRep is not undefined
+      GET minutes
+        SET decimalString to '0.' plus 1st element of arrayRep
+        SET result variable to number version of decimalString times 60
+        RETURN (rounded, string) result
+      SET resultArray to include (rounded, string) result (our minutes)
+      GET cleaned up version of resultArray
+      RETURN/PRINT joined (by ':') resultArray
+    ELSE
+      GET cleaned up version of resultArray
+      RETURN/PRINT joined (by ':') resultArray
+
+END

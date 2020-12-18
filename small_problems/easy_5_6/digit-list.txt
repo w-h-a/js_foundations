@@ -1,0 +1,40 @@
+Problem:
+
+Function takes one argument,
+a positive integer, and
+returns a list of the digits in the number.
+
+Test Cases (Given):
+
+digitList(12345);       // [1, 2, 3, 4, 5]
+digitList(7);           // [7]
+digitList(375290);      // [3, 7, 5, 2, 9, 0]
+digitList(444);         // [4, 4, 4]
+
+Pseudocode:
+
+Initial Recursion Approach:
+START
+
+IF the input number is not 0
+  SET remainder to input number remainder 10
+  SET resultArray to include remainder
+  SET difference to input number minus remainder
+  SET input number to difference divided by 10
+  RETURN recursive result until input number is 0
+ELSE
+  RETURN/PRINT reversed resultArray
+
+END
+
+Additional Reduce Approach:
+START
+
+SET stringVersion to stringified number
+SET arrayVersion to arrayified stringVersion
+WHILE there are elements in the arrayVersion
+  SET resultArray to include number version of arrayVersion element
+  RETURN resultArray
+RETURN/PRINT resultArray
+
+END
