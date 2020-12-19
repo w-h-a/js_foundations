@@ -24,18 +24,19 @@ Pseudocode:
 
 START
 
-1.  SET balance variable to 0
-2.  SET arrayRep to split string
-3.  SET reduced variable to true
-4.  WHILE there are elements in arrayRep
+1.  SET arrayRep to split string
+2.  SET reduced variable to object with two arrays (arrayOOpens, arrayOClosed)
+3.  WHILE there are elements in arrayRep
       IF the element is strictly identical to '('
-        SET balance to balance plus 1
+        SET arrayOOpens to include it
       ELSE IF element is strictly identical to ')'
-        SET balance to balance minus 1
-      IF balance is less than 0
-        SET reduced to false
-        RETURN reduced
+        SET arrayOClosed to include it
+      IF length of arrayOClosed > arrayOOpens
+        SET reduced variable to include 'closingBeforeOpening' : true
       RETURN reduced
-5.   RETURN reduced and whether balance is strictly identical to 0
+4.  IF reduced variable's 'closingBeforeOpening' is true
+      RETURN false
+    ELSE
+      RETURN whether arrayOClosed length is strictly identical to arrayOOpens length
 
 END
