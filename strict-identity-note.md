@@ -24,7 +24,7 @@ Consider first the following example using only strings:
 
 `let c = 'cow';`
 
-How many strings are there? Is the answer "three" or "two"? It is intuitively the case that `!(a === c || b == c)`. So there has to be at least two strings. But what about `a` and `b`? Assigning the value held inside `a` to the variable `b` duplicates `'bull'` such that `a` "points to" one `'bull'`-individual whereas `b` "points to" a distinct `'bull'`-individual. Still, JavaScript returns `true` when given `a === b`.
+How many strings are there? Is the answer "three" or "two"? It is intuitively the case that `!(a === c || b == c)`. So there has to be at least two strings. But what about `a` and `b`? Assigning the value held inside `a` to the variable `b` duplicates `'bull'` such that `a` "points to" one `'bull'`-individual whereas `b` "points to" a distinct `'bull'`-individual. Still, JavaScript returns `true` when given `a === b`. So, relative to JavaScript's strict identity operator, there are only two strings.
 
 Generalizing, this tells us that JavaScript's strict identity does not "see" tokens of simple (primitive) types as individuals. If it did, `a !== b` would return `true` since the value stored in `b` is not the same `'bull'`-individual as the `'bull'`-individual stored in `a`. So, JavaScript's strict identity only "sees" tokens of simple data types as kinds. It only sees string-kinds, number-kinds, and boolean-kinds rather than boolean-individuals, string-individuals, or number-individuals.
 
