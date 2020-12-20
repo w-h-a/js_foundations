@@ -56,7 +56,7 @@ The above return results tell us that JavaScript's strict identity does not "see
 
 Given the above model, the way I now understand strict identity in JavaScript is roughly as follows:
 
->If both operands are complex types, return `true` just in case the operands have the same type _and_ refer to the same individual. If both operands are simple types, return `true` just in case the operands have the same type _and_ are the same kind.
+>The strict identity operator returns `true` just in case either (i) both operands are the same complex type _and_ refer to the same individual or (ii) both operands are the same simple type _and_ are the same kind.
 
 Here we have reduced "strict identity" to three other "identity" relations: "same type", "same individual", and "same kind". The "same type" relation is, of course, a primitive (built-in) relation. Clearly, "same individual" has something to do with the location of the data in storage.  The "same kind" relation is a bit complicated, but [MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Strict_equality) has the following excellent heuristic:
 - Numbers must have the same numeric values. (+0 and -1 are identical, and if either operand is NaN, the strict identity operator returns false no matter what the other operand is.)
