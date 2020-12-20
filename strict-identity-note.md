@@ -28,7 +28,7 @@ Consider first the following example using only strings:
 
 How many strings are there? Is the answer "three" or "two"? It is intuitively the case that `!(a === c || b == c)`. So there has to be at least two strings. But what about `a` and `b`? Assigning the value held inside `a` to the variable `b` duplicates `'bull'` such that `a` "points to" one `'bull'`-individual whereas `b` "points to" a distinct `'bull'`-individual. Still, JavaScript returns `true` when given `a === b`. So, relative to JavaScript's strict identity operator, there are only two strings.
 
-Generalizing, this tells us that JavaScript's strict identity does not "see" tokens of simple (primitive) types as individuals. If it did, `a !== b` would return `true` since the value stored in `b` is not the same `'bull'`-individual as the `'bull'`-individual stored in `a`. So, JavaScript's strict identity only "sees" tokens of simple data types as kinds. It only sees string-kinds, number-kinds, and boolean-kinds rather than boolean-individuals, string-individuals, or number-individuals.
+Generalizing, this tells us that JavaScript's strict identity does not "see" tokens (or instances) of simple (primitive) types as individuals. If it did, `a !== b` would return `true` since the value stored in `b` is not the same `'bull'`-individual as the `'bull'`-individual stored in `a`. So, JavaScript's strict identity only "sees" tokens of simple data types as kinds. It only sees string-kinds, number-kinds, and boolean-kinds rather than boolean-individuals, string-individuals, or number-individuals.
 
 Now consider the following example using only array types:
 
@@ -38,37 +38,43 @@ Now consider the following example using only array types:
 
 `let c = ['bull', 'cow'];`
 
-How many arrays are on the list? Is the answer "three", "two", or "one"? Suppose JavaScript's strict identity operator only "sees" array-kinds in the same way as it did with the string example. In that case, the answer should be "one". After all, there is intuitively one kind of array in the above list of arrays. (Incidentally, JavaScript agrees with this if you run a pairwise comparison of the elements (or properties) of any of the listed array pairs.) However, it is perhaps counter-intuitive that we get precisely the same return values as we did before. That is, the following two comparisons return `true`:
+How many arrays are on the list? Is the answer "three", "two", or "one"? Suppose JavaScript's strict identity operator only "sees" array-kinds in the same way as it did with the string example. In that case, the answer should be "one". After all, there is intuitively one kind of array in the above list of arrays. (Incidentally, JavaScript agrees with this if you run a pairwise comparison of the elements (or properties) of any of the listed array pairs.) If there is only one array, then the following would return `true`:
+
+`(a === c || b === c);`
+
+`a === b;`
+
+However, it might be counter-intuitive to you that we get precisely the same return values as we did before. That is, the following two comparisons return `true` about our arrays:
 
 `!(a === c || b === c);`
 
 `a === b;`
 
-Given these results, as far as JavaScript's strict identity operator is concerned, there cannot be merely one array in the list. Indeed, there must be exactly two arrays, which suggests that JavaScript's strict identity operator is acting in a more fine-grained way than before. But, if so, why isn't it the case that `a !== b`? Here's the explanation: The assignment of the reference of `a` to `b` does not copy the designated array. Instead, the reference to the array is copied. Because `a` and `b` both contain the same reference-kind, both `a` and `b` designate (albeit, indirectly) the same array-individual. So, the reason `a === b` returns `true` is because we do not create any new individual upon the assignment of `a` to `b`. Hence, there cannot be three arrays here. Finally, the declaration/assignment of variable `c` creates a distinct array-individual and stores a different reference-kind in `c`. So, we have two arrays.
+Given these results, as far as JavaScript's strict identity operator is concerned, there cannot be merely one array in the list. Indeed, there must be exactly two arrays, which suggests that JavaScript's strict identity operator is sensitive to individuals. But, if so, why isn't it the case that `a !== b`? Here's the explanation: The assignment of the reference of `a` to `b` does _not_ duplicate the designated array. Instead, the reference to the array is copied. Because `a` and `b` both contain the same reference-kind, both `a` and `b` designate (albeit, indirectly) the same array-individual. So, the reason `a === b` returns `true` is because we do not create any new individual upon the assignment of `a` to `b`. Hence, there cannot be three arrays here. Finally, the declaration/assignment of variable `c` creates a distinct array-individual and stores a different reference-kind in `c`. So, we have two arrays.
 
-The above return results tell us that JavaScript's strict identity does not "see" tokens of complex (object) types as kinds. If it did, `(a === c || b === c)` (i.e., because `(a === c && b === c)`) since `a` (and `b`) has a reference that points to the same array-kind as the array-kind pointed to by the reference stored in `c`. So, JavaScript's strict identity must "see" tokens of complex data types as individuals. It sees array-individuals and object-individuals rather than array-kinds or object-kinds.
+The above return results tell us that JavaScript's strict identity does not "see" tokens of complex (object) types as kinds. If it did, `(a === c || b === c)` (i.e., because `(a === c && b === c)`) since `a` (and `b`) has a reference that points to the same array-kind as the array-kind pointed to by the reference stored in `c`. So, JavaScript's strict identity must "see" tokens (or instances) of complex data types as individuals. It sees array-individuals and object-individuals rather than array-kinds or object-kinds.
 
 Given the above model, the way I now understand strict identity in JavaScript is roughly as follows:
 
->If both operands are complex types, return `true` just in case the operands have the same type and refer to the same individual. If both operands are simple types, return `true` just in case the operands have the same type and refer to the same kind.
+>If both operands are complex types, return `true` just in case the operands have the same type _and_ refer to the same individual. If both operands are simple types, return `true` just in case the operands have the same type _and_ are the same kind.
 
 Here we have reduced "strict identity" to three other "identity" relations: "same type", "same individual", and "same kind". The "same type" relation is, of course, a primitive (built-in) relation. Clearly, "same individual" has something to do with the location of the data in storage.  The "same kind" relation is a bit complicated, but [MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Strict_equality) has the following excellent heuristic:
-- Numbers must have the same numeric values. (+0 and -1 are identical, and if either operand is NaN, the strict identity operator returns false.)
+- Numbers must have the same numeric values. (+0 and -1 are identical, and if either operand is NaN, the strict identity operator returns false no matter what the other operand is.)
 - Strings must have the same characters in the same order.
 - Booleans must be both `true` or both `false`.
 
-Note also that "same kind" generalizes over memory locations. Again, when we apply JavaScript's strict identity operator to simple data types, JavaScript does not see individuals but rather kinds.
+Recall also that "same kind" generalizes over memory locations. Again, when we apply JavaScript's strict identity operator to simple data types, JavaScript does not see individuals but rather kinds.
 
-How does this model of strict identity square with the definitions of strict identity given in Launch's Introduction to JavaScript? If we ignore the `NaN` number-kind for the moment, we get the following definition in the control flow chapter:
+How does this model of strict identity square with the definitions of strict identity given in Launch's Introduction to JavaScript book? If we ignore the (paradoxical) `NaN` number-kind for the moment, we get the following definition in the control flow chapter:
 
 >"The strict equality operator, also known as the identity operator, returns `true` when the operands have the same type _and_ value, `false` otherwise."
 
-Here 'same value' is ambiguous, but distinguishing between object-individuals and primitive-kinds helps clarify this definition. We can reduce 'same value' to 'same individual' and 'same kind', depending on the data type under discussion.
+Here 'same value' is ambiguous, but distinguishing between individuals and kinds helps clarify this definition. We can reduce 'same value' to 'same individual' and 'same kind', depending on the data type under discussion.
 
 Furthermore, in the chapter on arrays, we have the following passage:
 
 >"At first glance, you might say that [the 'a' (or 'b') and 'c' arrays are] 'the same array,' but they're not. They're two different arrays that happen to have the same values. However, they occupy distinct positions in memory, so they aren't the same array, and thus aren't equal."
 
-Again, making the distinction between object-individuals and primitive-kinds is useful here. The arrays are distinct because JavaScript's strict identity operator is concerned with array-individuals. That's why being in distinct positions in memory matters here but does not matter to identity in the case of simple types, where JavaScript is only concerned with kinds.
+Again, making the distinction between individuals and kinds is useful here. The arrays are distinct because JavaScript's strict identity operator is concerned with array-individuals. That's why being in distinct positions in memory matters here but does not matter to identity in the case of simple types, where JavaScript is only concerned with kinds.
 
 The distinction between individuals and kinds is also potentially useful for thinking about shallow and deep copies, but I'll stop here for now. I hope this was somewhat helpful. It was at least helpful for me to try to share my mental model with you.
