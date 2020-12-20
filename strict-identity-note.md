@@ -43,7 +43,7 @@ How many arrays are on the list? Is the answer "three", "two", or "one"? Suppose
 a === b;
 ```
 
-However, it might be counter-intuitive to you that we get precisely the same return values as we did before. That is, the following two comparisons return `true` about our arrays:
+However, the first line of code returns `false`. In fact, we get precisely the same return values as we did before. That is, the following two comparisons return `true` about our arrays:
 
 ```javascript
 !(a === c || b === c);
@@ -54,7 +54,7 @@ Given these results, as far as JavaScript's strict identity operator is concerne
 
 The above return results tell us that JavaScript's strict identity does not "see" tokens of complex (object) types as kinds. If it did, `(a === c || b === c)` (i.e., because `(a === c && b === c)`) since `a` (and `b`) has a reference that points to the same array-kind as the array-kind pointed to by the reference stored in `c`. So, JavaScript's strict identity must "see" tokens (or instances) of complex data types as individuals. It sees array-individuals and object-individuals rather than array-kinds or object-kinds.
 
-Given the above model, the way I now roughly understand the strict identity operator in JavaScript is roughly as follows:
+Given the above model, the way I now roughly understand the strict identity operator in JavaScript is as follows:
 
 >The strict identity operator returns `true` just in case either (i) both operands are the same complex type _and_ refer to the same individual or (ii) both operands are the same simple type _and_ are the same kind.
 
