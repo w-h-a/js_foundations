@@ -10,9 +10,7 @@ Consider the following list of words:
 
 How many words are on the list? You'll probably point out that such a question is ambiguous. The right answer could be "two" or "three". One explanation of this ambiguity is that the answer depends on what sort of thing we are counting (see also J. Perry's (1970) "The Same F"). Are we counting _kinds_ of words or _individual_ words?
 
-Suppose we understand the first and second items on the list as two non-identical word-individuals that, nevertheless, both share the property of being 'bull'. Further, the last item (but not the other two) has the property of being 'cow'.  Given all that, it seems correct to say there are three word-individuals, but only two word-kinds on the list. (Of course, we can note that all word-individuals share the property of being nouns and, hence, there is only one word-kind. This shows that we need to be clear on what kind of kind we're talking about, but let's leave that aside.)
-
-Alternatively, suppose we stipulate that there are no word-individuals but only word-kinds. I won't talk here about how we might understand word-kinds, but suffice it to stipulate that the first two items on the list are the same word-kind, whereas the third is a distinct word-kind. In that case, there are just two word-kinds on the list.
+Suppose we understand the first and second items on the list as two non-identical word-individuals_ that, nevertheless, both share the property of having the characters 'b', 'u', 'l', and 'l' in that order. Further, the last item (but not the other two) has the property of having the characters 'c', 'o', and 'w' in that order. Given all that, it seems correct to say there are _three word-individuals_, but only _two word-kinds_ on the list. (Of course, we can note that all of the word-individuals in the list share the property of being nouns and, hence, there is one word-kind. This shows that we need to be clear on what kind of kind we're talking about, but let's think about words as JavaScript does for now: strings of characters in a particular order.)
 
 Notice that our choice in how to handle the above question (in part) hinges on whether we want to say the first two items on the list are identical or not. The point is, we need to stipulate whether those are to be counted as identical so that we don't have any ambiguity in our language.
 
@@ -62,7 +60,7 @@ How does this model of strict identity square with the definitions of strict ide
 
 >"The strict equality operator, also known as the identity operator, returns true when the operands have the same type and value, false otherwise."
 
-Here 'same value' is ambiguous, but distinguishing between object-individuals and primitive-kinds is useful in clarifying this definition. We can reduce 'same value' to 'same individual' and 'same kind', depending on the data type under discussion.
+Here 'same value' is ambiguous, but distinguishing between object-individuals and primitive-kinds helps clarify this definition. We can reduce 'same value' to 'same individual' and 'same kind', depending on the data type under discussion.
 
 Furthermore, in the chapter on arrays, we have the following passage:
 
