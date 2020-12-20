@@ -4,11 +4,9 @@ Some weeks ago, I had a fun conversation with Victor Paolo Reyes (a Launch Schoo
 
 Consider the following list of words:
 
-'bull'
-
-'bull'
-
-'cow'
+- 'bull'
+- 'bull'
+- 'cow'
 
 How many words are on the list? You'll probably point out that such a question is ambiguous. The right answer could be "two" or "three". One explanation of this ambiguity is that the answer depends on what sort of thing we are counting (see also J. Perry's (1970) "The Same F"). Are we counting _kinds_ of words or _individual_ words?
 
@@ -20,11 +18,11 @@ What's JavaScript's choice? Depending on the data type, JavaScript does a bit of
 
 Consider first the following example using only strings:
 
-`let a = 'bull';`
-
-`let b = a;`
-
-`let c = 'cow';`
+```javascript
+let a = 'bull';
+let b = a;
+let c = 'cow';
+```
 
 How many strings are there? Is the answer "three" or "two"? It is intuitively the case that `!(a === c || b == c)`. So there must be at least two strings. But what about `a` and `b`? Assigning the value held inside `a` to the variable `b` duplicates `'bull'` such that `a` "points to" one `'bull'`-individual whereas `b` "points to" a distinct `'bull'`-individual. Still, JavaScript returns `true` when given `a === b`. So, relative to JavaScript's strict identity operator, there are only two strings.
 
@@ -32,23 +30,25 @@ Generalizing, this tells us that JavaScript's strict identity does not "see" tok
 
 Now consider the following example using only array types:
 
-`let a = ['bull', 'cow'];`
-
-`let b = a;`
-
-`let c = ['bull', 'cow'];`
+```javascript
+let a = ['bull', 'cow'];
+let b = a;
+let c = ['bull', 'cow'];
+```
 
 How many arrays are on the list? Is the answer "three", "two", or "one"? Suppose JavaScript's strict identity operator only "sees" array-kinds in the same way as it did with the string example. In that case, the answer should be "one". After all, there is intuitively one kind of array in the above list of arrays. (Incidentally, JavaScript agrees with this if you run a pairwise comparison of the elements (or properties) of any of the listed array pairs.) If there is only one array, then the following would return `true`:
 
-`(a === c || b === c);`
-
-`a === b;`
+```javascript
+(a === c || b === c);
+a === b;
+```
 
 However, it might be counter-intuitive to you that we get precisely the same return values as we did before. That is, the following two comparisons return `true` about our arrays:
 
-`!(a === c || b === c);`
-
-`a === b;`
+```javascript
+!(a === c || b === c);
+a === b;
+```
 
 Given these results, as far as JavaScript's strict identity operator is concerned, there cannot be merely one array in the list. Indeed, there must be exactly two arrays, which suggests that JavaScript's strict identity operator is sensitive to individuals. But, if so, why isn't it the case that `a !== b`? Here's the explanation: The assignment of the reference of `a` to `b` does _not_ duplicate the designated array. Instead, the reference to the array is copied. Because `a` and `b` both contain the same reference-kind, both `a` and `b` designate (albeit, indirectly) the same array-individual. So, the reason `a === b` returns `true` is that we do not create any new individual upon the assignment of `a` to `b`. Hence, there cannot be three arrays here. Finally, the declaration/assignment of variable `c` creates a distinct array-individual and stores a different reference-kind in `c`. So, we have two arrays.
 
@@ -59,7 +59,7 @@ Given the above model, the way I now roughly understand the strict identity oper
 >The strict identity operator returns `true` just in case either (i) both operands are the same complex type _and_ refer to the same individual or (ii) both operands are the same simple type _and_ are the same kind.
 
 Here we have reduced "strict identity" to three other "identity" relations: "same type", "same individual", and "same kind". The "same type" relation is, of course, a primitive (built-in) relation. Clearly, "same individual" has something to do with the location of the data in storage.  The "same kind" relation is a bit complicated, but [MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Strict_equality) has the following excellent heuristic:
-- Numbers must have the same numeric values. (+0 and -0 are identical, and if either operand is the (paradoxical) `NaN` number-kind, the strict identity operator returns `false` no matter what the other operand is.)
+- Numbers must have the same numeric values. (`+0` and `-0` are identical, and if either operand is the (paradoxical) `NaN` number-kind, the strict identity operator returns `false` no matter what the other operand is.)
 - Strings must have the same characters in the same order.
 - Booleans must be both `true` or both `false`.
 
