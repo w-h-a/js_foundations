@@ -56,6 +56,7 @@ Here we have reduced "strict identity" to three other "identity" relations: "sam
 - Numbers must have the same numeric values. (+0 and -1 are identical, and if either operand is NaN, the strict identity operator returns false.)
 - Strings must have the same characters in the same order.
 - Booleans must be both `true` or both `false`.
+
 Note also that "same kind" generalizes over memory locations. Again, when we apply JavaScript's strict identity operator to simple data types, JavaScript does not see individuals but rather kinds.
 
 How does this model of strict identity square with the definitions of strict identity given in Launch's Introduction to JavaScript? If we ignore the `NaN` number-kind for the moment, we get the following definition in the control flow chapter:
@@ -68,6 +69,6 @@ Furthermore, in the chapter on arrays, we have the following passage:
 
 >"At first glance, you might say that [the 'a' (or 'b') and 'c' arrays are] 'the same array,' but they're not. They're two different arrays that happen to have the same values. However, they occupy distinct positions in memory, so they aren't the same array, and thus aren't equal."
 
-Again, making the distinction between object-individuals and primitive-kinds is useful here. The arrays are distinct because JavaScript is concerned with array-individuals. That's why being in distinct positions in memory matters here but does not matter to identity in the case of primitive types, where JavaScript's strict identity is only concerned with kinds.
+Again, making the distinction between object-individuals and primitive-kinds is useful here. The arrays are distinct because JavaScript's strict identity operator is concerned with array-individuals. That's why being in distinct positions in memory matters here but does not matter to identity in the case of simple types, where JavaScript is only concerned with kinds.
 
 The distinction between individuals and kinds is also potentially useful for thinking about shallow and deep copies, but I'll stop here for now. I hope this was somewhat helpful. It was at least helpful for me to try to share my mental model with you.
