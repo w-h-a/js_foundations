@@ -53,9 +53,9 @@ Given the above model, the way I now understand strict identity in JavaScript is
 >If both operands are complex types, return `true` just in case the operands have the same type and refer to the same individual. If both operands are simple types, return `true` just in case the operands have the same type and refer to the same kind.
 
 Here we have reduced "strict identity" to three other "identity" relations: "same type", "same individual", and "same kind". The "same type" relation is, of course, a primitive (built-in) relation. Clearly, "same individual" has something to do with the location of the data in storage.  The "same kind" relation is a bit complicated, but [MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Strict_equality) has the following excellent heuristic:
--Numbers must have the same numeric values. (+0 and -1 are identical, and if either operand is NaN, the strict identity operator returns false.)
--Strings must have the same characters in the same order.
--Booleans must be both `true` or both `false`.
+- Numbers must have the same numeric values. (+0 and -1 are identical, and if either operand is NaN, the strict identity operator returns false.)
+- Strings must have the same characters in the same order.
+- Booleans must be both `true` or both `false`.
 Note also that "same kind" generalizes over memory locations. Again, when we apply JavaScript's strict identity operator to simple data types, JavaScript does not see individuals but rather kinds.
 
 How does this model of strict identity square with the definitions of strict identity given in Launch's Introduction to JavaScript? If we ignore the `NaN` number-kind for the moment, we get the following definition in the control flow chapter:
