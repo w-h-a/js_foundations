@@ -59,7 +59,7 @@ Given the above model, the way I now roughly understand the strict identity oper
 >The strict identity operator returns `true` just in case either (i) both operands are the same complex type _and_ refer to the same individual or (ii) both operands are the same simple type _and_ are the same kind.
 
 Here we have reduced "strict identity" to three other "identity" relations: "same type", "same individual", and "same kind". The "same type" relation is, of course, a primitive (built-in) relation. Clearly, "same individual" has something to do with the location of the data in storage.  The "same kind" relation is a bit complicated, but [MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Strict_equality) has the following excellent heuristic:
-- Numbers must have the same numeric values. (+0 and -1 are identical, and if either operand is NaN, the strict identity operator returns false no matter what the other operand is.)
+- Numbers must have the same numeric values. (+0 and -0 are identical, and if either operand is the (paradoxical) `NaN` number-kind, the strict identity operator returns `false` no matter what the other operand is.)
 - Strings must have the same characters in the same order.
 - Booleans must be both `true` or both `false`.
 
