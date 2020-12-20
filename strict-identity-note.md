@@ -1,3 +1,5 @@
+# On Strict Identity (or Equality) in JavaScript #
+
 Some weeks ago, I had a fun conversation with Victor Paolo Reyes (a Launch School TA) about everything from passing values, passing references, and scope in JavaScript. It was illuminating. One thing (among many) that Victor illuminated for me was that I didn't quite understand the strict identity operator in JavaScript. Thanks to Victor and thinking about the issue some more, I think I understand it better now. I hope that the following clarifies some things for beginning students that might be confused about strict identity in JavaScript.
 
 Consider the following list of words:
