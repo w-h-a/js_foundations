@@ -3,7 +3,9 @@ Some weeks ago, I had a fun conversation with Victor Paolo Reyes (a Launch Schoo
 Consider the following list of words:
 
 'bull'
+
 'bull'
+
 'cow'
 
 How many words are on the list? You'll probably point out that such a question is ambiguous. The right answer could be "two" or "three". One explanation of this ambiguity is that the answer depends on what sort of thing we are counting (see also J. Perry's (1970) "The Same F"). Are we counting _kinds_ of words or _individual_ words?
@@ -19,7 +21,9 @@ What's JavaScript's choice? Depending on the data type, JavaScript does a bit of
 Consider first the following example using only strings:
 
 `let a = 'bull';`
+
 `let b = a;`
+
 `let c = 'cow';`
 
 It is intuitively the case that `!(a === c || b == c)`. But what about `a` and `b`? Assigning the value held inside `a` to the variable `b` duplicates `'bull'` such that `a` "points to" one `'bull'`-individual whereas `b` "points to" a distinct `'bull'`-individual. Still, JavaScript returns `true` when given `a === b`.
@@ -29,13 +33,16 @@ Generalizing, this tells us that JavaScript's strict identity does not "see" tok
 Now consider the following example using only array types:
 
 `let a = ['bull', 'cow'];`
+
 `let b = a;`
+
 `let c = ['bull', 'cow'];`
 
 How many arrays are on the list? Suppose JavaScript's strict identity operator only "sees" array-kinds in the same way as it did with the string example. In that case, the answer should be "one". After all, there is intuitively one kind of array in the above list of arrays. (Incidentally, JavaScript agrees with this if you run a pairwise comparison of the elements (or properties) of any of the listed array pairs.) However, it is perhaps counter-intuitive that we get precisely the same return values as we did before. That is, the following two comparisons return `true`:
 
-`!(a === c || b === c)`
-`a === b`
+`!(a === c || b === c);`
+
+`a === b;`
 
 What's going on here? The assignment of the reference of `a` to `b` does not copy the designated array. Instead, the reference to the array is copied. Because `a` and `b` both contain the same reference-kind, both `a` and `b` designate (albeit, indirectly) the same array-individual. By contrast, the declaration/assignment of variable `c` creates a distinct array-individual and stores a different reference-kind in `c`.
 
