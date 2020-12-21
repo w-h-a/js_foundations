@@ -77,4 +77,16 @@ Furthermore, in the chapter on arrays, we have the following passage:
 
 Again, making the distinction between individuals and kinds is useful here. The arrays are distinct because JavaScript's strict identity operator is concerned with array-individuals. That's why being in distinct positions in memory matters here but does not matter to identity in the case of simple types, where JavaScript is only concerned with kinds.
 
+As a final example of why I think the individual/kind distinction is useful, consider the discussion of the PEDAC method in the fourth lesson of JS101. Therein the discussion begins by describing a programming problem. We are to write a function that takes a string as input and outputs a string. The output string must be such that every substring that is a palindrome is in all caps. The material instructs us to ask the interviewer questions to ensure we understand the problem statement fully. One of the questions they suggest we ask is:
+
+>"Do I need to return the same object or an entirely new one? This question isn't relevant to our current problem since JavaScript strings are immutable and any operation on them will result in a new string. In general, though, this question is one of the most important and most overlooked that you can ask. [...]"
+
+Given the distinction between individuals and kinds, we can see that this question is ambiguous between:
+
+>Do I need to return the same individual or an entirely new one?
+
+>Do I need to return the same kind or an entirely new one?
+
+Indeed, the first question isn't relevant to the current problem. Because we'll likely need to pass a simple value to a function to solve the problem, we'll duplicate the value. However, the second question is relevant to the current problem. If there is no palindrome, are we to return the same kind of string back or some kind of string that serves as an error message? That's relevant. So, the distinction between individuals and kinds nicely clarifies the possible questions we are asking.
+
 The distinction between individuals and kinds is also potentially useful for thinking about shallow and deep copies, but I'll stop here for now. I hope this was somewhat helpful. It was at least helpful for me to try to share my mental model with you.
