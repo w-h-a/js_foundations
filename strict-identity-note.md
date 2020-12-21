@@ -69,7 +69,7 @@ How does this model of strict identity square with the definitions of strict ide
 
 >"The strict equality operator, also known as the identity operator, returns `true` when the operands have the same type _and_ value, `false` otherwise."
 
-Here 'same value' is ambiguous, but distinguishing between individuals and kinds helps clarify this definition. We can reduce 'same value' to 'same individual' and 'same kind', depending on the data type under discussion.
+Here "same value" is ambiguous, but distinguishing between individuals and kinds helps clarify this definition. We can reduce "same value" to "same individual" and "same kind", depending on the data type under discussion.
 
 Furthermore, in the chapter on arrays, we have the following passage:
 
