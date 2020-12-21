@@ -12,7 +12,7 @@ How many words are on the list? You'll probably point out that such a question i
 
 Suppose we understand the first and second items on the list as two non-identical word-individuals that, nevertheless, both share the property of having the characters 'b', 'u', 'l', and 'l' in that order. Further, the last item (but not the other two) has the property of having the characters 'c', 'o', and 'w' in that order. Given all that, it seems correct to say there are _three word-individuals_, but only _two word-kinds_ on the list. (Of course, we can note that all of the word-individuals in the list share the property of being nouns and, hence, there is one word-kind. This shows that we need to be clear on what kind of kind we're talking about, but let's think about words as JavaScript does for now: strings of characters in a particular order.)
 
-Notice that our choice in how to handle the above question (in part) hinges on whether we want to say the first two items on the list are identical or not. We need to stipulate whether those are identical so that we don't have ambiguity in our language.
+Notice that our choice in how to handle the above question (in part) hinges on whether we want to say the first two items on the list are identical or not. Are the first two items on the list to be treated as the **same** word-_kind_ or **distinct** word-_individuals_? We need to stipulate whether they are identical so that we don't have ambiguity in our language.
 
 What's JavaScript's choice? Depending on the data type, JavaScript does a bit of both.
 
@@ -24,7 +24,7 @@ let b = a;
 let c = 'cow';
 ```
 
-How many strings are there? Is the answer "three" or "two"? It is intuitively the case that `!(a === c || b == c)`. So there must be at least two strings. But what about `a` and `b`? Assigning the value held inside `a` to the variable `b` duplicates `'bull'` such that `a` "points to" one `'bull'`-individual whereas `b` "points to" a distinct `'bull'`-individual. Still, JavaScript returns `true` when given `a === b`. So, relative to JavaScript's strict identity operator, there are only two strings.
+How many strings are there? Is the answer "three" or "two"? It is intuitively the case that `!(a === c || b == c)`. So there must be at least two strings. But what about `a` and `b`? Assigning the value held inside `a` to the variable `b` duplicates `'bull'` such that `a` "points to" one `'bull'`-individual whereas `b` "points to" a distinct `'bull'`-individual. Still, JavaScript returns `true` when given `a === b`. So, relative to JavaScript's strict identity operator, there are only two strings. (We might still say there are three pieces of data. Each piece of data has the property of having certain characters in a certain order, which, in turn, is what it means to be of the string type in JavaScript.)
 
 Generalizing, this tells us that JavaScript's strict identity does not "see" tokens (or instances) of simple (primitive) types as individuals. If it did, `a !== b` would return `true` since the value stored in `b` is not the same `'bull'`-individual as the `'bull'`-individual stored in `a`. So, JavaScript's strict identity only "sees" tokens of simple data types as kinds. It only sees string-kinds, number-kinds, and boolean-kinds rather than boolean-individuals, string-individuals, or number-individuals.
 
@@ -36,14 +36,14 @@ let b = a;
 let c = ['bull', 'cow'];
 ```
 
-How many arrays are on the list? Is the answer "three", "two", or "one"? Suppose JavaScript's strict identity operator only "sees" array-kinds in the same way as it did with the string example. In that case, the answer should be "one". After all, there is intuitively one kind of array in the above list of arrays. (Incidentally, JavaScript agrees with this if you run a pairwise comparison of the elements (or properties) of any of the listed array pairs.) If there is only one array, then the following would return `true`:
+How many arrays are on the list? Is the answer "three", "two", or "one"? Suppose JavaScript's strict identity operator only "sees" array-kinds in the same way as it did with the string example. In that case, the answer should be "one". After all, there is intuitively one kind of array in the above list of arrays. (Incidentally, JavaScript agrees with this if you run a pairwise comparison of the elements of any of the listed array pairs.) If there is only one array, then the following would return `true`:
 
 ```javascript
 (a === c || b === c);
 a === b;
 ```
 
-However, the first line of code returns `false`. In fact, we get precisely the same return values as we did before. That is, the following two comparisons return `true` about our arrays:
+However, the first line of code returns `false`. In fact, what we get is precisely the same return values as we did with our string example. That is, the following two comparisons return `true` about our arrays:
 
 ```javascript
 !(a === c || b === c);
@@ -52,7 +52,7 @@ a === b;
 
 Given these results, as far as JavaScript's strict identity operator is concerned, there cannot be merely one array in the list. Indeed, there must be exactly two arrays, which suggests that JavaScript's strict identity operator is sensitive to individuals. But, if so, why isn't it the case that `a !== b`? Here's the explanation: The assignment of the reference of `a` to `b` does _not_ duplicate the designated array. Instead, the reference to the array is copied. Because `a` and `b` both contain the same reference-kind, both `a` and `b` designate (albeit, indirectly) the same array-individual. So, the reason `a === b` returns `true` is that we do not create any new individual upon the assignment of `a` to `b`. Hence, there cannot be three arrays here. Finally, the declaration/assignment of variable `c` creates a distinct array-individual and stores a different reference-kind in `c`. So, we have two arrays.
 
-The above return results tell us that JavaScript's strict identity does not "see" tokens of complex (object) types as kinds. If it did, `(a === c || b === c)` (i.e., because `(a === c && b === c)`) since `a` (and `b`) has a reference that points to the same array-kind as the array-kind pointed to by the reference stored in `c`. So, JavaScript's strict identity must "see" tokens (or instances) of complex data types as individuals. It sees array-individuals and object-individuals rather than array-kinds or object-kinds.
+The above return results tell us that JavaScript's strict identity does not "see" tokens of complex (object) types as kinds. If it did, `(a === c || b === c)` because `(a === c && b === c)`, which, in turn, would be true since `a` (and `b`) has a reference that points to the same array-kind as the array-kind pointed to by the reference stored in `c`. So, JavaScript's strict identity must "see" tokens (or instances) of complex data types as individuals. It sees array-individuals and object-individuals rather than array-kinds or object-kinds.
 
 Given the above model, the way I now roughly understand the strict identity operator in JavaScript is as follows:
 
