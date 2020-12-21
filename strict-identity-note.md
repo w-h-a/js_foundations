@@ -36,7 +36,7 @@ let b = a;
 let c = ['bull', 'cow'];
 ```
 
-How many arrays are on the list? Is the answer "three", "two", or "one"? Suppose JavaScript's strict identity operator only "sees" array-kinds in the same way as it did with the string example. In that case, the answer should be "one". After all, there is intuitively one kind of array in the above list of arrays. (Incidentally, JavaScript agrees with this if you run a pairwise comparison of the elements of any of the listed array pairs.) If there is only one array, then the following would return `true`:
+How many arrays are on the list? Is the answer "three", "two", or "one"? Suppose JavaScript's strict identity operator only "sees" array-kinds in the same way as it did with the string example. In that case, the answer should be "one". After all, there is intuitively one kind of array in the above list of arrays. (Incidentally, JavaScript agrees with this if you run a pairwise comparison of the elements of any of the listed array pairs.) If there is only one array, then the following two lines would each return `true`:
 
 ```javascript
 (a === c || b === c);
