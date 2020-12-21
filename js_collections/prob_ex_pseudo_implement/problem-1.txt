@@ -1,0 +1,22 @@
+PROBLEM:
+
+Given a string, write a changeMe function which returns the same
+string but with all the words in it that are palindromes uppercased.
+
+input: string
+output: string
+
+rules:
+- explicit requirements:
+  - every palindrome in the string must be converted to uppercase
+  - palindromes are case sensitive ("Dad" is not a palindrome)
+- implicit requirements:
+  - if the string is an empty string, the result should be an empty string
+  - if a word is already capped but not a palindrome, leave it alone.
+
+TEST CASES (GIVEN):
+
+changeMe("We will meet at noon") === "We will meet at NOON";
+changeMe("No palindromes here") === "No palindromes here";
+changeMe("") === "";
+changeMe("I LOVE my mom and dad equally") === "I LOVE my MOM and DAD equally";
