@@ -87,6 +87,6 @@ Given the distinction between individuals and kinds, we can see that this questi
 
 >Do I need to return the same kind or an entirely new one?
 
-Indeed, the first question isn't relevant to this palindrome problem. Because we'll need to pass a string value to a function to solve the problem, we'll duplicate the value. However, the second question is relevant to the current problem. If there is no palindrome, are we to return the same kind of string back or some kind of string that serves as an error message? That's relevant. So, the distinction between individuals and kinds nicely clarifies the possible questions we are asking.
+Indeed, the first question isn't relevant to this palindrome problem. Because we'll need to pass a string value to a function to solve the problem, we'll duplicate the value. However, the second question is relevant to this palindrome problem. If there is no palindrome, are we to return the same kind of string back or some kind of string that serves as an error message? That's relevant. So, the distinction between individuals and kinds nicely clarifies the possible questions we are asking.
 
 The distinction between individuals and kinds is also potentially useful for thinking about shallow and deep copies, but I'll stop here for now. I hope this was somewhat helpful. It was at least helpful for me to try to share my mental model with you.
