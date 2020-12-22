@@ -89,4 +89,18 @@ Given the distinction between individuals and kinds, we can see that this questi
 
 Indeed, the first question isn't relevant to this palindrome problem. Because we'll need to pass a string value to a function to solve the problem, we'll duplicate the value. However, the second question is relevant to this palindrome problem. If there is no palindrome, are we to return the same kind of string back or some kind of string that serves as an error message? That's relevant. So, the distinction between individuals and kinds nicely clarifies the possible questions we are asking.
 
+Suppose we change the palindrome problem ever so slightly. Suppose we are to write a function that takes a string as input and outputs an array. The output array must be such that all and only substrings of the input string that are palindromes are included in the output array. This implies that if you feed an empty string into your function, it should be that your function returns an empty array. As you think about test cases, you might write the following:
+
+```javascript
+console.log(getListOfPalindromes("") === []); // should log: true
+```
+
+But, of course, this isn't a good test case. The reason is as follows. When strict identity is applied to individuals, the output array-individual will always be distinct from the array-individual in the strict identity operator's right-operand. This is true, even if you do an excellent job of returning an empty array. The two arrays are identical in kind, but they are nonetheless distinct individuals. So, thinking clearly about when and why the strict identity operator is sensitive to individuals rather than kinds should help you realize that
+
+```javascript
+console.log(getListOfPalindromes("")); // should log: []
+```
+
+is a better test case than before.
+
 The distinction between individuals and kinds is also potentially useful for thinking about shallow and deep copies, but I'll stop here for now. I hope this was somewhat helpful. It was at least helpful for me to try to share my mental model with you.
