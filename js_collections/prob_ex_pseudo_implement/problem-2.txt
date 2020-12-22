@@ -1,6 +1,6 @@
 PROBLEM:
 
-Given a string, write a palindromeSubstrings function which returns all the
+Write a palindromeSubstrings function which returns all the
 substrings from a given string which are palindromes. Consider palindrome words
 case sensitive.
 
@@ -25,5 +25,38 @@ console.log(palindromeSubstrings("abcddcbA"));
 console.log(palindromeSubstrings("palindrome"));
 // should log: []
 
-console.log(palindromeSubstrings("") === []);
-// should log: true
+console.log(palindromeSubstrings(""));
+// should log: []
+
+PSEUDOCODE:
+
+for substrings()
+Given an input string
+
+START
+
+1.  SET result to empty array
+2.  SET startingIndex to 0
+3.  WHILE startingIndex is less than length of string minus 1
+      SET numChars to 2
+      WHILE numChars < length of string - startingIndex + 1
+        SET substring to sliced string from startingIndex to startingIndex plus numChars
+        SET result array to include substring
+        SET numChars to numChars plus 1
+      SET startingIndex to startingIndex plus 1
+4.  RETURN result array
+
+END
+
+for isPalindrome()
+- check whether the string is strictly identical to the reversed string.
+- return whether it is or not.
+
+for palindromeSubstrings()
+- declare a result variable and initialize it to an empty array
+- create an array named 'substrArray' that contains all of the substrings
+  of the input string that are at least 2 characters long. (see more details above)
+- loop through the words in the substrArray array.
+- if the word is a palindrome (see more details above),
+  append that word to the result array.
+- return the result array
