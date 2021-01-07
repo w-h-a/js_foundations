@@ -50,9 +50,35 @@ miniLang('6 PUSH') // => n/a
 
 Pseudocode:
 
+for miniLang
 1. SET stack to []
 2. SET register to 0
 3. SET array to split string by whitespace
 4. WHILE there are elements in array
-  - GET and PERFORM operation
-5. PRINT register
+  - IF number version of element is not NaN
+    - SET register to number version of element
+    ELSE IF set of permissible operations does not include element
+    - PRINT 'impermissible operation'
+    ELSE IF element is 'PUSH'
+    - SET stack to include number of register
+    ELSE IF element is 'POP'
+    - SET register to include last element of stack
+    ELSE IF element is 'PRINT'
+    - PRINT register to console
+    ELSE
+    - SET register to RETURN value of performMath function
+5. IF register is NaN
+  - PRINT 'stack had length of 0'
+
+for performMath
+1. IF element is 'ADD'
+  - SET register to register plus last element of stack
+  ELSE IF element is 'SUB'
+  - SET register to register minus last element of stack
+  ELSE IF element is 'MULT'
+  - SET register to register times last element of stack
+  ELSE IF element is 'DIV'
+  - SET register to truncated: register divided by last element of stack
+  ELSE IF element is 'REM'
+  - SET register to truncated: register remainder last element of stack
+2. RETURN register
