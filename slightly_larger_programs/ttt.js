@@ -80,13 +80,14 @@ do {
       console.log("That is not an empty square.");
       humanSquare = getPlayersChoice();
     }
+    playerMoves[humanSquare] = humanMarker;
+
 
     emptySquares = getEmpties();
     let draw = Math.floor(Math.random() * emptySquares['length']);
     let compSquare = emptySquares[draw];
-
-    playerMoves[humanSquare] = humanMarker;
     playerMoves[compSquare] = computerMarker;
+    
     displayBoard();
   // }
 
