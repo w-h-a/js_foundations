@@ -52,6 +52,8 @@ IF the input array is length < 2
 
 Bonus Problem 2:
 
+Create an improved AI.
+
 for getStrategy(playerMoves, currentPlayer)
 1. SET copyOfMoves set copy of possible playersMove object
 2. SET emptySquares to getEmpties(copyOfMoves)

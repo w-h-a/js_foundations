@@ -30,6 +30,8 @@ let winningLines = [
   [1, 5, 9], [3, 5, 7]             // diagonals
 ];
 
+let arrayOfPossibleGames = [];
+
 // functions w/o side-effects
 
 /* no longer needed
@@ -78,27 +80,25 @@ function joinWith(arrParam, delimParam = ', ', wordParam = 'or') {
 }
 
 function getHumanBestMove(movesParam) {
-  let result;
   let minScore = Infinity;
-  movesParam.forEach((ele, idx) => {
+  return movesParam.reduce((acc, ele, idx) => {
     if (ele['score'] < minScore) {
       minScore = ele['score'];
-      result = idx;
+      acc = idx;
     }
-  });
-  return result;
+    return acc;
+  }, undefined);
 }
 
 function getComputerBestMove(movesParam) {
-  let result;
   let maxScore = -Infinity;
-  movesParam.forEach((ele, idx) => {
+  return movesParam.reduce((acc, ele, idx) => {
     if (ele['score'] > maxScore) {
       maxScore = ele['score'];
-      result = idx;
+      acc = idx;
     }
-  });
-  return result;
+    return acc;
+  }, undefined);
 }
 
 // functions w/ side-effects
@@ -113,32 +113,29 @@ function initializeBoard() {
   }
 }
 
-function displayBoard() {
-  console.clear();
+function displayBoard(movesParam = playerMoves) {
+  //console.clear();
 
   console.log(`You are ${humanMarker}. Computer is ${computerMarker}.`);
 
   console.log('');
   console.log('     |     |');
-  console.log(`  ${playerMoves['1']}  |  ${playerMoves['2']}  |  ${playerMoves['3']}`);
+  console.log(`  ${movesParam['1']}  |  ${movesParam['2']}  |  ${movesParam['3']}`);
   console.log('     |     |');
   console.log('-----+-----+-----');
   console.log('     |     |');
-  console.log(`  ${playerMoves['4']}  |  ${playerMoves['5']}  |  ${playerMoves['6']}`);
+  console.log(`  ${movesParam['4']}  |  ${movesParam['5']}  |  ${movesParam['6']}`);
   console.log('     |     |');
   console.log('-----+-----+-----');
   console.log('     |     |');
-  console.log(`  ${playerMoves['7']}  |  ${playerMoves['8']}  |  ${playerMoves['9']}`);
+  console.log(`  ${movesParam['7']}  |  ${movesParam['8']}  |  ${movesParam['9']}`);
   console.log('     |     |');
   console.log('');
 }
 
 function chooseSquare(playerParam) {
-  if (playerParam === 'human') {
-    humanMoves();
-  } else {
-    computerMoves();
-  }
+  if (playerParam === 'human') humanMoves();
+  if (playerParam === 'computer') computerMoves();
 }
 
 function humanMoves() {
@@ -161,69 +158,15 @@ function computerMoves() {
 */
 
 function computerMoves() {
-  let compSquare = getStrategy(playerMoves, "computer")['key'];
+  let compSquare = getStrategy(playerMoves, "computer")['square'];
   playerMoves[compSquare] = computerMarker;
 }
 
-/*
-for getStrategy(playerMoves, currentPlayer)
-1. SET copyOfMoves set copy of possible playersMove object
-2. SET emptySquares to getEmpties(copyOfMoves)
-3. IF human is the winner
-  - RETURN {score: -1}
-  ELSE IF computer is the winner
-  - RETURN {score: 1}
-  ELSE IF board full
-  - RETURN {score: 0}
-4. SET possibleMoves to getMoves(emptySquares, copyOfMoves, playerParam)
-5. SET optimalMove to undefined
-6. IF player is human
-  - SET optimalMove to getHumanBestMove(moves)
-  ELSE
-  - SET optimalMove to getComputerBestMove(moves)
-7. RETURN possibleMoves[optimalMove]
-
-for getMoves(empties, playerMoves, playerParam)
-1. SET possMoves to array of length 0
-2. WHILE there are elements in empties
-  - SET move be an object
-  - SET temp variable to the value of playerMoves given key of index empties
-  - SET move['key'] to element at idx of empties
-  - IF playerMoves is human
-    - SET playerMoves[emptiesParam[idx]] to humanMarker
-    - SET result to getStrategy(playerMoves, currentPlayer)
-    - SET move['score'] to result['score']
-    ELSE
-    - SET playerMoves[emptiesParam[idx]] to computerMarker
-    - SET result to getStrategy(playerMoves, currentPlayer)
-    - SET move['score'] to result['score']
-  - SET playerMoves[emptiesParam[idx]] to temp
-  - SET possMoves to inlucde move
-3. RETURN possMoves
-
-for getHumanBestMove(possibleMoves)
-1. SET result to undefined
-2. SET minScore to Infinity
-3. WHILE there are elements in possibleMoves
-  - IF ele['score'] less than minScore
-    - SET minScore to ele['score']
-    - SET reuslt to idx
-4. RETURN result
-
-for getComputerBestMove(possibleMoves)
-1. SET result to undefined
-2. SET maxScore to -Infinity
-3. WHILE there are elements in possibleMoves
-  - IF ele['score'] greater than maxScore
-    - SET maxScore to ele['score']
-    - SET reuslt to idx
-4. RETURN result
-*/
-
 function getStrategy(movesParam, playerParam) {
-  let copyOfMoves = Object.assign({}, movesParam);
+  if (movesParam === playerMoves) arrayOfPossibleGames = [];
 
-  let emptySquares = getEmpties(copyOfMoves);
+  let copyOfMoves = Object.assign({}, movesParam);
+  arrayOfPossibleGames.push(copyOfMoves);
 
   if (getWinner(copyOfMoves) === 'You') {
     return {score: -1};
@@ -233,7 +176,23 @@ function getStrategy(movesParam, playerParam) {
     return {score: 0};
   }
 
+  let emptySquares = getEmpties(copyOfMoves);
+
   let possibleMoves = getMoves(emptySquares, copyOfMoves, playerParam);
+
+  let stepsForward = arrayOfPossibleGames.reduce((acc, ele, idx) => {
+    if (copyOfMoves === ele) {
+      acc = idx;
+    }
+    return acc;
+  }, undefined);
+
+  if (getEmpties(playerMoves)['length'] < 4) {
+    console.log("From the starting assumption of...");
+    displayBoard(copyOfMoves);
+    console.log(`...which is ${stepsForward} step(s) forward,\nthe computer consdered the following ${playerParam} moves:`, possibleMoves);
+    getHumanInput("When you are ready, enter any key or hit enter to continue.\n");
+  }
 
   let optimalMove;
 
@@ -243,55 +202,87 @@ function getStrategy(movesParam, playerParam) {
     optimalMove = getComputerBestMove(possibleMoves);
   }
 
+  if (getEmpties(playerMoves)['length'] < 4) {
+    console.log(`${playerParam}'s optimal move is:`, possibleMoves[optimalMove]);
+    getHumanInput("When you are ready, enter any key or hit enter to continue.\n");
+  }
+
   return possibleMoves[optimalMove];
 }
 
 function getMoves(emptiesParam, movesParam, playerParam) {
-  return emptiesParam.reduce((acc, _, idx) => {
+  return emptiesParam.reduce((acc, ele) => {
     let move = {};
-    let temp = movesParam[emptiesParam[idx]];
-    move['key'] = emptiesParam[idx];
+    let temp = movesParam[ele];
+    move['square'] = ele;
 
     if (playerParam === 'human') {
-      movesParam[emptiesParam[idx]] = humanMarker;
-      let result = getStrategy(movesParam, "computer");
-      move['score'] = result['score'];
+      movesParam[ele] = humanMarker;
+
+      let stepsForward = arrayOfPossibleGames.reduce((acc, ele, idx) => {
+        if (movesParam === ele) {
+          acc = idx;
+        }
+        return acc;
+      }, undefined);
+
+      if (getEmpties(playerMoves)['length'] < 4) {
+        console.log(`The computer is ready to think about what would happen if ${playerParam} chose ${Number(ele)}, ${stepsForward + 1} step(s) forward.`);
+        displayBoard(movesParam);
+        getHumanInput("When you are ready, enter any key or hit enter to continue.\n");
+      }
+
+      let result = getStrategy(movesParam, "computer")['score'];
+      move['score'] = result;
+
+      if (getEmpties(playerMoves)['length'] < 4 && move['score'] === -1) {
+        console.log(`The computer sees you'd win and assigns a -1 to the outcome of this series of moves,\n which is ${stepsForward + 1} step(s) forward and ends with ${playerParam}'s ${move['square']}.`);
+        getHumanInput("When you are ready, enter any key or hit enter to continue.\n");
+      } else if (getEmpties(playerMoves)['length'] < 4 && move['score'] === 0) {
+        console.log(`The computer sees the game would end in a draw and assigns a 0 to the outcome of this series of moves,\n which is ${stepsForward + 1} step(s) forward and ends with ${playerParam}'s ${move['square']}.`);
+        getHumanInput("When you are ready, enter any key or hit enter to continue.\n");
+      } else if (getEmpties(playerMoves)['length'] < 4 && move['score'] === 1) {
+        console.log(`The computer sees it'd win and assigns a +1 to the outcome of this series of moves,\n which is ${stepsForward + 1} step(s) forward and ends with ${playerParam}'s ${move['square']}.`);
+        getHumanInput("When you are ready, enter any key or hit enter to continue.\n");
+      }
     } else {
-      movesParam[emptiesParam[idx]] = computerMarker;
-      let result = getStrategy(movesParam, "human");
-      move['score'] = result['score'];
+      movesParam[ele] = computerMarker;
+
+      let stepsForward = arrayOfPossibleGames.reduce((acc, ele, idx) => {
+        if (movesParam === ele) {
+          acc = idx;
+        }
+        return acc;
+      }, undefined);
+
+      if (getEmpties(playerMoves)['length'] < 4) {
+        console.log(`The computer is ready to think about what would happen if ${playerParam} chose ${Number(ele)}, ${stepsForward + 1} step(s) forward.`);
+        displayBoard(movesParam);
+        getHumanInput("When you are ready, enter any key or hit enter to continue.\n");
+      }
+
+      let result = getStrategy(movesParam, "human")['score'];
+      move['score'] = result;
+
+      if (getEmpties(playerMoves)['length'] < 4 && move['score'] === -1) {
+        console.log(`The computer sees you'd win and assigns a -1 to the outcome of this series of moves,\n which is ${stepsForward + 1} step(s) forward and ends with ${playerParam}'s ${move['square']}.`);
+        getHumanInput("When you are ready, enter any key or hit enter to continue.\n");
+      } else if (getEmpties(playerMoves)['length'] < 4 && move['score'] === 0) {
+        console.log(`The computer sees the game would end in a draw and assigns a 0 to the outcome of this series of moves,\n which is ${stepsForward + 1} step(s) forward and ends with ${playerParam}'s ${move['square']}.`);
+        getHumanInput("When you are ready, enter any key or hit enter to continue.\n");
+      } else if (getEmpties(playerMoves)['length'] < 4 && move['score'] === 1) {
+        console.log(`The computer sees it'd win and assigns a +1 to the outcome of this series of moves,\n which is ${stepsForward + 1} step(s) forward and ends with ${playerParam}'s ${move['square']}.`);
+        getHumanInput("When you are ready, enter any key or hit enter to continue.\n");
+      }
     }
 
-    movesParam[emptiesParam[idx]] = temp;
+    arrayOfPossibleGames.pop();
+    movesParam[ele] = temp;
 
     acc.push(move);
     return acc;
   }, []);
 }
-
-// pseudocode
-
-/*
-1. DO
-  - IF doWelcome is true
-    - PRINT 'Welcome!'
-    - SET doWelcome to false
-  - SET 3x3 board to empty
-  - SET (initialize) currentPlayer to 'human'
-  - WHILE there is no winner and the board is not full
-    - PRINT updated board
-    - GET currentPlayer's move (either human or computer)
-    - SET currentPlayer to GET switchPlayer(currentPlayer)
-  - PRINT updated board
-  - IF the board is a winning board
-    - PRINT winner
-    ELSE
-    - PRINT tie
-  - GET user's response to "Play again?"
-2. WHILE yes
-  - GO back to step 1
-3. PRINT "Goodbye!"
-*/
 
 // program
 
@@ -305,7 +296,7 @@ do {
 
   initializeBoard();
 
-  let currentPlayer = 'human';
+  let currentPlayer = 'computer';
 
   while (!getWinner() && !getIsBoardFull()) {
     displayBoard();
