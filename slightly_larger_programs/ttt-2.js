@@ -64,11 +64,11 @@ function getWinner(movesParam = playerMoves) {
   return null;
 }
 
-function joinWith(arrParam, delimParam = ', ', wordParam = 'or') {
+function joinWith(arrParam, delimParam = ', ', connParam = 'or') {
   if (arrParam['length'] < 2) return arrParam.join('');
-  if (arrParam['length'] === 2) return `${arrParam[0]} ${wordParam} ${arrParam[1]}`;
+  if (arrParam['length'] === 2) return `${arrParam[0]} ${connParam} ${arrParam[1]}`;
   let initialStr = arrParam.slice(0, arrParam['length'] - 1).join(delimParam);
-  return `${initialStr}${delimParam}${wordParam} ${arrParam[arrParam['length'] - 1]}`;
+  return `${initialStr}${delimParam}${connParam} ${arrParam[arrParam['length'] - 1]}`;
 }
 
 function minHumanMaxComputer(playerParam, possParam) {
