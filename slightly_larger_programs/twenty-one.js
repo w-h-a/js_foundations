@@ -154,6 +154,8 @@ function printNoBustsOutcome(outcomeParam) {
   }
 }
 
+// program
+
 do {
   if (doWelcome) {
     console.clear();
