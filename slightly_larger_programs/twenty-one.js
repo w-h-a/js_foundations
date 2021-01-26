@@ -15,11 +15,13 @@ let dealerHand = [];
 // functions without side-effects
 
 function getTotal(cardsParam) {
-  let values = cardsParam.map(card => card[1]);
-
+  let values = getCardValues(cardsParam);
   let acesElevenSum = getAcesElevenSum(values);
-
   return correctForAcesSum(values, acesElevenSum);
+}
+
+function getCardValues(cardsParam) {
+  return cardsParam.map(card => card[1]);
 }
 
 function getAcesElevenSum(valuesParam) {
@@ -50,10 +52,10 @@ function busts(subjParam) {
   }
 }
 
-function getWinner() {
-  if (getTotal(playerHand) === getTotal(dealerHand)) {
+function getWinner(playerTotParam, dealerTotParam) {
+  if (playerTotParam === dealerTotParam) {
     return 'draw';
-  } else if (getTotal(playerHand) > getTotal(dealerHand)) {
+  } else if (playerTotParam > dealerTotParam) {
     return 'player';
   } else {
     return 'dealer';
@@ -66,21 +68,6 @@ function getHumanInput(userInputParam) {
   return readline.question(userInputParam).trim().toLowerCase();
 }
 
-function printPartialGameSit() {
-  console.clear();
-  console.log(`Dealer has: ${dealerHand[0]} and unknown`);
-  playerHand.forEach(ele => console.log(`You have: ${ele}`));
-  console.log(`Your total is ${getTotal(playerHand)}`);
-}
-
-function printFullGameSit() {
-  console.clear();
-  dealerHand.forEach(ele => console.log(`Dealer has: ${ele}`));
-  console.log(`Dealer's total is ${getTotal(dealerHand)}`);
-  playerHand.forEach(ele => console.log(`You have: ${ele}`));
-  console.log(`Your total is ${getTotal(playerHand)}`);
-}
-
 function shuffle() {
   for (let idx = deck['length'] - 1; idx > 0; idx -= 1) {
     let jdx = Math.floor(Math.random() * (idx + 1));
@@ -88,24 +75,76 @@ function shuffle() {
   }
 }
 
+function printPartialGameSit() {
+  console.clear();
+  console.log('==============');
+  console.log(`Dealer has: ${dealerHand[0]}`);
+  console.log(`Dealer has: unknown`);
+  console.log('==============');
+  playerHand.forEach(ele => console.log(`You have: ${ele}`));
+  console.log(`Your total is ${getTotal(playerHand)}`);
+  console.log('==============');
+}
+
+function printFullGameSit() {
+  console.clear();
+  console.log('==============');
+  dealerHand.forEach(ele => console.log(`Dealer has: ${ele}`));
+  console.log(`Dealer's total is ${getTotal(dealerHand)}`);
+  console.log('==============');
+  playerHand.forEach(ele => console.log(`You have: ${ele}`));
+  console.log(`Your total is ${getTotal(playerHand)}`);
+  console.log('==============');
+}
+
 function doInitialDeal() {
   let dealTo = 'player';
-
   while (playerHand['length'] < 2 || dealerHand['length'] < 2) {
     deal(dealTo);
     dealTo = (dealTo === 'player' ? 'dealer' : 'player');
   }
 }
 
-function deal(toWhom) {
-  if (toWhom === 'player') {
+function deal(toWhomParam) {
+  if (toWhomParam === 'player') {
     playerHand.push(deck.pop());
   } else {
     dealerHand.push(deck.pop());
   }
 }
 
-function printOutcome(outcomeParam) {
+function getHumanTurn() {
+  let answer;
+  while (answer !== 'stay' && answer !== 's' && !busts('player') && getTotal(playerHand) !== 21) {
+    answer = getHumanInput('hit or stay?\n');
+    while (!['hit', 'stay', 'h', 's'].includes(answer)) {
+      console.log('You may only exclusively choose either (h)it or (s)tay.');
+      answer = getHumanInput();
+    }
+    if (answer === 'hit' || answer === 'h') deal('player');
+    printPartialGameSit();
+  }
+}
+
+function getDealerTurn() {
+  while (getTotal(dealerHand) < 17) {
+    deal('dealer');
+  }
+  if (getTotal(dealerHand) === 17 && dealerHand.some(card => card[1] === 'A')) {
+    deal('dealer');
+  }
+}
+
+function printBustedOutcome(subjParam) {
+  printFullGameSit();
+  if (subjParam === 'player') {
+    console.log('You busted. Dealer wins.');
+  } else {
+    console.log('Dealer busted. You win!');
+  }
+}
+
+function printNoBustsOutcome(outcomeParam) {
   if (outcomeParam === 'draw') {
     console.log(`The game is a draw`);
   } else if (outcomeParam === 'player') {
@@ -144,36 +183,36 @@ do {
 
   printPartialGameSit();
 
-  let answer;
+  getHumanInput("When you are ready, enter any key or hit enter to continue.\n");
 
-  while (answer !== 'stay' && !busts('player') && getTotal(playerHand) !== 21) {
-    answer = getHumanInput('hit or stay?\n');
-    while (!['hit', 'stay'].includes(answer)) {
-      console.log('You may only exclusively choose either hit or stay.');
-      answer = getHumanInput();
-    }
-    if (answer === 'hit') deal('player');
-    printPartialGameSit();
-  }
+  getHumanTurn();
 
   if (busts('player')) {
-    printFullGameSit();
-    console.log('Dealer wins.');
+    printBustedOutcome('player');
     playAgain = getHumanInput("Enter 'y' if you'd like another go; otherwise enter any key or press enter to exit.\n") === 'y';
-  } else {
-    while (getTotal(dealerHand) < 17) {
-      deal('dealer');
-    }
-
-    if (busts('dealer')) {
-      printFullGameSit();
-      console.log('You win!');
-      playAgain = getHumanInput("Enter 'y' if you'd like another go; otherwise enter any key or press enter to exit.\n") === 'y';
+    if (playAgain) {
+      continue;
     } else {
-      let winner = getWinner();
-      printFullGameSit();
-      printOutcome(winner);
-      playAgain = getHumanInput("Enter 'y' if you'd like another go; otherwise enter any key or press enter to exit.\n") === 'y';
+      break;
     }
   }
+
+  getDealerTurn();
+
+  if (busts('dealer')) {
+    printBustedOutcome('dealer');
+    playAgain = getHumanInput("Enter 'y' if you'd like another go; otherwise enter any key or press enter to exit.\n") === 'y';
+    if (playAgain) {
+      continue;
+    } else {
+      break;
+    }
+  }
+
+  let playerTotal = getTotal(playerHand);
+  let dealerTotal = getTotal(dealerHand);
+  let winner = getWinner(playerTotal, dealerTotal);
+  printFullGameSit();
+  printNoBustsOutcome(winner);
+  playAgain = getHumanInput("Enter 'y' if you'd like another go; otherwise enter any key or press enter to exit.\n") === 'y';
 } while (playAgain);
