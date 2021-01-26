@@ -161,7 +161,6 @@ do {
     console.log('Dealer wins.');
     playAgain = getHumanInput("Enter 'y' if you'd like another go; otherwise enter any key or press enter to exit.\n") === 'y';
   } else {
-    console.log("Dealer's turn...");
     while (getTotal(dealerHand) < 17) {
       deal('dealer');
     }
