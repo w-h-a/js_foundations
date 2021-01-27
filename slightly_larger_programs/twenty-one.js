@@ -2,15 +2,17 @@
 
 let readline = require('readline-sync');
 
-let playAgain;
-
 let doWelcome = true;
+
+let playAgain;
 
 let deck = [];
 
 let playerHand = [];
 
 let dealerHand = [];
+
+let dealerLimit = 17;
 
 // functions without side-effects
 
@@ -115,7 +117,7 @@ function deal(toWhomParam) {
 
 function getHumanTurn() {
   let answer;
-  while (answer !== 'stay' && answer !== 's' && !busts('player') && getTotal(playerHand) !== 21) {
+  while (answer !== 'stay' && answer !== 's' && getTotal(playerHand) < 21) {
     answer = getHumanInput('hit or stay?\n');
     while (!['hit', 'stay', 'h', 's'].includes(answer)) {
       console.log('You may only exclusively choose either (h)it or (s)tay.');
@@ -127,10 +129,10 @@ function getHumanTurn() {
 }
 
 function getDealerTurn() {
-  while (getTotal(dealerHand) < 17) {
+  while (getTotal(dealerHand) < dealerLimit) {
     deal('dealer');
   }
-  if (getTotal(dealerHand) === 17 && dealerHand.some(card => card[1] === 'A')) {
+  if (getTotal(dealerHand) === dealerLimit && dealerHand.some(card => card[1] === 'A')) {
     deal('dealer');
   }
 }
@@ -154,6 +156,10 @@ function printNoBustsOutcome(outcomeParam) {
   }
 }
 
+function getPlayAgain() {
+  return getHumanInput("Enter 'y' if you'd like another go; otherwise enter any key or press enter to exit.\n") === 'y';
+}
+
 // program
 
 do {
@@ -165,14 +171,14 @@ do {
   }
 
   deck = [
-    ['H', '2'], ['H', '3'], ['H', '4'], ['H', '5'], ['H', '6'], ['H', '7'], ['H', '8'],
-    ['H', '9'], ['H', '10'], ['H', 'J'], ['H', 'Q'], ['H', 'K'], ['H', 'A'],
-    ['D', '2'], ['D', '3'], ['D', '4'], ['D', '5'], ['D', '6'], ['D', '7'], ['D', '8'],
-    ['D', '9'], ['D', '10'], ['D', 'J'], ['D', 'Q'], ['D', 'K'], ['D', 'A'],
-    ['C', '2'], ['C', '3'], ['C', '4'], ['C', '5'], ['C', '6'], ['C', '7'], ['C', '8'],
-    ['C', '9'], ['C', '10'], ['C', 'J'], ['C', 'Q'], ['C', 'K'], ['C', 'A'],
-    ['S', '2'], ['S', '3'], ['S', '4'], ['S', '5'], ['S', '6'], ['S', '7'], ['S', '8'],
-    ['S', '9'], ['S', '10'], ['S', 'J'], ['S', 'Q'], ['S', 'K'], ['S', 'A'],
+    ['♥', '2'], ['♥', '3'], ['♥', '4'], ['♥', '5'], ['♥', '6'], ['♥', '7'], ['♥', '8'],
+    ['♥', '9'], ['♥', '10'], ['♥', 'J'], ['♥', 'Q'], ['♥', 'K'], ['♥', 'A'],
+    ['♦', '2'], ['♦', '3'], ['♦', '4'], ['♦', '5'], ['♦', '6'], ['♦', '7'], ['♦', '8'],
+    ['♦', '9'], ['♦', '10'], ['♦', 'J'], ['♦', 'Q'], ['♦', 'K'], ['♦', 'A'],
+    ['♣', '2'], ['♣', '3'], ['♣', '4'], ['♣', '5'], ['♣', '6'], ['♣', '7'], ['♣', '8'],
+    ['♣', '9'], ['♣', '10'], ['♣', 'J'], ['♣', 'Q'], ['♣', 'K'], ['♣', 'A'],
+    ['♠', '2'], ['♠', '3'], ['♠', '4'], ['♠', '5'], ['♠', '6'], ['♠', '7'], ['♠', '8'],
+    ['♠', '9'], ['♠', '10'], ['♠', 'J'], ['♠', 'Q'], ['♠', 'K'], ['♠', 'A'],
   ];
 
   playerHand = [];
@@ -191,24 +197,18 @@ do {
 
   if (busts('player')) {
     printBustedOutcome('player');
-    playAgain = getHumanInput("Enter 'y' if you'd like another go; otherwise enter any key or press enter to exit.\n") === 'y';
-    if (playAgain) {
-      continue;
-    } else {
-      break;
-    }
+    playAgain = getPlayAgain();
+    if (playAgain) continue;
+    break;
   }
 
   getDealerTurn();
 
   if (busts('dealer')) {
     printBustedOutcome('dealer');
-    playAgain = getHumanInput("Enter 'y' if you'd like another go; otherwise enter any key or press enter to exit.\n") === 'y';
-    if (playAgain) {
-      continue;
-    } else {
-      break;
-    }
+    playAgain = getPlayAgain();
+    if (playAgain) continue;
+    break;
   }
 
   let playerTotal = getTotal(playerHand);
@@ -216,5 +216,5 @@ do {
   let winner = getWinner(playerTotal, dealerTotal);
   printFullGameSit();
   printNoBustsOutcome(winner);
-  playAgain = getHumanInput("Enter 'y' if you'd like another go; otherwise enter any key or press enter to exit.\n") === 'y';
+  playAgain = getPlayAgain();
 } while (playAgain);
