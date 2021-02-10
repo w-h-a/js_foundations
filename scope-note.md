@@ -16,7 +16,7 @@ is the scope the `main` function. This is also referred to as the 'global' scope
 
 ```js
 function main() { // line 0
-  // potential source code // more lines
+  // source code
   function localFunction() { // line i
     // local code of length m
   } // line i + m
@@ -30,7 +30,7 @@ the code from line _i_ to line _i + m_ is the scope of the `localFunction` funct
 
 ```js
 function main() { // line 0
-  // potential source code // more lines
+  // source code
   { // line i
     // block code of length k
     function localFunction() { // line i + k
