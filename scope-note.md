@@ -19,12 +19,12 @@ function main() { // line 0
   // source code
   function localFunction() { // line i
     // local code of length m
-  } // line i + m
+  } // line i + m + 1
   // more source code
 } // line n + 1
 ```
 
-the code from line _i_ to line _i + m_ is the scope of the `localFunction` function. This is also referred to as 'function' scope.
+the code from line _i_ to line _i + m + 1_ is the scope of the `localFunction` function. This is also referred to as 'function' scope.
 
 3. Given the code of line length _n_ below
 
@@ -33,23 +33,23 @@ function main() { // line 0
   // source code
   { // line i
     // block code of length k
-    function localFunction() { // line i + k
+    function localFunction() { // line i + k + 1
       // local code of length m
-    } // line i + k + m
+    } // line i + k + 1 + m + 1
     // block code of length l
-    { // line i + k + m + l
+    { // line i + k + 1 + m + 1 + l + 1
       // nested block code of length p
-      const a; // line i + k + m + l + p
-      let u;  // line i + k + m + l + p + 1
+      const a; // line i + k + 1 + m + 1 + l + 1 + p + 1
+      let u;  // line i + k + 1 + m + 1 + l + 1 + p + 2
       // nested block code of length q
-    } // line i + k + m + l + p + 1 + q
+    } // line i + k + 1 + m + 1 + l + 1 + p + 2 + q + 1
     // block code of length r
-  } // line i + k + m + l + p + 1 + q + r
+  } // line i + k + 1 + m + 1 + l + 1 + p + 2 + q + 1 + r + 1
   // more source code
 } // line n + 1
 ```
 
-the code from line _i_ to line _i + k + m + l + p + 1 + q + r_ is the scope of the block just in case there is either a `let` or `const` declaration within block code of length _k_, block code of length _l_, or block code of length _r_. (Note, it is not enough that `a` and `u` are declared within the nested block.) This is also referred to as 'block' scope.
+the code from line _i_ to line _i + k + 1 + m + 1 + l + 1 + p + 2 + q + 1 + r + 1_ is the scope of the block just in case there is either a `let` or `const` declaration within block code of length _k_, block code of length _l_, or block code of length _r_. (Note, it is not enough that `a` and `u` are declared within the nested block.) This is also referred to as 'block' scope.
 
 Now if scopes are defined like this, let's talk about which scopes variables are _available in_ (or _accessible in_) rather than say scopes are properties of variables.
 
