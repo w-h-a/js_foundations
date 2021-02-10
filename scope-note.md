@@ -16,11 +16,11 @@ the code from line 1 to line _n_ is the 'global' or 'window' scope.
 
 ```js
 // line 1
-  // source code
+// source code
 function localFunction() { // line i
-    // local code of length m
+  // local code of length m
 } // line i + m + 1
-  // more source code
+// more source code
 // line n
 ```
 
@@ -30,22 +30,22 @@ the code from line _i_ to line _i + m + 1_ is the scope of the `localFunction` f
 
 ```js
 // line 1
-  // source code
+// source code
 { // line i
-    // block code of length k
+  // block code of length k
   function localFunction() { // line i + k + 1
-      // local code of length m
+    // local code of length m
   } // line i + k + 1 + m + 1
-    // block code of length l
+  // block code of length l
   { // line i + k + 1 + m + 1 + l + 1
-      // nested block code of length p
-      const a; // line i + k + 1 + m + 1 + l + 1 + p + 1
-      let u;  // line i + k + 1 + m + 1 + l + 1 + p + 2
-      // nested block code of length q
+    // nested block code of length p
+    const a; // line i + k + 1 + m + 1 + l + 1 + p + 1
+    let u;  // line i + k + 1 + m + 1 + l + 1 + p + 2
+    // nested block code of length q
   } // line i + k + 1 + m + 1 + l + 1 + p + 2 + q + 1
-    // block code of length r
+  // block code of length r
 } // line i + k + 1 + m + 1 + l + 1 + p + 2 + q + 1 + r + 1
-  // more source code
+// more source code
 // line n
 ```
 
