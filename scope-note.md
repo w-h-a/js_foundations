@@ -10,7 +10,7 @@ Define 'scope' as follows:
 // line n
 ```
 
-is the 'global' or 'window' scope.
+the code from line 1 to line _n_ is the 'global' or 'window' scope.
 
 2. Given the code of line length _n_ below
 
