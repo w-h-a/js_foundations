@@ -2,26 +2,26 @@ Definitions: Scope and Available Variables.
 
 Define 'scope' as follows:
 
-1. Suppose we make the main function of JS source code explicit (even though we can think of it as implicit). Then the code
+1. Given the code of line length _n_ below
 
 ```js
-function main() {
-  // all of the source code
-}
+// line 1
+// all of the source code
+// line n
 ```
 
-is the scope of the `main` function. This is also referred to as the 'global' scope.
+is the 'global' or 'window' scope.
 
 2. Given the code of line length _n_ below
 
 ```js
-function main() { // line 0
+// line 1
   // source code
   function localFunction() { // line i
     // local code of length m
   } // line i + m + 1
   // more source code
-} // line n + 1
+// line n
 ```
 
 the code from line _i_ to line _i + m + 1_ is the scope of the `localFunction` function. This is also referred to as 'function' scope.
@@ -29,7 +29,7 @@ the code from line _i_ to line _i + m + 1_ is the scope of the `localFunction` f
 3. Given the code of line length _n_ below
 
 ```js
-function main() { // line 0
+// line 1
   // source code
   { // line i
     // block code of length k
@@ -46,7 +46,7 @@ function main() { // line 0
     // block code of length r
   } // line i + k + 1 + m + 1 + l + 1 + p + 2 + q + 1 + r + 1
   // more source code
-} // line n + 1
+// line n
 ```
 
 the code from line _i_ to line _i + k + 1 + m + 1 + l + 1 + p + 2 + q + 1 + r + 1_ is the scope of the block just in case there is either a `let` or `const` declaration within the block code of length _k_, the block code of length _l_, or the block code of length _r_. (Note, it is not enough that `a` and `u` are declared within the nested block.) This is also referred to as 'block' scope.
