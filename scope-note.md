@@ -51,7 +51,7 @@ function main() { // line 0
 
 the code from line _i_ to line _i + k + 1 + m + 1 + l + 1 + p + 2 + q + 1 + r + 1_ is the scope of the block just in case there is either a `let` or `const` declaration within the block code of length _k_, the block code of length _l_, or the block code of length _r_. (Note, it is not enough that `a` and `u` are declared within the nested block.) This is also referred to as 'block' scope.
 
-Now if scopes are defined like this, let's talk about which scopes variables are _available in_ (or _accessible in_) rather than say scopes are properties of variables.
+Now, if scopes are defined like this, let's talk about which scopes variables are _available in_ (or _accessible in_) rather than say scopes are properties of variables.
 
 4. An occurrence of `z` is _available in_ a scope just in case:
   - if `z` is declared with `var`, either
@@ -60,3 +60,5 @@ Now if scopes are defined like this, let's talk about which scopes variables are
   - if `z` is declared with either `let` or `const`, either
     - `z` is declared in an outer nested scope and `z` is not also declared in the focal scope itself, or
     - `z` is declared at the top of the focal scope itself.
+
+So it is inappropriate to speak of 'variable scope' or the 'scope of a variable'. Variables are accessible or available in scopes, but they don't have scopes. If you think variables have scopes, you'd say something circular like the scope of a variable is the set of scopes within which it is accessible. Or you end up saying a scope of a variable is a scope within which it is accessible. So this must be a case where [Wikipedia](https://en.wikipedia.org/wiki/Scope_(computer_science)) is wrong (of course, that wouldn't be the first time).
