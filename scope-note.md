@@ -54,9 +54,9 @@ the code from line _i_ to line _i + k + m + l + p + 1 + q + r_ is the scope of t
 Now if scopes are defined like this, let's talk about which scopes variables are _available in_ (or _accessible in_) rather than say scopes are properties of variables.
 
 4. An occurrence of `z` is _available in_ a scope just in case:
-  - if `z` is declared with `var`,
-    - either `z` is declared in an outer nested scope and `z` is not also declared in the focal scope itself, or
+  - if `z` is declared with `var`, either
+    - `z` is declared in an outer nested scope and `z` is not also declared in the focal scope itself, or
     - `z` is declared in the focal scope itself; and
-  - if `z` is declared with either `let` or `const`,
-    - either `z` is declared in an outer nested scope and `z` is not also declared in the focal scope itself, or
+  - if `z` is declared with either `let` or `const`, either
+    - `z` is declared in an outer nested scope and `z` is not also declared in the focal scope itself, or
     - `z` is declared at the top of the focal scope itself.
