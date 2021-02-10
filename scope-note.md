@@ -10,7 +10,7 @@ function main() {
 }
 ```
 
-is the scope the `main` function. This is also referred to as the 'global' scope.
+is the scope of the `main` function. This is also referred to as the 'global' scope.
 
 2. Given the code of line length _n_ below
 
