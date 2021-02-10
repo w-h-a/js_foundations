@@ -49,7 +49,7 @@ function main() { // line 0
 } // line n + 1
 ```
 
-the code from line _i_ to line _i + k + m + l + p + 1 + q + r_ is the scope of the block just in case there is either a `let` or `const` declaration within block code of length _m_, block code of length _l_, or block code of length _r_. Note, it is not enough that `a` and `u` are declared within the nested block. This is also referred to as 'block' scope.
+the code from line _i_ to line _i + k + m + l + p + 1 + q + r_ is the scope of the block just in case there is either a `let` or `const` declaration within block code of length _k_, block code of length _l_, or block code of length _r_. (Note, it is not enough that `a` and `u` are declared within the nested block.) This is also referred to as 'block' scope.
 
 Now if scopes are defined like this, let's talk about which scopes variables are _available in_ (or _accessible in_) rather than say scopes are properties of variables.
 
