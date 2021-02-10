@@ -6,7 +6,7 @@ Define 'scope' as follows:
 
 ```js
 // line 1
-// all of the source code
+// source code
 // line n
 ```
 
@@ -61,4 +61,4 @@ Now, if scopes are defined like this, let's talk about which scopes variables ar
     - `z` is declared in an outer nested scope and `z` is not also declared in the focal scope itself, or
     - `z` is declared at the top of the focal scope itself.
 
-So it is inappropriate to speak of 'variable scope' or the 'scope of a variable'. Variables are accessible or available in scopes, but they don't have scopes. If you think variables have scopes, you'd say something circular like the scope of a variable is the set of scopes within which it is accessible. Or you end up saying a scope of a variable is a scope within which it is accessible. 
+So it is inappropriate to speak of 'variable scope' or the 'scope of a variable'. Variables are accessible or available in scopes, but they don't have scopes. If you think variables have scopes, you'd say something circular like the scope of a variable is the set of scopes within which it is accessible. Or you end up saying a scope of a variable is a scope within which it is accessible.
