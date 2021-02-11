@@ -64,7 +64,7 @@ Now, if scopes are defined like this, let's talk about the scopes that identifie
   - if `z` is declared as a function parameter, then either:
     - `z` is declared in an outer nesting function scope and `z` is not also declared in _s_ itself, or
     - _s_ is the function scope for which `z` was declared as a parameter; or
-  - if `z` is declared as a function declaration, then, alas, it seems to depend.
+  - if `z` is declared as the name of a function in a function declaration, then, alas, it seems to depend.
 
 Strictly speaking, there is no 'variable scope' or the 'scope of a variable'. Identifiers are accessible or available in scopes, but they don't have scopes. If you must say that an identifier or variable has a scope, let's say it is the scope within which it is declared and leave it at that. Otherwise, we get muddled.
 
