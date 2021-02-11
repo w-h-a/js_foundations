@@ -212,7 +212,7 @@ True.
 
 False.
 
-> Scope are independent of identifiers, although identifier can either be available or not within scopes.
+> An identifier can either be available or not within scopes.
 
 True.
 
