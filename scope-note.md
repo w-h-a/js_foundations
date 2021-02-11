@@ -85,7 +85,7 @@ console.log(a); // ReferenceError: a is not defined
 
 > The error tells you that `a` isn't available [...]. In other words, it isn't in scope outside of the `if` block.
 
-We get an error not because `let` creates a block-scoped variable but because `a` isn't accessible outside the block scope within which it was declared with `let`. I wouldn't say "`a` is not 'in scope' outside of the `if` block". I would say "`a` is not in _the_ scope outside of the `if` block".
+We get an error not because `let` creates a block-scoped variable but because `a` isn't accessible outside the block scope within which it was declared with `let`. I wouldn't say "`a` is not 'in scope' outside of the `if` block". I would say "`a` is not available in _the_ scope outside of the `if` block".
 
 > If, on the other hand, you declare the variable outside the `if` block, the variable is available within the block as well as after the block ends.
 
