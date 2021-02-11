@@ -107,7 +107,7 @@ No. Identifiers declared with `const` have the same availability as identifiers 
 
 > One of the trickiest things to understand for a beginner is the concept of scope and how it pertains to accessing variables. A variable's scope is the part of the program that can access that variable by name. This is true in all programming languages. Specifically, variable scoping rules describe how and where the language finds previously declared variables.
 
-A variable's scope is not the part of the program that can access that variable by name. Keep scope separate from the availability of identifiers in a program. Variable availability rules describe whether a variable is available in particular scopes of the code. Scope is something else.
+A variable's scope is not the part of the program that can access that variable by name. Keep scope separate from the availability of identifiers in a program. Variable availability rules describe whether a variable is available in particular scopes of the code. You cannot define scope in terms of where an identifier is available.
 
 > Note that a local variable only comes into existence when you call that function. The mere act of defining a function doesn't create any variables. The function declaration does, however, _define_ the scope of the variables. For example, in the `aFunc` function [below], the function body defines where variable `a`, when created, will be accessible.
 
