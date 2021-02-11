@@ -99,7 +99,7 @@ console.log(a);    // => 'bar'
 
 > As we can see, this code prints the string `"bar"` since `a` is accessible inside the block. Thus, we can reassign it to a different value inside the block. In other words, this `a` has a broader scope than the `a` variable in the previous example.
 
-Everything is right here except the last sentence. The variable `a` does not have a broader scope than the `a` variable in the previous. Instead, `a` is available in more scopes than the `a` variable in the previous. Speaking this way causes confusion between scope and the accessibility of identifiers. It especially makes it hard on beginners.
+Everything is right here except the last sentence. The variable `a` does not have a broader scope than the `a` variable in the previous. Speaking this way causes confusion between scope and the accessibility of identifiers. It especially makes it hard on beginners. Instead, `a` is available in more scopes than the `a` variable in the previous. 
 
 > Constants declared with `const` have the same scope as variables declared with `let`.
 
