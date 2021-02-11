@@ -199,3 +199,23 @@ Inner blocks can access variables from outer scopes.
 Variables defined in an inner block can shadow variables from outer scopes.
 
 The first statement in this passage is false. Also, there are no 'rules for block scopes'. However, there are rules of identifier accessibility that pertain to identifiers declared with either `let` or `const`.
+
+> Scope describes how and where the language finds and retrieves values from declared variables.
+
+False.
+
+> Defining a function creates new scopes.
+
+True.
+
+> Functions must contain a variable declaration to create a new scope.
+
+False.
+
+> Scope are independent of identifiers, although identifier can either be available or not within scopes.
+
+True.
+
+> Functions and blocks always create new scopes.
+
+False.
