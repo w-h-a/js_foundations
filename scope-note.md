@@ -68,6 +68,7 @@ Now, if scopes are defined like this, let's talk about the scopes that identifie
 
 Strictly speaking, there is no 'variable scope' or the 'scope of a variable'. Identifiers are accessible or available in scopes, but they don't have scopes. If you must say that an identifier or variable has a scope, let's say it is the scope within which it is declared and leave it at that. Otherwise, we get muddled.
 
+<!--REST IS FOR LAUNCH ONLY
 For example, consider:
 
 > A variable's scope determines where it is available in a program. The location where you declare a variable determines its scope. In JavaScript, variables declared with the `let` or `const` keywords have block scope.
@@ -99,7 +100,7 @@ console.log(a);    // => 'bar'
 
 > As we can see, this code prints the string `"bar"` since `a` is accessible inside the block. Thus, we can reassign it to a different value inside the block. In other words, this `a` has a broader scope than the `a` variable in the previous example.
 
-Everything is right here except the last sentence. The variable `a` does not have a broader scope than the `a` variable in the previous. Speaking this way causes confusion between scope and the accessibility of identifiers. It especially makes it hard on beginners. Instead, `a` is available in more scopes than the `a` variable in the previous. 
+Everything is right here except the last sentence. The variable `a` does not have a broader scope than the `a` variable in the previous. Speaking this way causes confusion between scope and the accessibility of identifiers. It especially makes it hard on beginners. Instead, `a` is available in more scopes than the `a` variable in the previous.
 
 > Constants declared with `const` have the same scope as variables declared with `let`.
 
@@ -219,3 +220,4 @@ True.
 > Functions and blocks always create new scopes.
 
 False.
+-->
