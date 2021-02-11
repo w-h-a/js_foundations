@@ -150,7 +150,7 @@ funcA();
 funcB();
 ```
 
-Executing `console.log(a)` throws an error since there is no `a` variable in `funcB`, period.
+Executing `console.log(a)` throws an error since there is no `a` variable that is accessible from `funcB`, period.
 
 > Nested functions follow the same rules of inner and outer scoped variables. When dealing with nested functions, our usage of what's "outer" or "inner" is going to be relative. We'll switch vocabulary and talk about the "first level," "second level," and "third level."
 
