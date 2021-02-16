@@ -58,15 +58,15 @@ Now, if scopes are defined like this, identifiers are _available in_ (or _access
 Strictly speaking, there is no 'variable scope' or the 'scope of a variable'. Those are misnomers. Identifiers are accessible or available in scopes, but they don't have scopes unless one simply means that it is the scope within which the identifier is declared. But often people obviously don't merely mean that. More generally, people tend to conflate definitions (1 - 3) with definition (4). They say strange things like:
 
 - the identifier is 'in scope' when they are clearly talking about a scope that the identifier was not declared in,
+- identifier `u` has 'broader scope' than identifier `v`,
 - the scope of an identifier is the region where the identifier is accessible,
+- identifiers declared with `const` have the 'the same scope' as identifiers declared with `let` (not necessarily; one might be global and the other local),
 - identifiers declared with `let` or `const` have 'block scope',
 - identifiers declared with `let` or `const` follow 'block scope rules',
-- identifiers declared with `const` have the 'the same scope' as identifiers declared with `let`,
 - identifiers declared with `const` follow 'the same scoping rules' as identifiers declared with `let`,
-- identifiers declared with `const` are 'scoped' just as identifiers declared with `let`,
-- identifier `u` has 'broader scope' than identifier `v`,
-- defining a function defines a scope 'of identifiers',
-- defining a function defines where identifiers are available, and
+- identifiers declared with `const` are 'scoped' just as identifiers declared with `let` (no; identifiers declared with `let` or `const` follow the same accessibility rules),
+- defining a function defines a scope 'of identifiers' (defining a function defines a scope, period),
+- defining a function defines where identifiers are available (no; that's what definition 4 does), and
 - alas, many more...
 
 That's when things get muddled. It is best to keep 'scope' for one thing, and the 'accessibility' (and the rules of accessibility) of identifiers clear and distinct.
