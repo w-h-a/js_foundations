@@ -64,7 +64,7 @@ Strictly speaking, there is no 'variable scope' or the 'scope of a variable'. Th
 - identifiers declared with `const` have the 'the same scope' as identifiers declared with `let`,
 - identifiers declared with `const` follow 'the same scoping rules' as identifiers declared with `let`,
 - identifiers declared with `const` are 'scoped' just as identifiers declared with `let`,
-- identifier _u_ has 'broader scope' than identifier _v_,
+- identifier `u` has 'broader scope' than identifier `v`,
 - defining a function defines a scope 'of identifiers',
 - defining a function defines where identifiers are available, and
 - alas, many more...
