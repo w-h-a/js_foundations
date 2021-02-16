@@ -17,14 +17,14 @@ the code from line 1 to line _n_ is the 'global' scope.
 ```js
 // line 1
 // source code
-function localFunction() { // line i
+const localFunction = function() { // line i
   // local code of length m
 } // line i + m + 1
 // more source code
 // line n
 ```
 
-the code from line _i_ to line _i + m + 1_ is the scope of the `localFunction` function. This is also referred to as 'function' scope. (Note, the above code uses a function declaration, but it could be replaced by either a function expression or arrow function. Note further, that we can say that the the parameter list is a scope and the function's body is a scope nested in that scope.)
+the code from line _i_ to line _i + m + 1_ is a scope of the `localFunction` function. (Note, the above code uses a function expression, but it could be replaced by either a function declaration or arrow function. Note further, that we can say that the the parameter list is a scope and the function's body is a scope nested in that scope.) This is also referred to as 'function' scope.
 
 3. Given the code of line length _n_ below
 
@@ -32,41 +32,44 @@ the code from line _i_ to line _i + m + 1_ is the scope of the `localFunction` f
 // line 1
 // source code
 { // line i
-  // block code of length k
-  function localFunction() { // line i + k + 1
-    // local code of length m
-  } // line i + k + 1 + m + 1
-  // block code of length l
-  { // line i + k + 1 + m + 1 + l + 1
-    // nested block code of length p
-    const a; // line i + k + 1 + m + 1 + l + 1 + p + 1
-    let u;  // line i + k + 1 + m + 1 + l + 1 + p + 2
-    // nested block code of length q
-  } // line i + k + 1 + m + 1 + l + 1 + p + 2 + q + 1
-  // block code of length r
-} // line i + k + 1 + m + 1 + l + 1 + p + 2 + q + 1 + r + 1
+  // block code of length m
+} // line i + m + 1
 // more source code
 // line n
 ```
 
-the code from line _i_ to line _i + k + 1 + m + 1 + l + 1 + p + 2 + q + 1 + r + 1_ is the scope of the block just in case there is either a `let` or `const` declaration within the block code of length _k_, the block code of length _l_, or the block code of length _r_. (Note, it is not enough that `a` and `u` are declared within the nested block.) This is also referred to as 'block' scope.
+the code from line _i_ to line _i + m + 1_ is the scope of the block just in case there is either a `let` or `const` declaration within the block code of length _m_. (Note it is not enough that there is either a `let` or `const` declaration within a local scope that is _nested_ within the block from line i to line _i + m + 1_.) This is also referred to as 'block' scope.
 
-Now, if scopes are defined like this, let's talk about the scopes that identifiers are _available in_ (or _accessible in_) rather than say scopes are properties of identifiers, name-bindings, or variables.
+Now, if scopes are defined like this, identifiers are _available in_ (or _accessible in_) certain scopes.
 
 4. An occurrence of identifier `z` is _available in_ scope _s_ just in case, either:
   - if `z` is declared with `var`, then either:
-    - `z` is declared in an outer nested scope and `z` is not also declared in _s_ itself, or
+    - `z` is declared in an outer nested scope and `z` is not also declared in _s_ itself,
     - `z` is declared in an inner nested block and `z` is not also declared in _s_ itself, or
-    - `z` is declared in _s_ itself; or
+    - `z` is declared in _s_ itself;
   - if `z` is declared with either `let` or `const`, then either:
     - `z` is declared in an outer nested scope and `z` is not also declared in _s_ itself, or
-    - `z` is declared at the top of _s_ itself; or
+    - `z` is declared at the top of _s_ itself;
   - if `z` is declared as a function parameter, then either:
     - `z` is declared in an outer nesting function scope and `z` is not also declared in _s_ itself, or
     - _s_ is the function scope for which `z` was declared as a parameter; or
   - if `z` is declared as the name of a function in a function declaration, then, alas, it seems to depend.
 
-Strictly speaking, there is no 'variable scope' or the 'scope of a variable'. Identifiers are accessible or available in scopes, but they don't have scopes. If you must say that an identifier or variable has a scope, let's say it is the scope within which it is declared and leave it at that. Otherwise, we get muddled.
+Strictly speaking, there is no 'variable scope' or the 'scope of a variable'. Those are misnomers. Identifiers are accessible or available in scopes, but they don't have scopes unless one simply means that it is the scope within which the identifier is declared. But often people obviously don't merely mean that. More generally, people tend to conflate definitions (1 - 3) with definition (4). They say strange things like:
+
+- the identifier is 'in scope' when they are clearly talking about a scope that the identifier was not declared in,
+- the scope of an identifier is the region where the identifier is accessible,
+- identifiers declared with `let` or `const` have 'block scope',
+- identifiers declared with `let` or `const` follow 'block scope rules',
+- identifiers declared with `const` have the 'the same scope' as identifiers declared with `let`,
+- identifiers declared with `const` follow 'the same scoping rules' as identifiers declared with `let`,
+- identifiers declared with `const` are 'scoped' just as identifiers declared with `let`,
+- identifier _u_ has 'broader scope' than identifier _v_,
+- defining a function defines a scope 'of identifiers',
+- defining a function defines where identifiers are available, and
+- alas, many more...
+
+That's when things get muddled. It is best to keep 'scope' for one thing, and the 'accessibility' (and the rules of accessibility) of identifiers clear and distinct.
 
 <!--REST IS FOR LAUNCH ONLY
 For example, consider:
