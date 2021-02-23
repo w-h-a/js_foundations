@@ -17,7 +17,7 @@ the code from line 1 to line _n_ is the 'global' scope.
 ```js
 // line 1
 // source code
-const funcRef = function localFunction() { // line i
+const localFunction = function() { // line i
   // local code of length m
 } // line i + m + 1
 // more source code
@@ -38,7 +38,7 @@ the code from line _i_ to line _i + m + 1_ is a scope of the `localFunction` fun
 // line n
 ```
 
-the code from line _i_ to line _i + m + 1_ is the scope of the block just in case there is either a `let` or `const` declaration within the block code of length _m_. (Note it is not enough that there is either a `let` or `const` declaration within a local scope that is _nested_ within the block from line i to line _i + m + 1_.) This is also referred to as 'block' scope.
+the code from line _i_ to line _i + m + 1_ is a block scope just in case it is in a context where JS expects a statement and is not prefixed by function, constructor, or switch syntax.
 
 Now, if scopes are defined like this, identifiers are _available in_ (or _accessible in_) certain scopes.
 
@@ -72,6 +72,12 @@ Strictly speaking, there is no 'variable scope' or the 'scope of a variable'. Th
 That's when things get muddled. It is best to keep 'scope' for one thing, and the 'accessibility' (and the rules of accessibility) of identifiers clear and distinct.
 
 <!--REST IS FOR LAUNCH ONLY
+
+OLD:
+
+the scope of the block just in case there is either a `let` or `const` declaration within the block code of length _m_. (Note it is not enough that there is either a `let` or `const` declaration within a local scope that is _nested_ within the block from line i to line _i + m + 1_.) This is also referred to as 'block' scope.
+
+
 For example, consider:
 
 > A variable's scope determines where it is available in a program. The location where you declare a variable determines its scope. In JavaScript, variables declared with the `let` or `const` keywords have block scope.
@@ -222,5 +228,8 @@ True.
 
 > Functions and blocks always create new scopes.
 
+True.
+
+OLD:
 False.
 -->

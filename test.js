@@ -1,7 +1,3 @@
-const funcRef = function saySomething() {
-  let greeting = 'hi';
-  console.log(greeting);
-}
+const bar = (p, q) => p + q;
 
-
-funcRef();
+{}
