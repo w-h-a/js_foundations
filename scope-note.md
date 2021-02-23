@@ -69,7 +69,7 @@ Strictly speaking, there is no 'variable scope' or the 'scope of a variable'. Th
 - defining a function defines where identifiers are available (no; that's what definition 4 does), and
 - alas, many more...
 
-That's when things get muddled. It is best to keep 'scope' for one thing, and the 'accessibility' (and the rules of accessibility) of identifiers clear and distinct.
+That's when things get muddled. It is best to keep 'scope' and the 'accessibility' (and the rules of accessibility) of identifiers clear and distinct.
 
 <!--REST IS FOR LAUNCH ONLY
 
