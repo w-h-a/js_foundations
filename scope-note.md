@@ -17,14 +17,14 @@ the code from line 1 to line _n_ is the 'global' scope.
 ```js
 // line 1
 // source code
-const localFunction = function() { // line i
+const funcRef = function localFunction() { // line i
   // local code of length m
 } // line i + m + 1
 // more source code
 // line n
 ```
 
-the code from line _i_ to line _i + m + 1_ is a scope of the `localFunction` function. (Note, the above code uses a function expression, but it could be replaced by either a function declaration or arrow function. Note further, that we can say that the the parameter list is a scope and the function's body is a scope nested in that scope.) This is also referred to as 'function' scope.
+the code from line _i_ to line _i + m + 1_ is a scope of the `localFunction` function. (Note, that we can say that the the parameter list is a scope and the function's body is a scope nested in that scope.) This is also referred to as 'function' scope.
 
 3. Given the code of line length _n_ below
 
