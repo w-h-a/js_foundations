@@ -45,7 +45,7 @@ Now, if scopes are defined like this, identifiers are _available in_ (or _access
 4. An occurrence of identifier "`z`" is _available in_ scope _s_ just in case, either:
   - if "`z`" is declared with `var`, then either:
     - "`z`" is declared in an outer nested scope and "`z`" is not also declared in _s_ itself,
-    - "`z`" is declared in an inner nested block, or
+    - "`z`" is declared in inner nested blocks, or
     - "`z`" is declared in _s_ itself;
   - if "`z`" is declared with either `let` or `const`, then either:
     - "`z`" is declared in an outer nested scope and "`z`" is not also declared in _s_ itself, or
