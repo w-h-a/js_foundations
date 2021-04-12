@@ -40,9 +40,9 @@ the code from line _i_ to line _i + m + 1_ is a scope of the `localFunction` fun
 
 the code from line _i_ to line _i + m + 1_ is a block scope just in case it is in a context where JS expects a statement and is not prefixed by function, constructor, or switch syntax.
 
-Now, if scopes are defined like this, named values are _available in_ (or _accessible in_) certain scopes.
+Now, if scopes are defined like this, a value of an identifier is _available in_ (or _accessible in_) certain scopes.
 
-4. `z` is _available in_ scope _s_ just in case, either:
+4. value of "`z`" is _available in_ scope _s_ just in case, either:
   - if "`z`" is declared with `var`, then either:
     - "`z`" is declared in an outer nested scope and "`z`" is not also declared in _s_ itself,
     - "`z`" is declared in inner nested blocks, or
@@ -55,9 +55,9 @@ Now, if scopes are defined like this, named values are _available in_ (or _acces
     - _s_ is the function (parameter) scope for which "`z`" was declared as a parameter; or
   - if "`z`" is declared as the name of a function in a function declaration, then, alas, it seems to depend.
 
-Strictly speaking, there is no 'variable scope' or the 'scope of a variable'. Those are misnomers. Identified (named) values available in scopes, but they don't have scopes unless one simply means that it is the scope within which the identifier is declared. But often people obviously don't merely mean that. More generally, people tend to conflate definitions (1 - 3) with definition (4). They say things like:
+Strictly speaking, there is no 'variable scope' or the 'scope of a variable'. Those are misnomers. A value of an identifier is available in scopes, but neither values nor their identifiers have scopes unless one simply means that it is the scope within which the identifier is declared. But often people obviously don't merely mean that. More generally, people tend to conflate definitions (1 - 3) with definition (4). They say things like:
 
-- the identified value is 'in scope' when they are clearly talking about a scope that the identifier was not declared in,
+- an identified value is 'in scope' when they are clearly talking about a scope that the identifier was not declared in,
 - `u` has 'broader scope' than `v`,
 - the scope of an identified value is the region where the identifier is accessible,
 - values identified with `const` have the 'the same scope' as values identified with `let` (not necessarily; one might be global and the other local),
