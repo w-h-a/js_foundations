@@ -19,12 +19,12 @@ the code from line 1 to line _n_ is the 'global' scope.
 // source code
 const localFunction = function() { // line i
   // local code of length m
-} // line i + m + 1
+}; // line i + m + 1
 // more source code
 // line n
 ```
 
-the code from line _i_ to line _i + m + 1_ is a scope of the `localFunction` function. (Note, that we can say that the the parameter list is a scope and the function's body is a scope nested in that scope.) This is also referred to as 'function' scope.
+the code from line _i_ to line _i + m + 1_ is the scope of the `localFunction` function. (Note, that we can say that the the parameter list is a scope and the function's body is a scope nested in that scope.) This is also referred to as 'function' scope.
 
 3. Given the code of line length _n_ below
 
@@ -40,20 +40,37 @@ the code from line _i_ to line _i + m + 1_ is a scope of the `localFunction` fun
 
 the code from line _i_ to line _i + m + 1_ is a block scope just in case it is in a context where JS expects a statement and is not prefixed by function, constructor, or switch syntax.
 
+4. Given the code of line length _n_ below
+
+```js
+// line 1
+// source code
+class Class { // line i
+  // local code of length m
+} // line i + m + 1
+// more source code
+// line n
+```
+
+The code from line _i_ to line _i + m + 1_ is the scope of `Class`. This is also referred to as 'function' or 'class' scope.
+
 Now, if scopes are defined like this, a value of an identifier is _available in_ (or _accessible in_) certain scopes.
 
-4. value of "`z`" is _available in_ scope _s_ just in case, either:
+5. value of "`z`" is _available in_ scope _s_ just in case, either:
   - if "`z`" is declared with `var`, then either:
     - "`z`" is declared in an outer nested scope and "`z`" is not also declared in _s_ itself,
     - "`z`" is declared in inner nested blocks, or
     - "`z`" is declared in _s_ itself;
   - if "`z`" is declared with either `let` or `const`, then either:
     - "`z`" is declared in an outer nested scope and "`z`" is not also declared in _s_ itself, or
-    - "`z`" is declared at the top of _s_ itself;
+    - "`z`" is declared in _s_ itself prior to the point of the access attempt.
   - if "`z`" is declared as a function parameter, then either:
     - "`z`" is declared in an outer nesting function (parameter) scope and "`z`" is not also declared in _s_ itself, or
     - _s_ is the function (parameter) scope for which "`z`" was declared as a parameter; or
   - if "`z`" is declared as the name of a function in a function declaration, then, alas, it seems to depend.
+  - if "`z`" is declared with `class`, then either:
+    - "`z`" is declared in an outer nested scope and "`z`" is not also declared in _s_ itself, or
+    - "`z`" is declared in _s_ itself prior to the point of the access attempt.
 
 Strictly speaking, there is no 'variable scope' or the 'scope of a variable'. Those are misnomers. A value of an identifier is available in scopes, but neither values nor their identifiers have scopes unless one simply means that it is the scope within which the identifier is declared. But often people obviously don't merely mean that. More generally, people tend to conflate definitions (1 - 3) with definition (4). They say things like:
 
@@ -66,7 +83,7 @@ Strictly speaking, there is no 'variable scope' or the 'scope of a variable'. Th
 - values identified with `const` follow 'the same scoping rules' as values identified with `let`,
 - values identified with `const` are 'scoped' just as values identified with `let` (no; values identified with `let` or `const` follow the same accessibility rules),
 - defining a function defines a scope 'of identifiers' (no; defining a function defines a scope, period),
-- defining a function defines where identified values are available (no; that's what definition 4 does), and
+- defining a function defines where identified values are available (no; that's what definition 5 does), and
 - alas, many more...
 
 That's when things get muddled. It is best to keep 'scope' and the 'accessibility' (and the rules of accessibility) of identified values clear and distinct.
