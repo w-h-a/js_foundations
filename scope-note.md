@@ -60,17 +60,17 @@ Now, if scopes are defined like this, a value of an identifier is _available in_
   - if "`z`" is declared with `var`, then either:
     - "`z`" is declared in an outer nested scope and "`z`" is not also declared in _s_ itself,
     - "`z`" is declared in inner nested blocks, or
-    - "`z`" is declared in _s_ itself;
+    - "`z`" is declared and initialized in _s_ itself prior to the point of the access attempt;
   - if "`z`" is declared with either `let` or `const`, then either:
     - "`z`" is declared in an outer nested scope and "`z`" is not also declared in _s_ itself, or
-    - "`z`" is declared in _s_ itself prior to the point of the access attempt.
+    - "`z`" is declared and initialized in _s_ itself prior to the point of the access attempt.
   - if "`z`" is declared as a function parameter, then either:
     - "`z`" is declared in an outer nesting function (parameter) scope and "`z`" is not also declared in _s_ itself, or
-    - _s_ is the function (parameter) scope for which "`z`" was declared as a parameter; or
+    - _s_ is the function (parameter) scope for which "`z`" was declared and initialized as a parameter; or
   - if "`z`" is declared as the name of a function in a function declaration, then, alas, it seems to depend.
   - if "`z`" is declared with `class`, then either:
     - "`z`" is declared in an outer nested scope and "`z`" is not also declared in _s_ itself, or
-    - "`z`" is declared in _s_ itself prior to the point of the access attempt.
+    - "`z`" is declared and initialized in _s_ itself prior to the point of the access attempt.
 
 Strictly speaking, there is no 'variable scope' or the 'scope of a variable'. Those are misnomers. A value of an identifier is available in scopes, but neither values nor their identifiers have scopes unless one simply means that it is the scope within which the identifier is declared. But often people obviously don't merely mean that. More generally, people tend to conflate definitions (1 - 3) with definition (4). They say things like:
 
