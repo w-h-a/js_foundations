@@ -1,20 +1,19 @@
-Definitions: Executable Code and Available Identifiers.
+Definitions: Executable Code and Identifier Presence or Availability.
 
-Executable regions (locations) of code can be:
+Executable code is a property of some function object. Executable code is always run within some execution context. When a piece of executable code uses an identifier, the execution context is checked to determine whether the identifier is present. If it is, the identifier is resolved. If it is not, an exception is thrown.
 
-1. global
-2. function-based (including classes)
-3. block-based
+Let's assume we don't declare functions (or classes) inside of blocks. Then an execution environment is composed like this:
 
-Now, if regions of executable code regions (locations) are defined like this, a value of an identifier is _available in_ (or _accessible in_) certain executable code regions (locations). The mechanism for determining such availability is related to the environment frame chain, which is part of any execution context. The environment frame chain is an ordered list of environment frames, one for each nested executable code region (location). Each environment frame contains identifiers associated with values.
+```js
+fooContext = {
+  this: ContextObject,
+  BlockStack = [ .. ],
+  Environment = { .. },
+  EnvironmentChain = [
+    fooContext.Environment,
+    ...foo.Envelope  
+  ]
+};
+```
 
-4. If "`z`" is declared with `var`, then the value of "`z`" is available in executable code region (location) _r_ just in case either:
-  - "`z`" is declared in an outer nested executable code region (location) and not also declared in "`z`",
-  - "`z`" is declared in an inner nested block, or
-  - "`z`" is declared and initialized in _r_ itself prior to the point of the access attempt.
-
-5. If "`z`" is declared as a parameter, or with `let`, `const`, or `class`, then the value of "`z`" is available in executable code region (location) _r_ just in case either:
-  - "`z`" is declared in an outer nested executable code region (location) and not also declared in "`z`", or
-  - "`z`" is declared and initialized in _r_ itself prior to the point of the access attempt.
-
-There are some discrepancies with identifiers that are `function` declared.
+If an identifier is declared with `let` or `const`, JS first checks `fooContext.BlockStack`, from last entry to first entry, and second checks `fooContext.EnvironmentChain`, from first entry to last entry. If an identifier is declared with `function`, `class`, or `var`, JS checks `fooContext.EnvironmentChain`, from first entry to last entry. An identifier is available if and only if JS does not throw a `ReferenceError` after all the checks.
