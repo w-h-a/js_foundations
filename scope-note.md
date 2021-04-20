@@ -16,4 +16,4 @@ fooContext = {
 };
 ```
 
-If an identifier is declared with `let` or `const`, JS first checks `fooContext.BlockStack`, from last entry to first entry, and second checks `fooContext.EnvironmentChain`, from first entry to last entry. If an identifier is declared with `function`, `class`, or `var`, JS checks `fooContext.EnvironmentChain`, from first entry to last entry. An identifier is available if and only if JS does not throw a `ReferenceError` after all the checks.
+If an identifier is declared with `let` or `const`, JS first checks `fooContext.BlockStack`, from last entry to first entry, and second checks `fooContext.EnvironmentChain`, from first entry to last entry. If an identifier is declared as a parameter, `function`, `class`, or `var`, JS checks `fooContext.EnvironmentChain`, from first entry to last entry. An identifier is available if and only if JS does not throw a `ReferenceError` after all the checks.
