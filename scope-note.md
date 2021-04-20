@@ -75,8 +75,7 @@ Now, if contexts are defined like this, a value of an identifier is _available i
     - "`z`" is declared and initialized in _c_ itself prior to the point of the access attempt;
   - if "`z`" is declared with either `let` or `const`, then either:
     - "`z`" is declared in an outer nested context and "`z`" is not also declared in _c_ itself, or
-    - "`z`" is declared and initialized in _c_ itself prior to the point of the access attempt _and_ within the block if any; 
-    - "`z`" is declared in an outer nested context and "`z`" is not also declared in
+    - "`z`" is declared and initialized in _c_ itself prior to the point of the access attempt _and_ if "`z`" is declared and initialized within a block of _c_ then, the point of access must be within the block;
   - if "`z`" is declared as a function parameter, then either:
     - "`z`" is declared in an outer nesting function (parameter) context and "`z`" is not also declared in _c_ itself, or
     - _c_ is the function (parameter) context for which "`z`" was declared and initialized as a parameter; or
